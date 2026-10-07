@@ -83,6 +83,14 @@ To test removal first:
 task del:test
 ```
 
+### Install Plugins
+
+Install bundled Gemini / Antigravity plugins (`ponytail`, `caveman`, and `context-mode`):
+
+```bash
+task plugins
+```
+
 ---
 
 ## :file_folder: Repository Structure

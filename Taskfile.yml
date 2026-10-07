@@ -37,6 +37,14 @@ tasks:
     cmds:
       - stow -n -D {{ .STOW_ARGS }}
 
+  plugins:
+    desc: Install plugins
+    cmds:
+      - agy plugin install https://github.com/DietrichGebert/ponytail
+      - agy plugin install https://github.com/JuliusBrussee/caveman
+      - npm install -g context-mode
+      - agy plugin install https://github.com/mksglu/context-mode/tree/main/configs/antigravity-cli
+
   default:
     cmds:
       - task -l

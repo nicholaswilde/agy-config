@@ -41,6 +41,7 @@ This project uses [Task](https://taskfile.dev/) to orchestrate [GNU Stow](https:
 - **Re-apply symlinks**: `task restow`
 - **Dry-run unstow**: `task del:test`
 - **Unstow / Delete symlinks**: `task del`
+- **Install plugins**: `task plugins`
 
 ### Git & Commit Guidelines
 
