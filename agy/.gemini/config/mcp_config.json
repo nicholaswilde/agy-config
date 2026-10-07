@@ -1,0 +1,40 @@
+{
+  "mcpServers": {
+    "codegraph": {
+      "command": "codegraph",
+      "args": [
+        "serve",
+        "--mcp"
+      ]
+    },
+    "docker-hub": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "HUB_PAT_TOKEN",
+        "mcp/dockerhub",
+        "--transport=stdio",
+        "--username=nicholaswilde"
+      ],
+      "env": {
+        "HUB_PAT_TOKEN": ""
+      },
+      "trust": true
+    },
+    "context-mode": {
+      "command": "/home/nicholas/.nvm/versions/node/v25.2.1/bin/context-mode",
+      "trust": true
+    },
+    "serena": {
+      "command": "serena",
+      "args": [
+        "start-mcp-server",
+        "--context=antigravity"
+      ],
+      "trust": true
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "allowNonWorkspaceAccess": true,
+  "colorScheme": "dark",
+  "model": "Gemini 3.8 Flash (Medium)",
+  "permissions": {
+    "allow": [
+      "command(grep)",
+      "command(head)",
+      "command(mv)",
+      "command(task)",
+      "command(git status)",
+      "command(git check-ignore)",
+      "command(find)",
+      "command(ls)",
+      "command(mkdir)",
+      "command(git add)",
+      "command(git diff)",
+      "command(git commit)",
+      "mcp(adguardhome/manage_dns)",
+      "mcp(pve04/get_cluster_status)",
+      "mcp(pve03/get_cluster_status)",
+      "mcp(pve03/load_all_tools)",
+      "mcp(pve03/list_containers)",
+      "mcp(pve03/list_vms)",
+      "mcp(pve04/load_all_tools)",
+      "mcp(pve04/list_vms)",
+      "command(ip)",
+      "mcp(pve04/list_nodes)",
+      "mcp(pve04/list_networks)",
+      "mcp(unifi/unifi_tool_index)",
+      "mcp(unifi/unifi_execute)",
+      "command(rtk )",
+      "mcp(codegraph/*)",
+      "mcp(context-mode/*)"
+    ]
+  },
+  "showFeedbackSurvey": false,
+  "trustedWorkspaces": [
+    "/home/nicholas/git/nicholaswilde/homelab",
+    "/home/nicholas/git/nicholaswilde/dotfiles",
+    "/home/nicholas/git/nicholaswilde/recipes",
+    "/home/nicholas/git/nicholaswilde/changedetection-mcp-rs",
+    "/home/nicholas/git/nicholaswilde/homebrew-tap",
+    "/home/nicholas/git/nicholaswilde/sysmqttd",
+    "/home/nicholas/git/nicholaswilde/cheatsheets",
+    "/home/nicholas/git/nicholaswilde/nicholaswilde.github.io",
+    "/home/nicholas/git/nicholaswilde/nicholaswilde",
+    "/home/nicholas/git/nicholaswilde/inventory-agent",
+    "/home/nicholas/git/nicholaswilde/esp32-sandbox",
+    "/home/nicholas/git/nicholaswilde/the-amazing-race"
+  ]
+}

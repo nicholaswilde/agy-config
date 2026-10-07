@@ -1,0 +1,42 @@
+# ==========================================
+# Antigravity CLI .gitignore
+# ==========================================
+
+# 1. State, History, and Memory Runtime
+tmp/
+history/
+memory/
+context-mode/sessions/
+antigravity-cli/brain/
+antigravity-cli/conversations/
+antigravity-cli/implicit/
+antigravity-cli/knowledge/
+antigravity-cli/presence/
+antigravity-cli/scratch/
+
+.codegraph/
+
+# 2. Logs, Caches, and Crash Dumps
+log/
+cache/
+crashes/
+antigravity-cli/cache/
+antigravity-cli/crashes/
+antigravity-cli/log/
+
+# 3. Binaries and Updates
+bin/
+antigravity-cli/bin/
+antigravity-cli/updater/
+
+# 4. Dependencies and Build Artifacts
+**/node_modules/
+**/dist/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+
+# 5. Secrets (Ensure SOPS handles these)
+secrets.yaml
+secrets.yml
+.env

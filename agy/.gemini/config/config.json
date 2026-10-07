@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "caveman": {
+      "enabled": true
+    },
+    "context-mode": {
+      "enabled": true
+    },
+    "ponytail": {
+      "enabled": true
+    }
+  },
+  "userSettings": {
+    "remoteControlHostname": "amd2-super-axis"
+  }
+}

@@ -1,0 +1,43 @@
+---
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: '3'
+
+vars:
+  STOW_ARGS: '-v -t ~/ agy'
+
+tasks:
+  restow:
+    desc: Restow
+    cmds:
+      - stow -R {{ .STOW_ARGS }}
+
+  restow:test:
+    desc: Restow test
+    cmds:
+      - stow -n -R {{ .STOW_ARGS }}
+
+  stow:
+    desc: Stow
+    cmds:
+      - stow -S {{ .STOW_ARGS }}
+
+  test:
+    desc: Test
+    cmds:
+      - stow -n -S {{ .STOW_ARGS }}
+
+  del:
+    desc: Delete
+    cmds:
+      - stow -D {{ .STOW_ARGS }}
+
+  del:test:
+    desc: Delete test
+    cmds:
+      - stow -n -D {{ .STOW_ARGS }}
+
+  default:
+    cmds:
+      - task -l
+    silent: true
