@@ -6,28 +6,21 @@
 tmp/
 history/
 memory/
-context-mode/sessions/
-antigravity-cli/brain/
-antigravity-cli/conversations/
-antigravity-cli/implicit/
-antigravity-cli/knowledge/
-antigravity-cli/presence/
-antigravity-cli/scratch/
+**/context-mode/
+**/antigravity-cli/*
+!**/antigravity-cli/settings.json
 
 .codegraph/
+.serena/
 
 # 2. Logs, Caches, and Crash Dumps
 log/
 cache/
 crashes/
-antigravity-cli/cache/
-antigravity-cli/crashes/
-antigravity-cli/log/
+*.log
 
 # 3. Binaries and Updates
 bin/
-antigravity-cli/bin/
-antigravity-cli/updater/
 
 # 4. Dependencies and Build Artifacts
 **/node_modules/
@@ -35,8 +28,14 @@ antigravity-cli/updater/
 **/__pycache__/
 **/*.pyc
 **/*.pyo
+**/config/plugins/
+**/config/projects/
+**/config/import_manifest.json
+**/config/.migrated
 
 # 5. Secrets (Ensure SOPS handles these)
 secrets.yaml
 secrets.yml
 .env
+*oauth-token*
+*-token
