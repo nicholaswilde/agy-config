@@ -107,12 +107,6 @@ task del:test
 
 ---
 
-## :handshake: Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request for fixes, new skills, or MCP configurations.
-
----
-
 ## :balance_scale: License
 
 ​[Apache License 2.0](LICENSE)
