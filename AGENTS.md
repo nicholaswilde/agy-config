@@ -116,4 +116,5 @@ When designing, scaffolding, or styling GUIs (web apps, desktop UIs, mobile apps
 - Check for or establish `DESIGN.md` in repository root.
 - Pair machine-readable design tokens in YAML front matter (`colors`, `typography`, `spacing`, `rounded`, `components`) with human-readable rationale in Markdown body.
 - Treat tokens as normative values (no arbitrary ad-hoc inline styles).
+- Default to **Catppuccin Mocha** palette for color tokens unless another brand identity is requested.
 - Ensure WCAG AA contrast compliance (≥ 4.5:1 ratio).

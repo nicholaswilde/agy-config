@@ -96,3 +96,4 @@ When building or styling any GUI:
 3. **Reference Tokens**: Use CSS custom properties or framework theme bindings derived from tokens (e.g. Tailwind `theme.extend`, CSS `:root`).
 4. **Enforce WCAG AA**: Ensure component `backgroundColor` and `textColor` meet minimum 4.5:1 contrast ratio.
 5. **No Magic Values**: Avoid arbitrary inline hex codes or pixel dimensions that bypass `DESIGN.md`.
+6. **Theme Preference**: Default to **Catppuccin Mocha** palette tokens (`#1e1e2e` base, `#89b4fa` blue, `#cdd6f4` text) unless an alternate palette is specified.

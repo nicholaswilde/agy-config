@@ -8,6 +8,7 @@ When designing, scaffolding, or implementing graphical user interfaces (web fron
 2. **Follow Format Specification**: Combine machine-readable design tokens in YAML front matter (`colors`, `typography`, `spacing`, `rounded`, `components`) with human-readable rationale in Markdown body (`Overview`, `Colors`, `Typography`, `Layout`, `Elevation & Depth`, `Shapes`, `Components`, `Do's and Don'ts`).
 3. **Normative Tokens**: Treat YAML tokens as the single source of truth for design values. Never invent arbitrary ad-hoc hex values, paddings, or font sizes in code when tokens exist.
 4. **Contrast and Accessibility**: Ensure all foreground/background color combinations satisfy WCAG AA contrast standards (minimum 4.5:1 ratio).
+5. **Preferred Theme**: Default to the **Catppuccin Mocha** palette for color tokens unless another brand identity is explicitly specified.
 
 ## References
 

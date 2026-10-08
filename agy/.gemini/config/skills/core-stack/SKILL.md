@@ -59,7 +59,7 @@ default to these tools and conventions.
 
   ```yaml
   MD007:
-    indent: 4
+    indent: 2
   MD013:
     line_length: 120
     code_blocks: false
@@ -250,8 +250,8 @@ default to these tools and conventions.
 ## 22. Docker-Based Linting (Repo-Local Override)
 
 * In this repo the root `Taskfile.yml` runs linters via Docker instead of native binaries:
-    * **Markdownlint:** `docker run --rm -it -v ${PWD}:/markdown:ro 06kellyjac/markdownlint-cli .`
-    * **Yamllint:** `docker run --rm -it -v ${PWD}:${PWD} -w ${PWD} programmerassistant/yamllint yamllint .`
+  * **Markdownlint:** `docker run --rm -it -v ${PWD}:/markdown:ro 06kellyjac/markdownlint-cli .`
+  * **Yamllint:** `docker run --rm -it -v ${PWD}:${PWD} -w ${PWD} programmerassistant/yamllint yamllint .`
 * This takes precedence over the native `rumdl`/`yamllint-rs` pattern (§4, §5) for this repo specifically.
 * Use the Docker variants when the repo's `task markdownlint` / `task yamllint` tasks are defined this way.
 
@@ -275,9 +275,9 @@ default to these tools and conventions.
 * Containerized cross-compilation tool for Rust projects, allowing target compilation (e.g. ARMv6, ARMv7, ARM64) on host development machines without local toolchains.
 * Requires a running container runtime (Docker or Podman) and a local `Cross.toml` for target image configurations if necessary.
 * Command examples:
-    * Install: `cargo install cross --git https://github.com/cross-rs/cross`
-    * Compile: `cross build --target arm-unknown-linux-gnueabihf --release`
-    * Run tests: `cross test --target arm-unknown-linux-gnueabihf`
+  * Install: `cargo install cross --git https://github.com/cross-rs/cross`
+  * Compile: `cross build --target arm-unknown-linux-gnueabihf --release`
+  * Run tests: `cross test --target arm-unknown-linux-gnueabihf`
 
 ## 26. Debian Packaging — `cargo-deb`
 
@@ -299,7 +299,7 @@ default to these tools and conventions.
   ```
 
 * Command examples:
-    * Build package: `cargo deb --no-build --target arm-unknown-linux-gnueabihf`
+  * Build package: `cargo deb --no-build --target arm-unknown-linux-gnueabihf`
 
 ## 27. RPM Packaging — `cargo-generate-rpm`
 
@@ -324,38 +324,38 @@ default to these tools and conventions.
   ```
 
 * Command examples:
-    * Build package: `cargo generate-rpm --target arm-unknown-linux-gnueabihf`
+  * Build package: `cargo generate-rpm --target arm-unknown-linux-gnueabihf`
 
 ## 28. Binary Installer — `cargo-binstall`
 
 * Installs pre-compiled Rust binaries directly from GitHub releases or crates.io, bypassing compilation overhead.
 * Prefer in CI pipelines or deployment scripts where building packaging/compilation dependencies would slow down the run.
 * Command examples:
-    * Install binstall: `curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash`
-    * Install tools: `cargo binstall -y cargo-deb cargo-generate-rpm`
+  * Install binstall: `curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash`
+  * Install tools: `cargo binstall -y cargo-deb cargo-generate-rpm`
 
 ## 29. Code Coverage — `cargo-llvm-cov`
 
 * Source-based code coverage tool for Rust with minimal overhead, supporting LCOV, HTML, and JSON reports.
 * Prefer when establishing strict coverage gates (e.g. 90% line gate) in local development and CI pipelines.
 * Command examples:
-    * Run tests and fail under line gate: `cargo llvm-cov --all-features --fail-under-lines 90 -- --test-threads=1`
-    * Generate coverage reports: `cargo llvm-cov --all-features --lcov --output-path lcov.info`
+  * Run tests and fail under line gate: `cargo llvm-cov --all-features --fail-under-lines 90 -- --test-threads=1`
+  * Generate coverage reports: `cargo llvm-cov --all-features --lcov --output-path lcov.info`
 
 ## 30. Coverage Reporting — `coveralls`
 
 * Uploads generated coverage reports (e.g. `lcov.info`) to Coveralls.io to track and monitor test coverage trends over time.
 * Command examples:
-    * CLI upload: `coveralls report lcov.info -n -r $COVERALLS_REPO_TOKEN`
-    * GitHub Action integration:
+  * CLI upload: `coveralls report lcov.info -n -r $COVERALLS_REPO_TOKEN`
+  * GitHub Action integration:
 
-      ```yaml
-      - name: Coveralls
-        uses: coverallsapp/github-action@v2
-        with:
-          files: lcov.info
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      ```
+    ```yaml
+    - name: Coveralls
+      uses: coverallsapp/github-action@v2
+      with:
+        files: lcov.info
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+    ```
 
 ## 31. Integration Test Containers — `testcontainers`
 
@@ -369,7 +369,7 @@ default to these tools and conventions.
   ```
 
 * Command examples:
-    * Run container-backed tests: `RUN_DOCKER_TESTS=1 cargo test -- --test-threads=1`
+  * Run container-backed tests: `RUN_DOCKER_TESTS=1 cargo test -- --test-threads=1`
 
 ## 32. GitHub Profile Metrics — `lowlighter/metrics`
 
@@ -397,3 +397,33 @@ default to these tools and conventions.
             template: classic
             base: header
   ```
+
+## 33. Theming & Color Palettes — Catppuccin Mocha
+
+* Default theme and color palette for all applications, UIs, dashboards, CLI tools, scripts, and documentation is **Catppuccin Mocha**.
+* Core Palette Reference:
+  * Backgrounds: Base (`#1e1e2e`), Mantle (`#181825`), Crust (`#11111b`)
+  * Surface & Overlays: Surface0 (`#313244`), Surface1 (`#45475a`), Surface2 (`#585b70`), Overlay0 (`#6c7086`)
+  * Foregrounds: Text (`#cdd6f4`), Subtext1 (`#bac2de`), Subtext0 (`#a6adc8`)
+  * Accents: Blue (`#89b4fa`), Sapphire (`#74c7ec`), Lavender (`#b4befe`), Mauve (`#cba6f7`)
+  * Semantics: Green (`#a6e3a1` - success), Yellow (`#f9e2af` - warning), Red (`#f38ba8` - error), Peach (`#fab387` - alert)
+* Implementation Rules:
+  * **GUI & DESIGN.md:** When creating or styling GUIs with Google `DESIGN.md`, populate the `colors` front-matter tokens using Catppuccin Mocha values.
+  * **Shell Scripts:** Map ANSI color logging (`log "INFO"`, `log "WARN"`, etc.) to Catppuccin Mocha hex or 256-color escape sequences.
+  * **Documentation:** Configure `zensical.toml` or MkDocs theme palettes to use Catppuccin Mocha dark theme presets.
+
+## 34. Indentation Standards — 2 Spaces, No Tabs
+
+* **Spaces Only:** Never use hard tab characters (`\t`) for indentation. All indentation must be soft spaces.
+* **Indentation Width:** Standard indentation width across all projects is **2 spaces**. This applies to:
+  * Config formats: YAML, JSON, TOML
+  * Scripts: Bash (2-space body/functions), Python
+  * Markup: Markdown nested lists (`MD007: indent: 2`), HTML, XML
+  * Programming languages: Rust, TypeScript, JavaScript, CSS/SCSS
+* **Exceptions:** Only file formats syntactically requiring hard tabs (e.g. `Makefile`) or toolings with strictly enforced language-level formatters (e.g. `gofmt` using tabs). Otherwise, always enforce 2 spaces.
+
+## 35. Markdown Emojis — Shortcodes Over Unicode
+
+* **Rule:** When adding emojis to Markdown files (headings, badges, lists, docs, or READMEs), **always** use standard GitHub emoji shortcodes (e.g. `:rocket:`, `:sparkles:`, `:gear:`, `:robot:`, `:package:`, `:shield:`, `:balance_scale:`, `:writing_hand:`) instead of raw Unicode emoji glyphs.
+* **Exceptions:** Only use raw Unicode when shortcodes are not supported or parsed by the target runtime or platform.
+* **Benefits:** Preserves plain ASCII compatibility, avoids character-width and monospace font alignment glitches in terminal editors and git diffs, and renders consistently on GitHub and Zensical/MkDocs.
