@@ -12,9 +12,10 @@ GNU Stow dotfiles package for managing Google Antigravity CLI (`agy`) configurat
 
 - **Dotfiles Management via GNU Stow**: Clean symlinking directly into `~/.gemini/`.
 - **MCP Server Configurations**: Preconfigured integration for `codegraph`, `docker-hub`, `context-mode`, and `serena`.
-- **Curated Skills Library**: Bundled custom skills including `caveman`, `cavecrew`, `core-stack`, `setup-serena`, and network diagnostics.
-- **Rule Enforcement**: Built-in rules for secret management, credential leak prevention, and semantic coding.
-- **Automated Workflows**: Streamlined `Taskfile` commands for safe dry-runs, stowing, restowing, and removal.
+- **Curated Skills Library**: Bundled custom skills including `caveman`, `cavecrew`, `core-stack`, `design-md`, `setup-serena`, and network diagnostics.
+- **Rule Enforcement**: Built-in rules for secret management, credential leak prevention, Google `DESIGN.md` GUI standards, and semantic coding.
+- **Automated Workflows & CI**: Streamlined `Taskfile` commands for safe dry-runs, stowing, restowing, and linting (`rumdl`, `yamllint`) backed by GitHub Actions CI.
+- **Design & Theming Standards**: Native Catppuccin Mocha theme defaults and 2-space indentation standards across all tools.
 
 ---
 
@@ -38,7 +39,7 @@ cd ~/git/nicholaswilde/agy-config
 
 ## :rocket: Usage
 
-Run stow operations using [Task](https://taskfile.dev/):
+Run operations using [Task](https://taskfile.dev/):
 
 ### Dry Run (Test)
 
@@ -108,26 +109,49 @@ Auto-format repository Markdown files and fix lint violations:
 task fmt:md
 ```
 
+### Lint YAML
+
+Lint repository YAML files with [yamllint-rs](https://github.com/kaleidawave/yamllint-rs):
+
+```bash
+task lint:yaml
+```
+
+### Lint All
+
+Run both Markdown and YAML linting checks:
+
+```bash
+task lint
+```
+
 ---
 
 ## :file_folder: Repository Structure
 
 ```text
 .
+├── .github/
+│   └── workflows/
+│       └── ci.yml              # GitHub Actions CI workflow
 ├── agy/
 │   ├── .gemini/
 │   │   ├── antigravity-cli/
-│   │   │   └── settings.json       # Permissions, trusted workspaces, and model settings
-│   │   ├── config/
-│   │   │   ├── config.json         # Plugin configurations
-│   │   │   └── mcp_config.json     # Model Context Protocol (MCP) server definitions
-│   │   ├── rules/                  # Behavioral and security rules
-│   │   └── skills/                 # Custom skills library
-│   └── .stow-local-ignore          # Ignores runtime and cache directories from Stow
-├── .gitignore                      # Git ignore patterns
-├── LICENSE                         # Apache 2.0 License
-├── README.md                       # Project documentation
-└── Taskfile.yml                    # Task automation definitions
+│   │   │   └── settings.json   # Permissions, trusted workspaces, and model settings
+│   │   └── config/
+│   │       ├── config.json     # Plugin configurations
+│   │       ├── mcp_config.json # Model Context Protocol (MCP) server definitions
+│   │       ├── rules/          # Behavioral and security rules
+│   │       └── skills/         # Custom skills library
+│   └── .stow-local-ignore      # Ignores runtime and cache directories from Stow
+├── .gitignore                  # Git ignore patterns
+├── .rumdl.toml                 # Markdown linter and formatter configuration
+├── .sops.yaml                  # SOPS encryption configuration (PGP + age)
+├── .yamllint                   # YAML linter configuration
+├── AGENTS.md                   # Operational guidelines for AI coding agents
+├── LICENSE                     # Apache 2.0 License
+├── README.md                   # Project documentation
+└── Taskfile.yml                # Task automation definitions
 ```
 
 ---
