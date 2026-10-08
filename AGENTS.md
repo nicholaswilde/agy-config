@@ -106,3 +106,12 @@ Prefix shell commands with `rtk` (e.g. `rtk git status`, `rtk git diff`, `rtk ls
 
 - **CodeGraph (`codegraph_explore`)**: Multi-hop repository architecture, call graph exploration, and blast radius analysis.
 - **Serena (`serena`)**: Symbol-level AST navigation, reference tracking, safe semantic refactoring, LSP diagnostics (`get_diagnostics_for_file`), and persistent project memories (`.serena/memories/`).
+
+### 7. Google DESIGN.md Specification for GUIs
+
+When designing, scaffolding, or styling GUIs (web apps, desktop UIs, mobile apps, or component libraries), adhere to Google's [DESIGN.md](https://github.com/google-labs-code/design.md) specification:
+
+- Check for or establish `DESIGN.md` in repository root.
+- Pair machine-readable design tokens in YAML front matter (`colors`, `typography`, `spacing`, `rounded`, `components`) with human-readable rationale in Markdown body.
+- Treat tokens as normative values (no arbitrary ad-hoc inline styles).
+- Ensure WCAG AA contrast compliance (≥ 4.5:1 ratio).
