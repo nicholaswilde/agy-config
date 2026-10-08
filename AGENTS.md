@@ -44,6 +44,8 @@ This project uses [Task](https://taskfile.dev/) to orchestrate [GNU Stow](https:
 - **Install plugins**: `task plugins`
 - **Lint markdown**: `task lint:md` (`rumdl check .`)
 - **Format markdown**: `task fmt:md` (`rumdl fmt .`)
+- **Lint YAML**: `task lint:yaml` (`yamllint-rs .`)
+- **Lint all**: `task lint`
 
 ### Git & Commit Guidelines
 

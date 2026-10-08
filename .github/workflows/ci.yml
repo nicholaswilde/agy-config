@@ -1,0 +1,62 @@
+---
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Lint & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y stow jq yamllint
+
+      - name: Install go-task
+        run: |
+          sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
+
+      - name: Install rumdl
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release download --repo rvben/rumdl \
+            --pattern "*x86_64-unknown-linux-musl.tar.gz" \
+            --output - | sudo tar -xz -C /usr/local/bin
+
+      - name: Validate JSON configuration files
+        run: |
+          jq empty agy/.gemini/antigravity-cli/settings.json
+          jq empty agy/.gemini/config/config.json
+          jq empty agy/.gemini/config/mcp_config.json
+
+      - name: Lint YAML
+        run: yamllint .
+
+      - name: Lint Markdown
+        run: task lint:md
+
+
+      - name: Test GNU Stow
+        run: task test
+
+      - name: Verify Secrets Invariant
+        run: |
+          if git ls-files | grep -E '\.env$|\.key$|\.pem$|id_rsa|id_ed25519'; then
+            echo "::error::Found sensitive secret files tracked in git!"
+            exit 1
+          fi

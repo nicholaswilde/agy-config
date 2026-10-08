@@ -55,6 +55,17 @@ tasks:
     cmds:
       - rumdl fmt .
 
+  lint:yaml:
+    desc: Lint YAML files
+    cmds:
+      - yamllint-rs .
+
+  lint:
+    desc: Lint all files
+    cmds:
+      - task: lint:md
+      - task: lint:yaml
+
   default:
     cmds:
       - task -l

@@ -1,6 +1,7 @@
 # :gear: Antigravity CLI Config :robot:
 
 [![task](https://img.shields.io/badge/Task-Enabled-brightgreen?style=for-the-badge&logo=task&logoColor=white)](https://taskfile.dev/#/)
+[![ci](https://img.shields.io/github/actions/workflow/status/nicholaswilde/agy-config/ci.yml?label=ci&style=for-the-badge&branch=main&logo=github-actions)](https://github.com/nicholaswilde/agy-config/actions/workflows/ci.yml)
 [![license](https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=for-the-badge)](LICENSE)
 
 GNU Stow dotfiles package for managing Google Antigravity CLI (`agy`) configuration, MCP servers, plugins, global rules, and custom skills.
