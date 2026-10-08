@@ -8,7 +8,7 @@ Scan the current repository for tools, conventions, and configuration files, com
 
 Use this verbatim (or paste into chat) to audit and modernize an existing repository:
 
-```
+```text
 Analyze this repository's tooling, scripts, and CI/CD workflows, then compare them against the core stack standards in `~/.gemini/antigravity-cli/skills/core_stack.md`.
 
 Provide a detailed modernization report and recommendations, specifically looking for:

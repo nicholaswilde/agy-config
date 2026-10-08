@@ -9,7 +9,7 @@ into `~/.gemini/antigravity-cli/skills/core_stack.md`.
 
 Use this verbatim (or paste into chat) when starting a new repo:
 
-```
+```text
 Scan this repository for tools, conventions, and patterns used across the project.
 Look at (at minimum):
 

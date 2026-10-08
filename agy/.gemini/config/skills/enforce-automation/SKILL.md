@@ -3,6 +3,7 @@
 Global behavioral constraint forcing the agent to check for predefined tasks and scripts before executing raw shell commands.
 
 ## Description
+
 This skill establishes a strict execution hierarchy for system operations, repository management, and environment orchestration. Agents must never default to raw multi-line shell executions or ad-hoc commands if an established automation pathway exists within `Taskfile.yaml` or the `scripts/` directory.
 
 ## Protocol

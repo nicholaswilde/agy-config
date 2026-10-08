@@ -45,11 +45,13 @@ Keep user's language by default. User write Portuguese → reply Portuguese cave
 Default mode = `full`. Change it:
 
 **Environment variable** (highest priority):
+
 ```bash
 export CAVEMAN_DEFAULT_MODE=ultra
 ```
 
 **Config file** (`~/.config/caveman/config.json`):
+
 ```json
 { "defaultMode": "lite" }
 ```
@@ -60,4 +62,4 @@ Resolution: env var > config file > `full`.
 
 ## More
 
-Full docs: https://github.com/JuliusBrussee/caveman
+Full docs: <https://github.com/JuliusBrussee/caveman>

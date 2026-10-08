@@ -11,7 +11,7 @@ Use this skill when the user asks to investigate slow internet speed or run a sp
 
 ## Workflow
 
-1. **Local Benchmark:** 
+1. **Local Benchmark:**
    - Run the official Ookla speedtest CLI locally to check the effective speed from the host.
    - *Tip:* If the binary isn't installed and standard download tools are blocked by `context-mode`, use a Python script to download and extract `https://install.speedtest.net/app/cli/ookla-speedtest-1.2.0-linux-x86_64.tgz`.
 

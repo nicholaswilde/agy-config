@@ -3,6 +3,7 @@
 Migrates legacy Gemini CLI commands from `<workspace-root>/.gemini/commands/` to Antigravity skills in `<workspace-root>/.agents/skills/` and ensures compatibility.
 
 ## Description
+
 This skill automates the migration of legacy Gemini-based command definitions into modern Antigravity skills. It scans the source folder, reads each command file, reviews it for compatibility with the Antigravity persona and toolset, converts Gemini-specific terminology to Antigravity conventions, and writes the updated skill definition to the workspace's `.agents/skills/` directory before removing the legacy command.
 
 ## Protocol

@@ -26,6 +26,7 @@ Compress natural language files (CLAUDE.md, todos, preferences) into caveman-spe
 python3 -m scripts <absolute_filepath>
 
 3. The CLI will:
+
 - detect file type (no tokens)
 - call Claude to compress
 - validate output (no tokens)
@@ -38,6 +39,7 @@ python3 -m scripts <absolute_filepath>
 ## Compression Rules
 
 ### Remove
+
 - Articles: a, an, the
 - Filler: just, really, basically, actually, simply, essentially, generally
 - Pleasantries: "sure", "certainly", "of course", "happy to", "I'd recommend"
@@ -46,6 +48,7 @@ python3 -m scripts <absolute_filepath>
 - Connective fluff: "however", "furthermore", "additionally", "in addition"
 
 ### Preserve EXACTLY (never modify)
+
 - Code blocks (fenced ``` and indented)
 - Inline code (`backtick content`)
 - URLs and links (full URLs, markdown links)
@@ -57,6 +60,7 @@ python3 -m scripts <absolute_filepath>
 - Environment variables (`$HOME`, `NODE_ENV`)
 
 ### Preserve Structure
+
 - All markdown headings (keep exact heading text, compress body below)
 - Bullet point hierarchy (keep nesting level)
 - Numbered lists (keep numbering)
@@ -64,6 +68,7 @@ python3 -m scripts <absolute_filepath>
 - Frontmatter/YAML headers in markdown files
 
 ### Compress
+
 - Use short synonyms: "big" not "extensive", "fix" not "implement a solution for", "use" not "utilize"
 - Fragments OK: "Run tests before commit" not "You should always run tests before committing"
 - Drop "you should", "make sure to", "remember to" — just state the action
@@ -73,6 +78,7 @@ python3 -m scripts <absolute_filepath>
 CRITICAL RULE:
 Anything inside ``` ... ``` must be copied EXACTLY.
 Do not:
+
 - remove comments
 - remove spacing
 - reorder lines
@@ -83,6 +89,7 @@ Inline code (`...`) must be preserved EXACTLY.
 Do not modify anything inside backticks.
 
 If file contains code blocks:
+
 - Treat code blocks as read-only regions
 - Only compress text outside them
 - Do not merge sections around code

@@ -35,6 +35,7 @@ default to these tools and conventions.
 * Config file: `.yamllint` at repo root.
 * Run via task: `task yamllint` → `yamllint-rs .`
 * Canonical config:
+
   ```yaml
   extends: default
   ignore: |
@@ -55,6 +56,7 @@ default to these tools and conventions.
 * Run via task: `task markdownlint` → `rumdl check .`
 * Auto-fix: `task markdownlint-fix` → `rumdl check --fix .`
 * Canonical config:
+
   ```yaml
   MD007:
     indent: 4
@@ -86,6 +88,7 @@ default to these tools and conventions.
 * Accept 403/429/520 status codes as valid (anti-scraper/rate-limit false positives).
 * CI uses [`lycheeverse/lychee-action@v2`](https://github.com/lycheeverse/lychee-action) on a daily cron schedule.
 * Canonical config keys:
+
   ```toml
   timeout = 5
   max_retries = 2
@@ -102,6 +105,7 @@ default to these tools and conventions.
 * Encrypt: `task encrypt` / Decrypt: `task decrypt`.
 * Encrypted files use `.enc` suffix (e.g. `mcp_config.json.enc`).
 * Canonical `.sops.yaml`:
+
   ```yaml
   creation_rules:
     - filename_regex: (\.ya?ml|\.db|\.env|\.json|\.ini|\.toml)$
@@ -121,6 +125,7 @@ default to these tools and conventions.
 * **Always** use `gh` when interacting with the remote repository (e.g., cloning, managing issues/PRs, monitoring workflows).
 * **Always** pipe all `gh` commands to `cat` to bypass interactive paging, prompts, and other user interactions: `gh <command> | cat`
 * Key commands:
+
   ```bash
   gh repo clone <owner>/<repo> | cat    # clone a remote repository
   gh pr list | cat                      # list pull requests
@@ -131,14 +136,17 @@ default to these tools and conventions.
   gh issue list | cat                   # open issues
   gh issue close <number>               # close an issue
   ```
+
 * GitHub issues **only close automatically** when commits containing `Fixes #<number>` are pushed to the remote.
 
 ## 11. Conventional Commits
 
 * All commits follow [Conventional Commits](https://www.conventionalcommits.org/) format:
-  ```
+
+  ```text
   <type>: <description>. Fixes #<issue>
   ```
+
 * Types: `feat`, `fix`, `docs`, `chore`, `refactor`, `ci`, `style`.
 * Use `git filter-branch` or interactive `git rebase -i` to rewrite generic messages (e.g. "update") to descriptive ones.
 
@@ -198,6 +206,7 @@ default to these tools and conventions.
 * For simple YAML reads or writes without comment preservation, `yq` (§9) is preferred.
 * Install: `uv pip install ruamel-yaml`.
 * Usage pattern:
+
   ```python
   from ruamel.yaml import YAML
   yaml = YAML()
@@ -275,6 +284,7 @@ default to these tools and conventions.
 * Generates Debian `.deb` packages directly from Cargo metadata, automating system user creation, directory permissions, and systemd service generation.
 * Configuration is declared directly in `Cargo.toml` under `[package.metadata.deb]`.
 * Canonical config snippet:
+
   ```toml
   [package.metadata.deb]
   extended-description = "Description..."
@@ -287,6 +297,7 @@ default to these tools and conventions.
       ["app.toml.example", "etc/app/app.toml.example", "644"]
   ]
   ```
+
 * Command examples:
   * Build package: `cargo deb --no-build --target arm-unknown-linux-gnueabihf`
 
@@ -295,6 +306,7 @@ default to these tools and conventions.
 * Generates RedHat `.rpm` packages directly from Cargo metadata, utilizing custom post-install and pre-uninstall hooks.
 * Configuration is declared in `Cargo.toml` under `[package.metadata.generate-rpm]`.
 * Canonical config snippet:
+
   ```toml
   [package.metadata.generate-rpm]
   group = "Applications/System"
@@ -310,6 +322,7 @@ default to these tools and conventions.
   dest = "/usr/bin/app"
   mode = "0755"
   ```
+
 * Command examples:
   * Build package: `cargo generate-rpm --target arm-unknown-linux-gnueabihf`
 
@@ -335,6 +348,7 @@ default to these tools and conventions.
 * Command examples:
   * CLI upload: `coveralls report lcov.info -n -r $COVERALLS_REPO_TOKEN`
   * GitHub Action integration:
+
     ```yaml
     - name: Coveralls
       uses: coverallsapp/github-action@v2
@@ -348,10 +362,12 @@ default to these tools and conventions.
 * Programmatic orchestration of transient Docker containers inside Rust unit or integration tests.
 * Prefer when integration testing has dependencies on third-party services (like MQTT brokers, databases) and you want automated setup/cleanup per test.
 * Canonical config snippet (in `Cargo.toml`):
+
   ```toml
   [dev-dependencies]
   testcontainers = "0.23"
   ```
+
 * Command examples:
   * Run container-backed tests: `RUN_DOCKER_TESTS=1 cargo test -- --test-threads=1`
 
@@ -361,6 +377,7 @@ default to these tools and conventions.
 * Prefer using this action in a dedicated GitHub Actions workflow file (e.g. `.github/workflows/metrics.yml`) running on a regular cron schedule to keep profile assets up-to-date.
 * Always store sensitive keys, such as `METRICS_SECRET` (GitHub Personal Access Token) and `WAKATIME_API_KEY`, as GitHub Repository Secrets.
 * Canonical GitHub Actions job snippet:
+
   ```yaml
   name: Metrics
   on:

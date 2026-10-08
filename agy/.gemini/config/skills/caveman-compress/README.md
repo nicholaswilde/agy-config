@@ -16,11 +16,11 @@ Claude read `CLAUDE.md` on every session start. If file big, cost big. Caveman m
 
 ## What It Do
 
-```
+```text
 /caveman-compress CLAUDE.md
 ```
 
-```
+```text
 CLAUDE.md          ← compressed (Claude reads this — fewer tokens every session)
 CLAUDE.original.md ← human-readable backup (you edit this)
 ```
@@ -83,12 +83,13 @@ caveman-compress/
 
 ## Usage
 
-```
+```text
 /caveman-compress <filepath>
 ```
 
 Examples:
-```
+
+```text
 /caveman-compress CLAUDE.md
 /caveman-compress docs/preferences.md
 /caveman-compress todos.md
@@ -105,7 +106,7 @@ Examples:
 
 ## How It Work
 
-```
+```text
 /caveman-compress CLAUDE.md
         ↓
 detect file type        (no tokens)
@@ -146,7 +147,7 @@ Caveman compress natural language. It never touch:
 
 Caveman cut that by ~46% on average. Same instructions. Same accuracy. Less waste.
 
-```
+```text
 ┌────────────────────────────────────────────┐
 │  TOKEN SAVINGS PER FILE    █████       46% │
 │  SESSIONS THAT BENEFIT     ██████████ 100% │

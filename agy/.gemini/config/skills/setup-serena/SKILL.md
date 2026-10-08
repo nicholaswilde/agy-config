@@ -19,6 +19,7 @@ Serena provides Language Server Protocol (LSP) backed semantic coding tools, tok
 Serena MCP server must be registered in the agent's MCP configuration (`serena`). Available tools can be called directly or via `call_mcp_tool` with `ServerName: "serena"`.
 
 Key Serena tools:
+
 - `get_current_config`: Inspect active project, modes, and LSP status.
 - `activate_project`: Register and switch active project to a specified directory path.
 - `onboarding`: Retrieve project onboarding guidelines and memory schemas.
@@ -58,12 +59,14 @@ Serena will initialize the project, detect the language server, and report langu
 When initializing Serena on a project for the first time, establish persistent project memories so future agents have immediate context.
 
 1. Call `onboarding` to inspect standard memory requirements:
+
    ```json
    ToolName: "onboarding"
    Arguments: {}
    ```
 
 2. Check existing memories using `list_memories`:
+
    ```json
    ToolName: "list_memories"
    Arguments: {}
@@ -77,6 +80,7 @@ When initializing Serena on a project for the first time, establish persistent p
    - `mem:task_completion`: Mandatory validation commands before considering any task complete.
 
    Example call:
+
    ```json
    ToolName: "write_memory"
    Arguments: {
@@ -90,22 +94,27 @@ When initializing Serena on a project for the first time, establish persistent p
 Run diagnostic checks to ensure the LSP and AST parsers are fully functional:
 
 1. **Verify Config:**
+
    ```json
    ToolName: "get_current_config"
    ```
+
    Ensure `Language server status: ready` and `Active project` points to the correct project.
 
 2. **Test Symbol Overview:**
    Pick a representative source code file and test AST extraction:
+
    ```json
    ToolName: "get_symbols_overview"
    Arguments: {
      "relative_path": "path/to/code_file.ext"
    }
    ```
+
    Verify that top-level symbols (functions, classes, methods) are returned without error.
 
 3. **Test Diagnostics (LSP):**
+
    ```json
    ToolName: "get_diagnostics_for_file"
    Arguments: {

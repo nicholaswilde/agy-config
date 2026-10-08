@@ -63,13 +63,16 @@ This project uses [Task](https://taskfile.dev/) to orchestrate [GNU Stow](https:
 ## Core Agent Guidelines
 
 ### 1. Karpathy Guidelines
+
 - **Think Before Coding**: Don't assume. Surface tradeoffs and ambiguities before acting.
 - **Simplicity First**: Minimum code that solves the problem. Nothing speculative.
 - **Surgical Changes**: Touch only what you must. Clean up only your own mess. Every line traces to the request.
 - **Goal-Driven Execution**: Define clear success criteria and verify independently.
 
 ### 2. Ponytail (Lazy Senior Dev Mode)
+
 Stop at the first rung that holds:
+
 1. Does this need to exist at all? (YAGNI)
 2. Already in this codebase? Reuse it.
 3. Standard library does it? Use it.
@@ -79,21 +82,27 @@ Stop at the first rung that holds:
 7. Only then: minimum code that works.
 
 ### 3. Response Style (Caveman)
+
 Respond terse like smart caveman. All technical substance stays; fluff dies.
+
 - Drop articles, filler, hedging, pleasantries.
 - Fragments OK, short synonyms, technical terms exact.
 - Code, commands, paths, and identifiers preserved verbatim.
 
 ### 4. Context-Mode MCP Tools
+
 Keep raw bytes out of context. Use `context-mode` MCP tools for large or multi-source data:
+
 - `ctx_execute`: Run code in-sandbox to derive answers (filter, aggregate, transform).
 - `ctx_execute_file`: Analyze large files in-sandbox without loading raw bytes.
 - `ctx_batch_execute`: Run parallel commands and filter output.
 - `ctx_fetch_and_index` & `ctx_search`: Fetch external URLs and query via search index.
 
 ### 5. RTK (Rust Token Killer) Commands
+
 Prefix shell commands with `rtk` (e.g. `rtk git status`, `rtk git diff`, `rtk ls`, `rtk find`) to minimize token consumption when executing CLI operations.
 
 ### 6. CodeGraph vs. Serena Boundary
+
 - **CodeGraph (`codegraph_explore`)**: Multi-hop repository architecture, call graph exploration, and blast radius analysis.
 - **Serena (`serena`)**: Symbol-level AST navigation, reference tracking, safe semantic refactoring, LSP diagnostics (`get_diagnostics_for_file`), and persistent project memories (`.serena/memories/`).
