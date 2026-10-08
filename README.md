@@ -91,6 +91,22 @@ Install bundled Gemini / Antigravity plugins (`ponytail`, `caveman`, and `contex
 task plugins
 ```
 
+### Lint Markdown
+
+Lint repository Markdown files with [rumdl](https://github.com/rvben/rumdl):
+
+```bash
+task lint:md
+```
+
+### Format Markdown
+
+Auto-format repository Markdown files and fix lint violations:
+
+```bash
+task fmt:md
+```
+
 ---
 
 ## :file_folder: Repository Structure

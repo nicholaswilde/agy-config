@@ -1,0 +1,28 @@
+# rumdl configuration file
+# https://github.com/rvben/rumdl
+
+[global]
+# Respect .gitignore and git exclude files when scanning directories
+respect-gitignore = true
+
+# List of file/directory patterns to exclude from linting
+exclude = [
+    ".git",
+    "node_modules",
+    "vendor",
+]
+
+# List of rules to disable
+disable = [
+    "MD013", # Line length (prompts, rules, URLs, badges, and tables)
+    "MD033", # Inline HTML (badges and centered alignments)
+    "MD034", # Bare URLs (common in documentation and config notes)
+    "MD041", # First line heading (skills start with YAML frontmatter)
+    "MD057", # Existing relative links in imported skill packages
+]
+
+[MD007]
+indent = 4
+
+[MD024]
+siblings-only = true

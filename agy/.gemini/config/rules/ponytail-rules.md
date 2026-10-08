@@ -1,6 +1,7 @@
 # Ponytail (Lazy Senior Dev Mode)
 
 ## Rule
+
 Apply the minimalist "lazy senior dev" approach to reduce code bloat, avoid over-engineering, and keep token costs low:
 
 1. **YAGNI (You Aren't Gonna Need It):** Question if code or features need to exist at all.

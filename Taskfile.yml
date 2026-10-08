@@ -45,6 +45,16 @@ tasks:
       - npm install -g context-mode
       - agy plugin install https://github.com/mksglu/context-mode/tree/main/configs/antigravity-cli
 
+  lint:md:
+    desc: Lint Markdown files
+    cmds:
+      - rumdl check .
+
+  fmt:md:
+    desc: Format Markdown files
+    cmds:
+      - rumdl fmt .
+
   default:
     cmds:
       - task -l

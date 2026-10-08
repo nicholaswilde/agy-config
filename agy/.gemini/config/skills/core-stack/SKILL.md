@@ -250,8 +250,8 @@ default to these tools and conventions.
 ## 22. Docker-Based Linting (Repo-Local Override)
 
 * In this repo the root `Taskfile.yml` runs linters via Docker instead of native binaries:
-  * **Markdownlint:** `docker run --rm -it -v ${PWD}:/markdown:ro 06kellyjac/markdownlint-cli .`
-  * **Yamllint:** `docker run --rm -it -v ${PWD}:${PWD} -w ${PWD} programmerassistant/yamllint yamllint .`
+    * **Markdownlint:** `docker run --rm -it -v ${PWD}:/markdown:ro 06kellyjac/markdownlint-cli .`
+    * **Yamllint:** `docker run --rm -it -v ${PWD}:${PWD} -w ${PWD} programmerassistant/yamllint yamllint .`
 * This takes precedence over the native `rumdl`/`yamllint-rs` pattern (§4, §5) for this repo specifically.
 * Use the Docker variants when the repo's `task markdownlint` / `task yamllint` tasks are defined this way.
 
@@ -275,9 +275,9 @@ default to these tools and conventions.
 * Containerized cross-compilation tool for Rust projects, allowing target compilation (e.g. ARMv6, ARMv7, ARM64) on host development machines without local toolchains.
 * Requires a running container runtime (Docker or Podman) and a local `Cross.toml` for target image configurations if necessary.
 * Command examples:
-  * Install: `cargo install cross --git https://github.com/cross-rs/cross`
-  * Compile: `cross build --target arm-unknown-linux-gnueabihf --release`
-  * Run tests: `cross test --target arm-unknown-linux-gnueabihf`
+    * Install: `cargo install cross --git https://github.com/cross-rs/cross`
+    * Compile: `cross build --target arm-unknown-linux-gnueabihf --release`
+    * Run tests: `cross test --target arm-unknown-linux-gnueabihf`
 
 ## 26. Debian Packaging — `cargo-deb`
 
@@ -299,7 +299,7 @@ default to these tools and conventions.
   ```
 
 * Command examples:
-  * Build package: `cargo deb --no-build --target arm-unknown-linux-gnueabihf`
+    * Build package: `cargo deb --no-build --target arm-unknown-linux-gnueabihf`
 
 ## 27. RPM Packaging — `cargo-generate-rpm`
 
@@ -324,38 +324,38 @@ default to these tools and conventions.
   ```
 
 * Command examples:
-  * Build package: `cargo generate-rpm --target arm-unknown-linux-gnueabihf`
+    * Build package: `cargo generate-rpm --target arm-unknown-linux-gnueabihf`
 
 ## 28. Binary Installer — `cargo-binstall`
 
 * Installs pre-compiled Rust binaries directly from GitHub releases or crates.io, bypassing compilation overhead.
 * Prefer in CI pipelines or deployment scripts where building packaging/compilation dependencies would slow down the run.
 * Command examples:
-  * Install binstall: `curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash`
-  * Install tools: `cargo binstall -y cargo-deb cargo-generate-rpm`
+    * Install binstall: `curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash`
+    * Install tools: `cargo binstall -y cargo-deb cargo-generate-rpm`
 
 ## 29. Code Coverage — `cargo-llvm-cov`
 
 * Source-based code coverage tool for Rust with minimal overhead, supporting LCOV, HTML, and JSON reports.
 * Prefer when establishing strict coverage gates (e.g. 90% line gate) in local development and CI pipelines.
 * Command examples:
-  * Run tests and fail under line gate: `cargo llvm-cov --all-features --fail-under-lines 90 -- --test-threads=1`
-  * Generate coverage reports: `cargo llvm-cov --all-features --lcov --output-path lcov.info`
+    * Run tests and fail under line gate: `cargo llvm-cov --all-features --fail-under-lines 90 -- --test-threads=1`
+    * Generate coverage reports: `cargo llvm-cov --all-features --lcov --output-path lcov.info`
 
 ## 30. Coverage Reporting — `coveralls`
 
 * Uploads generated coverage reports (e.g. `lcov.info`) to Coveralls.io to track and monitor test coverage trends over time.
 * Command examples:
-  * CLI upload: `coveralls report lcov.info -n -r $COVERALLS_REPO_TOKEN`
-  * GitHub Action integration:
+    * CLI upload: `coveralls report lcov.info -n -r $COVERALLS_REPO_TOKEN`
+    * GitHub Action integration:
 
-    ```yaml
-    - name: Coveralls
-      uses: coverallsapp/github-action@v2
-      with:
-        files: lcov.info
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-    ```
+      ```yaml
+      - name: Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          files: lcov.info
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      ```
 
 ## 31. Integration Test Containers — `testcontainers`
 
@@ -369,7 +369,7 @@ default to these tools and conventions.
   ```
 
 * Command examples:
-  * Run container-backed tests: `RUN_DOCKER_TESTS=1 cargo test -- --test-threads=1`
+    * Run container-backed tests: `RUN_DOCKER_TESTS=1 cargo test -- --test-threads=1`
 
 ## 32. GitHub Profile Metrics — `lowlighter/metrics`
 
