@@ -16,6 +16,7 @@ GNU Stow dotfiles package for managing Google Antigravity CLI (`agy`) configurat
 - **Rule Enforcement**: Built-in rules for secret management, credential leak prevention, Google `DESIGN.md` GUI standards, and semantic coding.
 - **Automated Workflows & CI**: Streamlined `Taskfile` commands for safe dry-runs, stowing, restowing, and linting (`rumdl`, `yamllint`) backed by GitHub Actions CI.
 - **Design & Theming Standards**: Native Catppuccin Mocha theme defaults and 2-space indentation standards across all tools.
+- **Dirty Repo Notifications**: systemd user timer alerts via [Mailrise](https://github.com/YoRyan/mailrise) when config changes are uncommitted or unpushed.
 
 ---
 
@@ -127,7 +128,12 @@ task lint
 
 ### Dirty Repo Notifications
 
-Periodic uncommitted change detection via systemd user timer with [Mailrise](https://github.com/YoRyan/mailrise) alerts:
+Periodic uncommitted change detection via systemd user timer with [Mailrise](https://github.com/YoRyan/mailrise) alerts.
+[`notify-dirty.sh`](scripts/notify-dirty.sh) sends an SMTP email to Mailrise (via `curl`), which forwards it to any
+[Apprise](https://github.com/caronc/apprise) target (Gotify, ntfy, Discord, etc.).
+
+- Detects uncommitted/untracked changes to skills, rules, and config files, plus unpushed commits.
+- Notifies once per dirty period; state resets when repo is clean and synced with upstream.
 
 1. Copy `.env.example` to `.env` (git-ignored) and adjust configuration (e.g. `NOTIFY_MODE=dirty`, `both`, or `disabled`):
 
@@ -141,6 +147,12 @@ Periodic uncommitted change detection via systemd user timer with [Mailrise](htt
    task notify:check
    ```
 
+   Send a test notification regardless of repo state:
+
+   ```bash
+   task notify:check -- --force
+   ```
+
 3. Install and activate user timer (every 15 minutes):
 
    ```bash
@@ -152,6 +164,28 @@ Periodic uncommitted change detection via systemd user timer with [Mailrise](htt
    ```bash
    task notify:status
    ```
+
+5. Remove timer and service:
+
+   ```bash
+   task notify:uninstall
+   ```
+
+#### Configuration
+
+| Variable            | Default                                                   | Description                                        |
+|---------------------|-----------------------------------------------------------|----------------------------------------------------|
+| `MAILRISE_URL`      | `smtp://smtp.l.nicholaswilde.io:8025`                     | Mailrise SMTP endpoint                             |
+| `MAILRISE_TO`       | `all@mailrise.xyz`                                        | Mailrise target (defined in `mailrise.yaml`)       |
+| `MAILRISE_FROM`     | `agy-config@<hostname>`                                   | Sender address                                     |
+| `MAILRISE_USER`     | _(empty)_                                                 | Optional SMTP username                             |
+| `MAILRISE_PASSWORD` | _(empty)_                                                 | Optional SMTP password (keep in `.env` only)       |
+| `NOTIFY_MODE`       | `dirty`                                                   | `dirty`, `both` (also notify when clean), `disabled` |
+| `CHECK_ALL_FILES`   | `false`                                                   | `true` alerts on any uncommitted file              |
+| `TARGET_REGEX`      | `skills/\|rules/\|settings\.json\|config\.json\|mcp_config\.json` | Paths watched when `CHECK_ALL_FILES=false` |
+| `STATE_FILE`        | `$XDG_STATE_HOME/agy-config/dirty.state`                  | Tracks whether notification was already sent       |
+
+Precedence: caller environment > `.env` > script default.
 
 ---
 
