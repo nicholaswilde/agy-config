@@ -427,3 +427,66 @@ default to these tools and conventions.
 * **Rule:** When adding emojis to Markdown files (headings, badges, lists, docs, or READMEs), **always** use standard GitHub emoji shortcodes (e.g. `:rocket:`, `:sparkles:`, `:gear:`, `:robot:`, `:package:`, `:shield:`, `:balance_scale:`, `:writing_hand:`) instead of raw Unicode emoji glyphs.
 * **Exceptions:** Only use raw Unicode when shortcodes are not supported or parsed by the target runtime or platform.
 * **Benefits:** Preserves plain ASCII compatibility, avoids character-width and monospace font alignment glitches in terminal editors and git diffs, and renders consistently on GitHub and Zensical/MkDocs.
+
+## 36. AI Agent Ingestion — `llms.txt` + `llms-full.txt`
+
+* Follow the [llms.txt spec](https://llmstxt.org/) so AI agents can ingest a repo/site without crawling HTML.
+* **Relevant repos:** anything with a docs site (`zensical`), libraries, CLIs, MCP servers, or apps others integrate with. Skip pure dotfile/config or private scratch repos.
+* **Two files:**
+  * `llms.txt` — hand-curated index. Small; links only.
+  * `llms-full.txt` — generated; `llms.txt` + full content of every linked Markdown file concatenated. Never hand-edit.
+* **Location:**
+  * Docs-site repos: `docs/llms.txt` + `docs/llms-full.txt` → served at site root (`<site_url>/llms.txt`).
+  * Non-docs repos: repo root (`./llms.txt`, `./llms-full.txt`) → agents fetch via raw GitHub URL.
+* **`llms.txt` format** (sections in this order):
+  1. H1 project name (only required section).
+  2. Blockquote one-line summary.
+  3. Optional paragraphs/lists (no headings) with key context.
+  4. H2 sections of file lists: `- [Name](url): optional notes`.
+  5. `## Optional` H2 last — secondary links agents may skip for short context.
+* Link to raw Markdown (`.md`) URLs, not rendered HTML, so agents get clean text.
+* Canonical `llms.txt`:
+
+  ```markdown
+  # project-name
+
+  > One-line summary of what the project does.
+
+  Key facts an agent needs: language, install command, config file location.
+
+  ## Docs
+
+  - [README](https://raw.githubusercontent.com/nicholaswilde/project-name/main/README.md): Overview and install
+  - [Configuration](https://nicholaswilde.github.io/project-name/configuration.md): Config reference
+
+  ## Optional
+
+  - [Changelog](https://raw.githubusercontent.com/nicholaswilde/project-name/main/CHANGELOG.md)
+  ```
+
+* Generate `llms-full.txt` via task (`DIR` = `docs` or `.`):
+
+  ```yaml
+  llms:
+    desc: Generate llms-full.txt from llms.txt + Markdown docs
+    vars:
+      DIR: docs
+    cmds:
+      - |
+        {
+          cat {{.DIR}}/llms.txt
+          find {{.DIR}} -name '*.md' -not -path '*/node_modules/*' | sort | while read -r f; do
+            printf '\n\n---\n\n# Source: %s\n\n' "$f"
+            cat "$f"
+          done
+        } > {{.DIR}}/llms-full.txt
+    sources:
+      - "{{.DIR}}/**/*.md"
+      - "{{.DIR}}/llms.txt"
+    generates:
+      - "{{.DIR}}/llms-full.txt"
+  ```
+
+* Run `task llms` before `task build`; regenerate in CI docs-deploy workflow so `llms-full.txt` never goes stale.
+* Exclude `llms-full.txt` from `lychee.toml` (`exclude_path`) and `_typos.toml` — content duplicates already-checked sources.
+* Link both files from `README.md` (e.g. `:robot: [llms.txt](llms.txt)`) and `AGENTS.md` for discoverability.

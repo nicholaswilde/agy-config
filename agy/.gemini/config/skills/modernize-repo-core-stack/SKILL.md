@@ -39,6 +39,7 @@ For each modernization finding, suggest the exact changes needed (CI workflows, 
      - Check for `markdownlint-cli` or similar and recommend `rumdl`.
      - Check for `yamllint` and recommend `yamllint-rs`.
    - **CI/CD**: Scan `.github/workflows/*.yaml` for outdated GitHub Action versions or tasks that should run through `go-task`.
+   - **AI Ingestion**: If repo has docs site, library, CLI, or MCP server, check for `llms.txt` + `llms-full.txt` (core stack §36). Recommend adding curated `llms.txt` and a `task llms` generator for `llms-full.txt`.
 4. **Generate Report** — Write a markdown artifact `modernization_report.md` detailing:
    - **Identified Legacy Tools**: Current tool setup.
    - **Recommended Core Stack Replacement**: The modern alternative from `core_stack.md`.
