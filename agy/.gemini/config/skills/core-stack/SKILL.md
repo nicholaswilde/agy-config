@@ -490,3 +490,23 @@ default to these tools and conventions.
 * Run `task llms` before `task build`; regenerate in CI docs-deploy workflow so `llms-full.txt` never goes stale.
 * Exclude `llms-full.txt` from `lychee.toml` (`exclude_path`) and `_typos.toml` — content duplicates already-checked sources.
 * Link both files from `README.md` (e.g. `:robot: [llms.txt](llms.txt)`) and `AGENTS.md` for discoverability.
+
+## 37. Content Search — `ripgrep` (`rg`)
+
+* Use [`ripgrep`](https://github.com/BurntSushi/ripgrep) (`rg`) for all file-content, string, and regex searches. Never `grep -r`.
+* Respects `.gitignore` by default; skips hidden/binary files. Use `--hidden` / `-uu` only when needed.
+* Prefix with `rtk` in agent shells to compress output: `rtk rg <pattern>`.
+* Scope with `-t <type>` and target dirs; keep context small (`-C 1`/`-C 2`); use `-l` for file lists.
+* Prefer `rg` over `grep` in Taskfiles and scripts too (e.g. `rg -l 'TODO' docs/`).
+* Install: `cargo binstall -y ripgrep` or `apt install ripgrep`.
+* Full rule: `~/.gemini/config/rules/ripgrep-rules.md`.
+* Command examples:
+
+  ```bash
+  rg "pattern" src/          # search a directory
+  rg -t py "def scrape"      # filter by file type
+  rg -i "amazing race"       # case-insensitive
+  rg -w "Season"             # whole word
+  rg -l "Pydantic"           # list matching files only
+  rg --files -g '*.md'       # list files by glob (fd/find alternative)
+  ```
