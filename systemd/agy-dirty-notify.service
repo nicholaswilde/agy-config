@@ -1,0 +1,12 @@
+[Unit]
+Description=Check agy-config for uncommitted changes and notify via Mailrise
+Documentation=https://github.com/nicholaswilde/agy-config
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/git/nicholaswilde/agy-config
+ExecStart=%h/git/nicholaswilde/agy-config/scripts/notify-dirty.sh
+StandardOutput=journal
+StandardError=journal

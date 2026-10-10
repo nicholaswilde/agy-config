@@ -66,6 +66,34 @@ tasks:
       - task: lint:md
       - task: lint:yaml
 
+  notify:check:
+    desc: 'Run uncommitted changes check manually'
+    cmds:
+      - './scripts/notify-dirty.sh {{.CLI_ARGS}}'
+
+  notify:install:
+    desc: 'Install and activate systemd user timer'
+    cmds:
+      - 'mkdir -p ~/.config/systemd/user'
+      - 'ln -sf "$(pwd)/systemd/agy-dirty-notify.service" ~/.config/systemd/user/agy-dirty-notify.service'
+      - 'ln -sf "$(pwd)/systemd/agy-dirty-notify.timer" ~/.config/systemd/user/agy-dirty-notify.timer'
+      - 'systemctl --user daemon-reload'
+      - 'systemctl --user "enable" --now agy-dirty-notify.timer'
+
+  notify:status:
+    desc: 'Check status of systemd timer and service'
+    cmds:
+      - 'systemctl --user status agy-dirty-notify.timer --no-pager'
+      - 'systemctl --user list-timers agy-dirty-notify.timer'
+
+  notify:uninstall:
+    desc: 'Stop and remove systemd user timer'
+    cmds:
+      - 'systemctl --user "disable" --now agy-dirty-notify.timer || :'
+      - 'rm -f ~/.config/systemd/user/agy-dirty-notify.service ~/.config/systemd/user/agy-dirty-notify.timer'
+      - 'systemctl --user daemon-reload'
+
+
   default:
     cmds:
       - task -l

@@ -42,6 +42,9 @@ This project uses [Task](https://taskfile.dev/) to orchestrate [GNU Stow](https:
 - **Dry-run unstow**: `task del:test`
 - **Unstow / Delete symlinks**: `task del`
 - **Install plugins**: `task plugins`
+- **Check dirty repo**: `task notify:check`
+- **Install dirty notify timer**: `task notify:install`
+- **Check notify timer status**: `task notify:status`
 - **Lint markdown**: `task lint:md` (`rumdl check .`)
 - **Format markdown**: `task fmt:md` (`rumdl fmt .`)
 - **Lint YAML**: `task lint:yaml` (`yamllint-rs .`)

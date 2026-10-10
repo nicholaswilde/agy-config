@@ -125,6 +125,34 @@ Run both Markdown and YAML linting checks:
 task lint
 ```
 
+### Dirty Repo Notifications
+
+Periodic uncommitted change detection via systemd user timer with [Mailrise](https://github.com/YoRyan/mailrise) alerts:
+
+1. Copy `.env.example` to `.env` (git-ignored) and adjust configuration (e.g. `NOTIFY_MODE=dirty`, `both`, or `disabled`):
+
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Run dirty check manually:
+
+   ```bash
+   task notify:check
+   ```
+
+3. Install and activate user timer (every 15 minutes):
+
+   ```bash
+   task notify:install
+   ```
+
+4. Check timer and service status:
+
+   ```bash
+   task notify:status
+   ```
+
 ---
 
 ## :file_folder: Repository Structure
@@ -144,6 +172,12 @@ task lint
 │   │       ├── rules/          # Behavioral and security rules
 │   │       └── skills/         # Custom skills library
 │   └── .stow-local-ignore      # Ignores runtime and cache directories from Stow
+├── scripts/
+│   └── notify-dirty.sh         # Dirty check & Mailrise notification script
+├── systemd/
+│   ├── agy-dirty-notify.service # systemd user service definition
+│   └── agy-dirty-notify.timer   # systemd user timer definition (15m interval)
+├── .env.example                # Notification and Mailrise environment template
 ├── .gitignore                  # Git ignore patterns
 ├── .rumdl.toml                 # Markdown linter and formatter configuration
 ├── .sops.yaml                  # SOPS encryption configuration (PGP + age)
