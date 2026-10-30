@@ -22,12 +22,47 @@ default to these tools and conventions.
 * Standard Cargo layout: `src/main.rs`, `Cargo.toml`.
 * Always include `cargo clippy -- -D warnings` in build/test steps.
 
-## 3. Python Tooling — `uv`
+## 3. Python Tooling & Workflows — `uv`
 
-* Use [`uv`](https://github.com/astral-sh/uv) for all Python dependency management (never `pip` directly at the project level).
-* Install deps with `uv pip install <package>`.
-* Project metadata lives in `pyproject.toml` with `requires-python` pinned.
-* Lock file: `uv.lock`.
+* Use [`uv`](https://github.com/astral-sh/uv) for all Python package management, environment isolation, script execution, and pipeline workflows.
+* **NEVER** use `pip`, `poetry`, `pipenv`, or raw `virtualenv` at the project level.
+* **Command Execution**:
+  * Run project commands, linters, and tests through `uv run`: `uv run pytest`, `uv run ruff check`.
+  * Run scripts: `uv run python script.py` or standalone `uv run --with <pkg> script.py`.
+* **Dependency Management**:
+  * Add dependencies: `uv add <package>` (or `uv add --dev <package>` for dev tools).
+  * Remove dependencies: `uv remove <package>`.
+  * Synchronize environment: `uv sync` (or `uv sync --frozen` in CI).
+  * Project metadata lives in `pyproject.toml` with `requires-python` pinned.
+  * Always commit `uv.lock` to git.
+* **Pipeline Workflows & Script Metadata**:
+  * For self-contained automation scripts, declare dependencies using PEP 723 inline script metadata:
+
+    ```python
+    # /// script
+    # requires-python = ">=3.11"
+    # dependencies = [
+    #   "requests",
+    #   "rich",
+    # ]
+    # ///
+    ```
+
+  * Run directly with `uv run script.py` — `uv` transparently isolates dependencies in an ephemeral environment.
+* **Taskfile Integration**:
+
+  ```yaml
+  test:
+    desc: Run test suite
+    cmds:
+      - uv run pytest
+
+  lint:
+    desc: Lint Python codebase
+    cmds:
+      - uv run ruff check .
+      - uv run mypy .
+  ```
 
 ## 4. YAML Linting — `yamllint-rs`
 
