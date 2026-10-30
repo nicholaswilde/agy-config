@@ -24,10 +24,6 @@
       },
       "trust": true
     },
-    "context-mode": {
-      "command": "/home/nicholas/.nvm/versions/node/v25.2.1/bin/context-mode",
-      "trust": true
-    },
     "serena": {
       "command": "serena",
       "args": [
