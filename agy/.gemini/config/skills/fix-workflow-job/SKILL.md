@@ -29,12 +29,27 @@ When a continuous integration (CI) or deployment workflow job fails, this skill 
 
 ## Protocol
 
-### 1. Inspect Job Metadata & Environment
+### 1. Extract Failure Diagnostics (Token-Optimized)
 
-Query the job to determine its runner platform, target matrix values, and failed steps:
+Run the skill's helper script to filter out runner initialization noise and extract the concise failure block directly:
+
+```bash
+python3 ~/.gemini/config/skills/fix-workflow-job/scripts/get-job-failure.py <job_id>
+```
+
+Alternatively, pipe raw failed logs to the script:
+
+```bash
+gh run view --job <job_id> --log-failed | python3 ~/.gemini/config/skills/fix-workflow-job/scripts/get-job-failure.py
+```
+
+### 2. Inspect Job Metadata & Context (Fallback)
+
+If the helper script is unavailable, manually inspect the job overview and failed logs:
 
 ```bash
 gh run view --job <job_id> | cat
+gh run view --job <job_id> --log-failed | cat
 ```
 
 Note:
@@ -43,19 +58,7 @@ Note:
 - Toolchain / runtime versions: Rust stable/beta/nightly, Go version, Node version, Python version.
 - Cross-compilation target: e.g. `aarch64-unknown-linux-musl`, `armv7`, `x86_64-pc-windows-msvc`.
 - Exact failed step name (e.g., `Run tests`, `Check clippy`, `Build`).
-
-### 2. Extract Failed Step Logs
-
-Retrieve failed log output:
-
-```bash
-gh run view --job <job_id> --log-failed | cat
-```
-
-If logs are truncated or large:
-
 - Filter for error keywords: `FAILED`, `panicked at`, `error[E`, `failures:`, `assertion failed`.
-- Identify the exact file path and line number where the failure occurred.
 
 ### 3. Root Cause Diagnosis & Local Reproduction
 

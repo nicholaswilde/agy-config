@@ -29,25 +29,26 @@ When an automated CI/CD workflow run fails, multiple jobs across operating syste
 
 ## Protocol
 
-### 1. Inspect Workflow Run Overview
+### 1. Extract Run Failures (Token-Optimized)
 
-Query the run to view the workflow name, trigger event, and pass/fail status of all constituent jobs:
+Run the skill's helper script to scan the entire run, identify failed jobs and failing steps, and extract clean failure blocks:
+
+```bash
+python3 ~/.gemini/config/skills/fix-workflow-run/scripts/get-run-failures.py <run_id>
+```
+
+Alternatively, pipe failed run logs directly to the script:
+
+```bash
+gh run view <run_id> --log-failed | python3 ~/.gemini/config/skills/fix-workflow-run/scripts/get-run-failures.py
+```
+
+### 2. Inspect Workflow Run Overview (Fallback)
+
+If the helper script is unavailable, manually inspect the run overview and logs:
 
 ```bash
 gh run view <run_id> | cat
-```
-
-Analyze the output:
-
-- Identify all jobs marked with `X` (failed).
-- Record the failed job IDs (e.g., `ID 123881774649`).
-- Compare failed jobs against passing jobs: Did only `win-msvc` fail while `ubuntu` and `macos` passed? Did all targets fail at the same lint or test step?
-
-### 2. Extract Failed Step Logs
-
-Retrieve failed step logs across all failing jobs in the run:
-
-```bash
 gh run view <run_id> --log-failed | cat
 ```
 
@@ -57,12 +58,11 @@ If multiple jobs failed or the output is large, drill down into specific failed 
 gh run view --job <job_id> --log-failed | cat
 ```
 
-Filter for critical failure signals:
+Analyze the output:
 
-- `failures:` and test names.
-- `thread '...' panicked at <file>:<line>`.
-- `error[E...]:` or compilation errors.
-- Linter warnings treated as errors (`-D warnings`).
+- Identify all jobs marked with `X` (failed) and their job IDs.
+- Compare failed jobs against passing jobs: Did only `win-msvc` fail while `ubuntu` and `macos` passed? Did all targets fail at the same lint or test step?
+- Filter for critical signals: `failures:`, `thread '...' panicked at`, `error[E...]:`, `-D warnings`.
 
 ### 3. Root Cause Diagnosis & Local Reproduction
 
