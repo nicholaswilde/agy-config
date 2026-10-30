@@ -2,7 +2,7 @@
 
 ## Rule
 
-Prefix raw shell commands with `rtk` whenever a subcommand exists. `rtk` filters and compresses output before it reaches model context.
+Prefix raw shell commands with `rtk` whenever subcommand exists. `rtk` filters and compresses output before model context.
 
 ## Command Map
 
@@ -24,7 +24,7 @@ Prefix raw shell commands with `rtk` whenever a subcommand exists. `rtk` filters
 
 ## Exceptions
 
-1. **ctx sandbox**: inside `ctx_execute` / `ctx_batch_execute` code, `rtk` isn't needed; only printed output enters context.
-2. **Exact output needed**: drop `rtk` when the exact raw bytes matter (e.g., `git diff` to apply as a patch, or file content to edit verbatim).
-3. **No subcommand**: commands without an `rtk` subcommand run raw (e.g., `mkdir`, `mv`, `rm`).
-4. **Unknown**: check `rtk --help` before assuming a subcommand exists.
+1. **ctx sandbox**: inside `ctx_execute` / `ctx_batch_execute`, skip `rtk`; only printed output enters context.
+2. **Exact output needed**: drop `rtk` when raw bytes matter (`git diff` patch, verbatim file edit).
+3. **No subcommand**: run commands without `rtk` subcommand raw (`mkdir`, `mv`, `rm`).
+4. **Unknown**: check `rtk --help` before assuming subcommand exists.

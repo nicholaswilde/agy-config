@@ -1,3 +1,10 @@
+---
+name: scan-and-update-core-stack
+description: >-
+  Scan current repository for tooling conventions and merge new patterns into core-stack skill.
+  Trigger: /scan-and-update-core-stack, "scan core stack", "update core stack".
+---
+
 # Scan & Update Core Stack Skill
 
 Scan the current repository for tools, conventions, and patterns, then merge any new findings

@@ -1,12 +1,8 @@
 ---
 name: commit-agy-config
-description: >
-  Create git commits and pushes for new or updated Antigravity (agy) skills, rules,
-  and configurations in agy-config (or workspace .agents/). Audits changes for secrets,
-  validates formatting/linting, stages files explicitly, generates conventional commit messages,
-  commits, and pushes to remote.
-  Trigger: "commit agy config", "commit agy changes", "commit agy skills", "commit agy rules",
-  "commit and push agy config", "sync agy config", "push agy config", "/commit-agy-config", "/sync-agy-config".
+description: >-
+  Audit, stage, commit, and push Antigravity (agy) skills, rules, and configs in agy-config or .agents/.
+  Trigger: "commit agy config", "commit agy changes", "commit agy skills", "commit agy rules", "commit and push agy config", "sync agy config", "push agy config", "/commit-agy-config", "/sync-agy-config".
 ---
 
 # Commit and Push AGY Config Skill

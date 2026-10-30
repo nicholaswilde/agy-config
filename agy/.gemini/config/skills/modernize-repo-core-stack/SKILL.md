@@ -1,3 +1,10 @@
+---
+name: modernize-repo-core-stack
+description: >-
+  Audit and modernize repository tooling, scripts, and CI workflows to match core-stack standards.
+  Trigger: /modernize-repo-core-stack, "modernize core stack", "audit core stack", "upgrade repo stack".
+---
+
 # Modernize Repo to Core Stack Skill
 
 Scan the current repository for tools, conventions, and configuration files, compare them against the standards in `~/.gemini/antigravity-cli/skills/core_stack.md`, and recommend/apply updates to use modern tools (e.g., converting `shellcheck` to `shuck`, `make` to `go-task`, etc.).

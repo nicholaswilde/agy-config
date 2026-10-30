@@ -1,9 +1,7 @@
 ---
 name: fix-workflow-run
 description: >-
-  Investigate, debug, and fix a failed remote GitHub Actions workflow run given its run ID.
-  Queries run status, lists failed jobs, extracts failing step logs via GitHub CLI, isolates root causes,
-  reproduces failures locally, applies surgical fixes, runs quality gates, and pushes fixes.
+  Investigate, reproduce, and fix a failed GitHub Actions workflow run by run ID.
   Trigger: /fix-workflow-run, /fix-run, "fix workflow run <run_id>", "fix run <run_id>", "look at run <run_id> and fix", "debug run <run_id>".
 ---
 

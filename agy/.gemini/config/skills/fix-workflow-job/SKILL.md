@@ -1,9 +1,7 @@
 ---
 name: fix-workflow-job
 description: >-
-  Investigate, debug, and fix a failed remote GitHub Actions workflow job given its job ID.
-  Queries job details, extracts failing step logs via GitHub CLI, isolates root causes,
-  reproduces failures locally, applies surgical fixes, runs quality gates, and pushes fixes.
+  Investigate, reproduce, and fix a failed GitHub Actions workflow job by job ID.
   Trigger: /fix-workflow-job, /fix-job, "fix workflow job <job_id>", "fix job <job_id>", "debug job <job_id>".
 ---
 

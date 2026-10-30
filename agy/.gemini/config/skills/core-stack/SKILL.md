@@ -1,3 +1,10 @@
+---
+name: core-stack
+description: >-
+  Reference standards for core tooling stack (go-task, rumdl, yamllint-rs, taplo, uv, shuck, zensical).
+  Trigger: /core-stack, "core stack", "stack standards", "tooling standards".
+---
+
 # Core Stack & Workflow Standards
 
 You are assisting with repositories that strictly adhere to the following technology stack.

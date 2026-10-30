@@ -2,7 +2,7 @@
 
 ## Rule
 
-Always pipe GitHub CLI (`gh`) commands to `cat` to bypass interactive prompts and terminal pagers:
+Always pipe GitHub CLI (`gh`) commands to `cat` to bypass interactive prompts and pagers:
 
 ```bash
 rtk gh <command> | cat
@@ -10,9 +10,9 @@ rtk gh <command> | cat
 
 ## Guidelines
 
-1. **Never Run Bare `gh` Interactively**: Without a pipe, `gh` may invoke a pager (e.g., `less`) or wait on interactive confirmation prompts, causing agent execution to hang.
-2. **Combine with RTK**: Prefix with `rtk` to filter output tokens while piping to `cat` (e.g., `rtk gh issue list | cat`).
-3. **Explicit Non-Interactive Flags**: Where applicable, provide required arguments explicitly (e.g., `--title`, `--body`, `--label`, `--non-interactive`) so `gh` does not prompt for missing fields.
+1. **Never Run Bare `gh` Interactively**: Without pipe, `gh` may invoke pager (`less`) or wait on prompts, hanging execution.
+2. **Combine with RTK**: Prefix with `rtk` while piping to `cat` (e.g., `rtk gh issue list | cat`).
+3. **Explicit Non-Interactive Flags**: Pass required args (`--title`, `--body`, `--label`, `--non-interactive`) so `gh` never prompts.
 
 ## Examples
 

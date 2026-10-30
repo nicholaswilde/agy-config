@@ -1,11 +1,8 @@
 ---
 name: generate-llms-txt
-description: >
-  Generate standardized llms.txt and llms-full.txt files for a repository according
-  to the llmstxt.org specification. Extracts project name, overview, structured
-  documentation/resource links, and optional full-context content.
-  Trigger: /generate-llms-txt, /llms-txt, "create llms.txt", "generate llms.txt", "create llms-full.txt",
-  "generate llms-full.txt", "add llms.txt", "llms.txt".
+description: >-
+  Generate standardized llms.txt and llms-full.txt files per llmstxt.org spec.
+  Trigger: /generate-llms-txt, /llms-txt, "create llms.txt", "generate llms.txt", "create llms-full.txt", "generate llms-full.txt", "add llms.txt", "llms.txt".
 ---
 
 # Generate llms.txt & llms-full.txt Skill

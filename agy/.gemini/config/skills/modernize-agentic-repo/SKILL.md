@@ -1,12 +1,8 @@
 ---
 name: modernize-agentic-repo
-description: >
-  Audit, verify, and modernize repository for agentic coding tools: ensure serena, rtk,
-  ponytail, codegraph, context-mode, and caveman are operational; update .gitignore
-  for tool caches; merge .gemini into .agents/; migrate conductor into .agents/conductor/
-  and update documentation references.
-  Trigger: /modernize-agentic-repo, /modernize-agents, "modernize agent tooling",
-  "modernize repo", "modernize workspace", "ensure agent tools", "modernize agents".
+description: >-
+  Verify and modernize repo for agentic tools (serena, rtk, ponytail, codegraph, context-mode, caveman) and .agents/ layout.
+  Trigger: /modernize-agentic-repo, /modernize-agents, "modernize agent tooling", "modernize repo", "modernize workspace", "ensure agent tools", "modernize agents".
 ---
 
 # Modernize Agentic Repository Skill
