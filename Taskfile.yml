@@ -60,11 +60,17 @@ tasks:
     cmds:
       - yamllint-rs .
 
+  lint:tokens:
+    desc: Lint rules and skill frontmatters for token compression and size caps
+    cmds:
+      - python3 ./scripts/lint-tokens.py
+
   lint:
     desc: Lint all files
     cmds:
       - task: lint:md
       - task: lint:yaml
+      - task: lint:tokens
 
   notify:check:
     desc: 'Run uncommitted changes check manually'

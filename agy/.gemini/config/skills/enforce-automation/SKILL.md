@@ -1,3 +1,9 @@
+---
+name: enforce-automation
+description: >-
+  Check and run predefined Taskfile tasks or scripts/ before executing raw shell commands.
+---
+
 # Enforce Taskfile and Scripts Automation
 
 Global behavioral constraint forcing the agent to check for predefined tasks and scripts before executing raw shell commands.

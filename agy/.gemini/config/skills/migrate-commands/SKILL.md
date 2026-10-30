@@ -1,3 +1,10 @@
+---
+name: migrate-commands
+description: >-
+  Migrate legacy .gemini/commands/ into Antigravity skills in .agents/skills/.
+  Trigger: /migrate-commands, "migrate commands".
+---
+
 # /migrate commands
 
 Migrates legacy Gemini CLI commands from `<workspace-root>/.gemini/commands/` to Antigravity skills in `<workspace-root>/.agents/skills/` and ensures compatibility.

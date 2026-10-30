@@ -1,3 +1,10 @@
+---
+name: readme-style
+description: >-
+  Enforce repository README styling, badges, callouts, and structure conventions.
+  Trigger: /readme-style, "readme style", "format readme".
+---
+
 # /readme-style-guide
 
 Applies or verifies strict README styling, structure, and formatting guidelines based on the repository's native standard conventions.

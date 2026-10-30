@@ -31,13 +31,16 @@ Strictly enforce secret management guidelines before staging any file:
 - **Sanitize configs**: Check that configuration files (`settings.json`, `mcp_config.json`, `config.json`) contain no plaintext secrets or personal access tokens.
 - **No blanket staging**: NEVER run `git add .` or `git add -A`. All targets must be staged explicitly by path.
 
-### 3. Formatting & Linting Validation
+### 3. Formatting, Linting & Token Compression Validation
 
-Ensure modified assets pass repository linting standards:
+Ensure modified assets pass repository linting and token-budget standards:
 
+- **Token Compression (`caveman-compress`)**:
+  - Author/edit all `rules/*.md`, `AGENTS.md`, and `GEMINI.md` files in caveman-compressed style (drop articles, filler, hedging; preserve headings, code blocks, inline backticks, URLs, and paths verbatim).
+  - Keep `SKILL.md` YAML frontmatter under 380 chars (`<1-line summary>. Trigger: <keywords>.`).
 - **Markdown**: Run `task lint:md` (or `rumdl check .`). If violations exist, fix or run `task fmt:md`.
 - **YAML**: Run `task lint:yaml` (or `yamllint-rs .`) if YAML files were touched.
-- **Skill Frontmatter**: Verify new or updated `SKILL.md` files contain valid YAML frontmatter with `name` and `description`.
+- **Token Hygiene**: Run `task lint:tokens` (or `task lint`) to verify rule byte caps, filler phrases, and `SKILL.md` frontmatter bounds.
 
 ### 4. Explicit Staging & Diff Review
 
