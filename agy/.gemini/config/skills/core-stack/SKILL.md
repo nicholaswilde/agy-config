@@ -510,3 +510,47 @@ default to these tools and conventions.
   rg -l "Pydantic"           # list matching files only
   rg --files -g '*.md'       # list files by glob (fd/find alternative)
   ```
+
+## 38. TOML Linting & Formatting — `taplo`
+
+* Use [`taplo`](https://github.com/tamasfe/taplo) (`taplo-cli`) as the standard TOML toolkit for linting, formatting, schema validation, and syntax checking across all repositories.
+* Applies to all TOML files: `Cargo.toml`, `pyproject.toml`, `Taskfile.toml`, `_typos.toml`, `lychee.toml`, and application configuration files.
+* Config file: `taplo.toml` or `.taplo.toml` at repo root.
+* Format files in-place: `taplo fmt`.
+* Dry-run / CI format check: `taplo fmt --check`.
+* Lint syntax and validate schemas: `taplo lint` (or `taplo check`).
+* Install: `cargo binstall -y taplo-cli`, `brew install taplo`, or download from GitHub releases (`tamasfe/taplo`).
+* Canonical `taplo.toml`:
+
+  ```toml
+  include = ["**/*.toml"]
+  exclude = ["**/target/**", "**/node_modules/**", "**/.venv/**"]
+
+  [formatting]
+  align_entries = false
+  array_auto_collapse = true
+  array_auto_expand = true
+  array_trailing_comma = true
+  compact_arrays = true
+  compact_inline_tables = false
+  crlf = false
+  indent_entries = false
+  indent_string = "  "
+  reorder_keys = false
+  trailing_newline = true
+  ```
+
+* Standard Taskfile tasks:
+
+  ```yaml
+  fmt:toml:
+    desc: Format TOML files
+    cmds:
+      - taplo fmt
+
+  lint:toml:
+    desc: Lint TOML files
+    cmds:
+      - taplo lint
+      - taplo fmt --check
+  ```

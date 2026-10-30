@@ -38,11 +38,12 @@ For each modernization finding, suggest the exact changes needed (CI workflows, 
    - **Linters**:
      - Check for `markdownlint-cli` or similar and recommend `rumdl`.
      - Check for `yamllint` and recommend `yamllint-rs`.
+     - Check for unformatted or unlinted TOML files and recommend `taplo` (core stack §38).
    - **CI/CD**: Scan `.github/workflows/*.yaml` for outdated GitHub Action versions or tasks that should run through `go-task`.
    - **AI Ingestion**: If repo has docs site, library, CLI, or MCP server, check for `llms.txt` + `llms-full.txt` (core stack §36). Recommend adding curated `llms.txt` and a `task llms` generator for `llms-full.txt`.
 4. **Generate Report** — Write a markdown artifact `modernization_report.md` detailing:
    - **Identified Legacy Tools**: Current tool setup.
    - **Recommended Core Stack Replacement**: The modern alternative from `core_stack.md`.
-   - **Required Configuration Files**: e.g., `.yamllint`, `.markdownlint.yaml`, `_typos.toml`, `Taskfile.yaml`.
+   - **Required Configuration Files**: e.g., `.yamllint`, `.markdownlint.yaml`, `_typos.toml`, `taplo.toml`, `Taskfile.yaml`.
    - **Action Plan**: Detailed step-by-step conversion tasks.
 5. **Apply Conversions** — Upon user approval, implement the configuration files, rewrite scripts, and update the CI/CD workflows.
