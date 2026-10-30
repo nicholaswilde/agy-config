@@ -26,9 +26,11 @@ The file MUST follow this exact order:
 3. **Preamble / Context Paragraph(s)**: Optional background text, installation notes, or high-level architecture. **No subheadings are allowed in the preamble.**
 4. **H2 Sections (`## <Category>`)**: Categorized groupings of resources (e.g. `## Documentation`, `## Core Modules`, `## Usage`, `## CLI Commands`).
    - Every item in a section MUST be a Markdown list item containing a hyperlink:
+
      ```markdown
      - [Title](URL): Brief description of what this resource covers.
      ```
+
    - URLs should point directly to relevant files, documentation pages, or repository paths.
 5. **Optional Section (`## Optional`)**: A designated section for secondary, low-priority, or supplementary links that LLMs can omit when context is constrained (e.g. license, author profiles, changelogs).
 
@@ -49,6 +51,7 @@ Aggregates all key information inline so an agent can ingest the complete reposi
 ## Workflow Protocol
 
 ### Step 1: Repository Exploration
+
 1. Identify the project name and high-level purpose:
    - Check `README.md`, `pyproject.toml`, `Cargo.toml`, `package.json`, or equivalent manifest.
    - Inspect existing documentation in `docs/` or `.agents/`.
@@ -60,6 +63,7 @@ Aggregates all key information inline so an agent can ingest the complete reposi
    - Look for `Taskfile.yml`, `Makefile`, `Justfile`, `scripts/`, or CI workflows.
 
 ### Step 2: Generate `llms.txt`
+
 1. Draft the file with:
    - Single H1 heading with project name.
    - Single blockquote summary.
@@ -69,6 +73,7 @@ Aggregates all key information inline so an agent can ingest the complete reposi
 2. Write to `llms.txt` in the repository root.
 
 ### Step 3: Generate `llms-full.txt`
+
 1. Assemble detailed documentation into a single consolidated document.
 2. Ensure markdown formatting is clean:
    - No unnecessary raw HTML or boilerplate navigation bars.
@@ -77,6 +82,7 @@ Aggregates all key information inline so an agent can ingest the complete reposi
 3. Write to `llms-full.txt` in the repository root.
 
 ### Step 4: Verification
+
 1. Verify both files exist at the repository root.
 2. Check that `llms.txt` strictly adheres to the format:
    - Exactly one `#` header at line 1.
