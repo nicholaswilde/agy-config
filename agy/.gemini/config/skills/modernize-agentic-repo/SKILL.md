@@ -1,19 +1,19 @@
 ---
 name: modernize-agentic-repo
 description: >-
-  Verify and modernize repo for agentic tools (serena, rtk, ponytail, codegraph, context-mode, caveman) and .agents/ layout.
+  Verify and modernize repo for agentic tools (serena, rtk, ponytail, codegraph, context-mode, caveman, headroom) and .agents/ layout.
   Trigger: /modernize-agentic-repo, /modernize-agents, "modernize agent tooling", "modernize repo", "modernize workspace", "ensure agent tools", "modernize agents".
 ---
 
 # Modernize Agentic Repository Skill
 
-Use this skill to modernize a repository's workspace and tool configuration for Antigravity's agentic stack (Serena, RTK, Ponytail, CodeGraph, Context-Mode, Caveman) and standardize directory layouts under `.agents/`.
+Use this skill to modernize a repository's workspace and tool configuration for Antigravity's agentic stack (Serena, RTK, Ponytail, CodeGraph, Context-Mode, Caveman, Headroom) and standardize directory layouts under `.agents/`.
 
 ## Protocol
 
 ### 1. Stack Health & Tooling Verification
 
-Verify and ensure all 6 agentic tools and MCP servers are functional in the workspace:
+Verify and ensure all 7 agentic tools and MCP servers are functional in the workspace:
 
 1. **Serena MCP (Semantic Coding & LSP)**
    - Call `activate_project` with the current workspace root path.
@@ -42,6 +42,10 @@ Verify and ensure all 6 agentic tools and MCP servers are functional in the work
 6. **Caveman (Compressed Response Style)**
    - Confirm `Response Style (caveman)` is active in session rules.
    - Ensure caveman skills and subagent `cavecrew-builder` are available.
+
+7. **Headroom MCP (Context Window Compression)**
+   - Run `headroom_stats` via `call_mcp_tool(ServerName: "headroom", ToolName: "headroom_stats")` to verify MCP server readiness.
+   - Confirm `headroom_compress` and `headroom_retrieve` tools are available for shrinking large tool outputs and retrieving by hash.
 
 ### 2. Repository Hygiene (`.gitignore`)
 
