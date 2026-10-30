@@ -28,7 +28,8 @@
       "command": "serena",
       "args": [
         "start-mcp-server",
-        "--context=antigravity"
+        "--context=antigravity",
+        "--project-from-cwd"
       ],
       "trust": true
     }

@@ -8,10 +8,20 @@ Always activate and use Serena (`serena`) MCP tools for semantic navigation, AST
 
 ## Initialization
 
-Before modifying or analyzing code, ensure the project is active:
+Serena auto-activates from the working directory (`--project-from-cwd`).
 
-1. Call `activate_project` with the current workspace directory or project name if not already activated (or when Serena returns `No active project`).
-2. Call `read_memory` (e.g. `critical_info`) or `list_memories` to load essential project constraints.
+1. If Serena returns `No active project`, call `activate_project` with the workspace directory or project name.
+2. Call `read_memory` or `list_memories` when task context requires project memories.
+
+## Mandatory Code Update Workflow
+
+When reading or modifying source code files (`.rs`, `.py`, `.go`, `.ts`, `.js`, `.c`, `.cpp`, `.java`):
+
+1. **Map first:** Call `get_symbols_overview` on the target file instead of `read_file` on the whole file.
+2. **Read target symbol only:** Call `find_symbol` with `include_body: true` for the specific function, struct, or method being changed.
+3. **Check callers when signature/behavior changes:** Call `find_referencing_symbols`.
+4. **Edit by symbol:** Use `replace_symbol_body`, `insert_after_symbol`, `insert_before_symbol`, or `rename_symbol` when modifying a whole symbol. Use `edit_file` only for 1–5 line surgical tweaks inside a symbol body already loaded via `find_symbol` or `codegraph_explore`, or for non-code files (configs, docs, tests fixtures).
+5. **Verify:** Call `get_diagnostics_for_file` after edits to catch LSP errors before running full builds.
 
 ## Tool Mappings & Capabilities
 
