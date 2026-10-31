@@ -104,6 +104,7 @@ Keep raw bytes out of context. Use `context-mode` MCP tools for large or multi-s
 - `ctx_execute_file`: Analyze large files in-sandbox without loading raw bytes.
 - `ctx_batch_execute`: Run parallel commands and filter output.
 - `ctx_fetch_and_index` & `ctx_search`: Fetch external URLs and query via search index.
+- MCP Server Name: Use `ServerName: "context-mode_context-mode"` (or `"context-mode"`). Retain plugin MCP server; do not duplicate in `mcp_config.json`.
 
 ### 5. RTK (Rust Token Killer) Commands
 

@@ -12,9 +12,12 @@ Use these tools directly. Do not inspect cached schema files under
 
 If agy uses the generic MCP wrapper, call `call_mcp_tool` with:
 
-- `ServerName`: `"context-mode"`
+- `ServerName`: `"context-mode_context-mode"` (or `"context-mode"`)
 - `ToolName`: one of the tool names below
 - `Arguments`: the JSON arguments for that tool
+
+> [!NOTE]
+> Antigravity CLI namespaces plugin MCP servers as `<plugin_name>_<server_name>` (`context-mode_context-mode`). Keep only the plugin version; do not add a duplicate `context-mode` entry in `~/.gemini/config/mcp_config.json`.
 
 ## Tool List
 

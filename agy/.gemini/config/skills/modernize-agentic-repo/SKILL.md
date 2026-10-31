@@ -35,7 +35,8 @@ Verify and ensure all 7 agentic tools and MCP servers are functional in the work
    - Test CLI access: `codegraph explore "<symbol>"`.
 
 5. **Context-Mode (In-Sandbox Execution & Bounded Routing)**
-   - Run `ctx_doctor` via `call_mcp_tool(ServerName: "context-mode", ToolName: "ctx_doctor")`.
+   - Run `ctx_doctor` via `call_mcp_tool(ServerName: "context-mode_context-mode", ToolName: "ctx_doctor")` (fallback `"context-mode"`).
+   - Ensure plugin MCP server is used; remove any duplicate `context-mode` from `~/.gemini/config/mcp_config.json`.
    - Verify sandbox runtimes and SQLite/FTS5 pass.
    - Confirm command-routing hooks route data-heavy inspections into `ctx_execute`.
 

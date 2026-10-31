@@ -22,7 +22,7 @@ Run tests to verify that all 5 critical environment tools and plugins are functi
 
 ## 3. context-mode (In-sandbox analysis & indexing)
 
-- Exec: `ctx_doctor` MCP tool via `call_mcp_tool` (ServerName: `context-mode`, ToolName: `ctx_doctor`)
+- Exec: `ctx_doctor` MCP tool via `call_mcp_tool` (ServerName: `context-mode_context-mode` or `context-mode`, ToolName: `ctx_doctor`)
 - Verify: Returns status report with `[OK] Server test: PASS` and `[OK] FTS5 / SQLite: PASS`.
 
 ## 4. ponytail (YAGNI & lazy architecture enforcement)

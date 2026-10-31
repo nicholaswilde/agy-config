@@ -2,7 +2,7 @@
 
 ## Rule
 
-Always use the `context-mode` MCP tools instead of native tools for file inspection, command execution, and search.
+Always use `context-mode` MCP tools (`ServerName: "context-mode_context-mode"` or `"context-mode"`) instead of native tools for file inspection, command execution, and search.
 
 ## Tool Mappings
 

@@ -17,8 +17,8 @@ Inspect repository root `AGENTS.md`:
 
 1. **Verify Core Tooling Blocks**:
    Ensure tagged blocks exist with current specifications:
-   - `<!-- rtk-begin -->` — RTK command proxy (`rtk git`, `rtk gh ... | cat`, `rtk ls`, `rtk rg`, `rtk test`, `rtk err`; sandbox exception).
-   - `<!-- context-mode-begin -->` — In-sandbox derivation (`ctx_execute`, bounded routing).
+   - `<!-- rtk-begin -->` — RTK command proxy (`rtk git`, `rtk gh ... | cat`, `rtk ls`, `rtk rg`, `rtk test`, `rtk err`; sandbox exception: skip `rtk` inside `ctx_execute` / `ctx_batch_execute`).
+   - `<!-- context-mode-begin -->` — In-sandbox derivation (`ctx_execute`, bounded routing via `context-mode_context-mode`). Retain plugin MCP server; do not duplicate in `mcp_config.json`.
    - `<!-- ponytail-begin -->` — YAGNI, 7-rung minimalism, root cause over symptom.
    - `<!-- caveman-begin -->` — Terse communication style.
    - `<!-- codegraph-begin -->` — CodeGraph index check (`.codegraph/`).
@@ -39,7 +39,7 @@ Inspect repository root `AGENTS.md`:
 Ensure `.agents/rules/` directory exists and aligns with global standards:
 
 1. **Remove Obsolete Rules**:
-   Remove deprecated or static copies superseded by global rules (e.g. legacy `antigravity-rtk-rules.md`).
+   Remove deprecated or static copies superseded by global rules (e.g. legacy `antigravity-rtk-rules.md`, `serena-rules.md`, `context-mode-rules.md` — context-mode routing belongs in `AGENTS.md`).
 2. **Symlink Relevant Global Rules**:
    Create symbolic links pointing to `/home/nicholas/git/nicholaswilde/agy-config/agy/.gemini/config/rules/<rule>.md`:
    - `rtk-rules.md` (universal)
