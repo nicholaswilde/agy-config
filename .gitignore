@@ -13,6 +13,14 @@ memory/
 .codegraph/
 .serena/
 
+.rtk/*
+!.rtk/filters.toml
+
+.agents/*
+!.agents/skills/
+!.agents/rules/
+!.agents/skills_catalog.md
+
 # 2. Logs, Caches, and Crash Dumps
 log/
 cache/
