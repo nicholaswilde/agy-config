@@ -16,9 +16,11 @@ Use this skill to modernize a repository's workspace and tool configuration for 
 Verify and ensure all 7 agentic tools and MCP servers are functional in the workspace:
 
 1. **Serena MCP (Semantic Coding & LSP)**
-   - Call `activate_project` with the current workspace root path.
-   - Run `get_current_config` via `call_mcp_tool(ServerName: "serena", ToolName: "get_current_config")` to verify project registration and LSP readiness.
-   - Test symbol navigation on a key repo file via `get_symbols_overview`.
+   - Automatically execute the `/setup-serena` workflow:
+     - Check project status via `get_current_config`.
+     - Call `activate_project` with current workspace root path if not active or pointing elsewhere.
+     - Inspect memories with `list_memories`. If onboarding memories are missing, call `onboarding` and populate baseline durable memories (`mem:core`, `mem:tech_stack`, `mem:suggested_commands`, `mem:conventions`, `mem:task_completion`) via `write_memory`.
+     - Test symbol navigation on a key repo file via `get_symbols_overview` and verify diagnostics with `get_diagnostics_for_file`.
 
 2. **RTK (Token-Optimized CLI Proxy)**
    - Check binary presence: `which rtk` or verify `/home/linuxbrew/.linuxbrew/bin/rtk`.

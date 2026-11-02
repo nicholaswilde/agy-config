@@ -25,7 +25,7 @@ Inspect repository root `AGENTS.md`:
    - `<!-- serena-begin -->` — Serena MCP symbol navigation (`get_symbols_overview`, `find_symbol`, `get_diagnostics_for_file`).
    - `<!-- headroom-begin -->` — Headroom MCP context compression (`headroom_compress`).
    - `<!-- ripgrep-guidelines-begin -->` — Pattern search via `rtk rg`.
-   - `<!-- taplo-rules-begin -->` — TOML formatting & linting (`taplo fmt`, `taplo lint` for TOML projects).
+   - `<!-- taplo-rules-begin -->` — TOML formatting & linting (`rtk taplo fmt`, `rtk taplo lint` for TOML projects).
    - `<!-- sensitive-information-protection-begin -->` — Secret commit prevention, SOPS encryption (`task encrypt`), no blanket staging.
 2. **Preserve Project Rules**:
    Retain and update project-specific blocks (APIs, hardware, workflows, TDD, format conventions).

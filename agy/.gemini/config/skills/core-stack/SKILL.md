@@ -94,9 +94,11 @@ default to these tools and conventions.
 ## 5. Markdown Linting — `rumdl`
 
 * Use [`rumdl`](https://github.com/nicholaswilde/rumdl) for markdown linting (not `markdownlint-cli`).
-* Config file: `.markdownlint.yaml` at repo root.
+* Config file: `.markdownlint.yaml` or `.rumdl.toml` at repo root.
+* Interactive check: `rtk rumdl check .`
+* Interactive auto-fix / format: `rtk rumdl fmt .` (or `rtk rumdl check --fix .`)
 * Run via task: `task markdownlint` → `rumdl check .`
-* Auto-fix: `task markdownlint-fix` → `rumdl check --fix .`
+* Auto-fix via task: `task markdownlint-fix` → `rumdl check --fix .`
 * Canonical config:
 
   ```yaml
@@ -115,16 +117,21 @@ default to these tools and conventions.
 ## 6. Spellcheck — `typos`
 
 * Use [`typos-cli`](https://github.com/crate-ci/typos) for spellchecking.
+* Interactive spellcheck: `rtk typos --format brief` (strips visual context blocks to save tokens).
 * Config file: `_typos.toml` (auto-generated; do NOT hand-edit).
 * Custom dictionary: `dictionary.txt` (one word per line, sorted alphabetically).
-* Always regenerate config before running: `python3 scripts/generate_typos_config.py && typos`.
-* Use focused checks: `task spellcheck-file FILE=path/to/file` rather than global `task spellcheck`.
+* Always regenerate config before running: `python3 scripts/generate_typos_config.py && rtk typos --format brief`.
+* Use focused checks: `task spellcheck-file FILE=path/to/file` or `rtk typos --format brief path/to/file` rather than global checks.
 * Sort dictionary after additions: `task sort` → `sort dictionary.txt -u -o dictionary.txt`.
 * CI uses [`crate-ci/typos@v1`](https://github.com/crate-ci/typos) GitHub Action.
 
 ## 7. Link Checking — `lychee`
 
 * Use [`lychee`](https://github.com/lycheeverse/lychee) for dead link detection.
+* **Standard execution format**: `rtk lychee --no-progress [optional: --offline] <target>`
+  1. **Always wrap with `rtk`**: Deduplicates repetitive errors (e.g. repeated broken footer links across multiple files).
+  2. **Disable progress bars (`--no-progress`)**: Always include `--no-progress` to suppress ANSI escape sequences that pollute output and waste tokens.
+  3. **Use offline mode for internal routing (`--offline`)**: Append `--offline` when verifying local file paths and internal routing to prevent external network timeouts.
 * Config file: `lychee.toml` at repo root.
 * Run via task: `task linkcheck` (online), `task linkcheck-offline`, or `task linkcheck-file FILE=path`.
 * Accept 403/429/520 status codes as valid (anti-scraper/rate-limit false positives).
@@ -558,9 +565,9 @@ default to these tools and conventions.
 * Use [`taplo`](https://github.com/tamasfe/taplo) (`taplo-cli`) as the standard TOML toolkit for linting, formatting, schema validation, and syntax checking across all repositories.
 * Applies to all TOML files: `Cargo.toml`, `pyproject.toml`, `Taskfile.toml`, `_typos.toml`, `lychee.toml`, and application configuration files.
 * Config file: `taplo.toml` or `.taplo.toml` at repo root.
-* Format files in-place: `taplo fmt`.
-* Dry-run / CI format check: `taplo fmt --check`.
-* Lint syntax and validate schemas: `taplo lint` (or `taplo check`).
+* Format files in-place: `rtk taplo fmt` (interactive shell) or `taplo fmt` (Taskfile / CI).
+* Dry-run / CI format check: `rtk taplo fmt --check` (or `taplo fmt --check`).
+* Lint syntax and validate schemas: `rtk taplo lint` (or `rtk taplo check`).
 * Install: `cargo binstall -y taplo-cli`, `brew install taplo`, or download from GitHub releases (`tamasfe/taplo`).
 * Canonical `taplo.toml`:
 

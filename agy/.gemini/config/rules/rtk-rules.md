@@ -16,6 +16,10 @@ Prefix raw shell commands with `rtk` whenever subcommand exists. `rtk` filters a
 | `diff` | `rtk diff` |
 | `wc` | `rtk wc` |
 | `docker` / `kubectl` | `rtk docker` / `rtk kubectl` |
+| `lychee` | `rtk lychee --no-progress [optional: --offline] <target>` |
+| `rumdl <cmd>` | `rtk rumdl <cmd>` (e.g. `rtk rumdl check .`, `rtk rumdl fmt .`) |
+| `taplo <cmd>` | `rtk taplo <cmd>` (e.g. `rtk taplo fmt`, `rtk taplo lint`) |
+| `typos` | `rtk typos --format brief` |
 | `wget` | `rtk wget` |
 | tests (`cargo test`, `task test`, `pytest`) | `rtk test <cmd>` |
 | build/lint (`cargo build`, `task lint`, `cargo clippy`) | `rtk err <cmd>` |
