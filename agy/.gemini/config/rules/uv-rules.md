@@ -2,20 +2,20 @@
 
 ## Rule
 
-Always use [`uv`](https://github.com/astral-sh/uv) to manage Python dependencies, run workflows, execute scripts, and invoke CLI tools. Never run bare `pip`, `python`, `pipx`, `virtualenv`, or `poetry`.
+Always use [`uv`](https://github.com/astral-sh/uv) to manage Python dependencies, run workflows, execute scripts, and invoke CLI tools. Always prefix `uv` commands with `rtk` (e.g. `rtk uv run ...`). Never run bare `pip`, `python`, `python3`, `pipx`, `virtualenv`, `poetry`, or bare `uv`.
 
 ## Guidelines
 
 1. **Command & Script Execution**:
-   - Run project tools via `uv run <command>` (`uv run pytest`, `uv run ruff check`, `uv run mypy .`).
-   - Run scripts via `uv run python3 <script>` or `uv run <script>`. Never invoke bare `python3 <script>`.
-   - For standalone scripts with deps, use PEP 723 inline metadata or `--with <pkg>`: `uv run --with requests python script.py`.
+   - Run project tools via `rtk uv run <command>` (`rtk uv run pytest`, `rtk uv run ruff check`, `rtk uv run mypy .`).
+   - Run scripts via `rtk uv run python3 <script>` or `rtk uv run <script>`. Never invoke bare `python3 <script>` or bare `uv run <script>`.
+   - For standalone scripts with deps, use PEP 723 inline metadata or `--with <pkg>`: `rtk uv run --with requests python script.py`.
 
 2. **Dependency Management**:
-   - Add: `uv add <package>` (or `uv add --dev <package>`).
-   - Remove: `uv remove <package>`.
-   - Lock: `uv lock` (or `uv lock --upgrade`).
-   - Sync: `uv sync`.
+   - Add: `rtk uv add <package>` (or `rtk uv add --dev <package>`).
+   - Remove: `rtk uv remove <package>`.
+   - Lock: `rtk uv lock` (or `rtk uv lock --upgrade`).
+   - Sync: `rtk uv sync`.
    - Keep metadata in `pyproject.toml` and commit `uv.lock`.
 
 3. **Taskfile & CI Automation**:
@@ -24,11 +24,11 @@ Always use [`uv`](https://github.com/astral-sh/uv) to manage Python dependencies
 
 ## Common Command Reference
 
-- `uv run <cmd>` — Run tool in project env
-- `uv run script.py` — Run script with project/inline deps
-- `uv add <package>` — Add dep to `pyproject.toml` + `uv.lock`
-- `uv add --dev <package>` — Add dev dep
-- `uv remove <package>` — Remove dep
-- `uv sync` — Sync venv with `uv.lock`
-- `uv sync --frozen` — Sync without updating lockfile (CI)
-- `uv python pin <version>` — Pin Python in `.python-version`
+- `rtk uv run <cmd>` — Run tool in project env
+- `rtk uv run script.py` — Run script with project/inline deps
+- `rtk uv add <package>` — Add dep to `pyproject.toml` + `uv.lock`
+- `rtk uv add --dev <package>` — Add dev dep
+- `rtk uv remove <package>` — Remove dep
+- `rtk uv sync` — Sync venv with `uv.lock`
+- `rtk uv sync --frozen` — Sync without updating lockfile (CI)
+- `rtk uv python pin <version>` — Pin Python in `.python-version`

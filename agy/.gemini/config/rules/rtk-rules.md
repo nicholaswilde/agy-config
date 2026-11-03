@@ -21,6 +21,9 @@ Prefix raw shell commands with `rtk` whenever subcommand exists. `rtk` filters a
 | `taplo <cmd>` | `rtk taplo <cmd>` (e.g. `rtk taplo fmt`, `rtk taplo lint`) |
 | `typos` | `rtk typos --format brief` |
 | `wget` | `rtk wget` |
+| `npx <cmd>` | `rtk npx <cmd>` (auto-routes `tsc`, `eslint`, `vitest`, `prettier`, `prisma`) |
+| `uv <cmd>` | `rtk uv <cmd>` (e.g. `rtk uv run <script>`, `rtk uv add`, `rtk uv sync`) |
+| `python` / `python3 <script>` | `rtk uv run <script>` |
 | tests (`cargo test`, `task test`, `pytest`) | `rtk test <cmd>` |
 | build/lint (`cargo build`, `task lint`, `cargo clippy`) | `rtk err <cmd>` |
 | long logs | `rtk log` |

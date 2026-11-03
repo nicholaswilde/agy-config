@@ -17,7 +17,7 @@ Inspect repository root `AGENTS.md`:
 
 1. **Verify Core Tooling Blocks**:
    Ensure tagged blocks exist with current specifications:
-   - `<!-- rtk-begin -->` — RTK command proxy (`rtk git`, `rtk gh ... | cat`, `rtk ls`, `rtk rg`, `rtk test`, `rtk err`; sandbox exception: skip `rtk` inside `ctx_execute` / `ctx_batch_execute`).
+   - `<!-- rtk-begin -->` — RTK command proxy (`rtk git`, `rtk gh ... | cat`, `rtk ls`, `rtk rg`, `rtk npx`, `rtk test`, `rtk err`; sandbox exception: skip `rtk` inside `ctx_execute` / `ctx_batch_execute`).
    - `<!-- context-mode-begin -->` — In-sandbox derivation (`ctx_execute`, bounded routing via `context-mode_context-mode`). Retain plugin MCP server; do not duplicate in `mcp_config.json`.
    - `<!-- ponytail-begin -->` — YAGNI, 7-rung minimalism, root cause over symptom.
    - `<!-- caveman-begin -->` — Terse communication style.
