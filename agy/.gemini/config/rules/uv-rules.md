@@ -8,7 +8,7 @@ Always use [`uv`](https://github.com/astral-sh/uv) to manage Python dependencies
 
 1. **Command & Script Execution**:
    - Run project tools via `uv run <command>` (`uv run pytest`, `uv run ruff check`, `uv run mypy .`).
-   - Run scripts via `uv run script.py`.
+   - Run scripts via `uv run python3 <script>` or `uv run <script>`. Never invoke bare `python3 <script>`.
    - For standalone scripts with deps, use PEP 723 inline metadata or `--with <pkg>`: `uv run --with requests python script.py`.
 
 2. **Dependency Management**:
