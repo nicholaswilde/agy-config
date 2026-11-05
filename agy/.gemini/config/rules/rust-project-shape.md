@@ -1,3 +1,8 @@
+---
+trigger: always_on
+description: "Rust project workspace layout, formatting, and conventions"
+---
+
 # Rust Project Shape Standards
 
 When initializing, modernizing, or structuring Rust CLI repositories (baseline: `nicholaswilde/tfa`):

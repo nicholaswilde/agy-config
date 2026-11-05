@@ -1,3 +1,8 @@
+---
+trigger: always_on
+description: "GitHub issue creation, labels, and issue closing rules"
+---
+
 # GitHub Issues Workflow for Tasks
 
 Strict workflow rule for task management, bug tracking, and feature development.

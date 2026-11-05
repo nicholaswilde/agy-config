@@ -1,3 +1,8 @@
+---
+trigger: always_on
+description: "Taplo TOML linting, formatting, and schema validation"
+---
+
 # Taplo TOML Linting and Formatting
 
 ## Rule

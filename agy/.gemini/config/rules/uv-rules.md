@@ -1,3 +1,8 @@
+---
+trigger: always_on
+description: "Python tooling & execution with uv"
+---
+
 # Python Tooling & Execution with `uv`
 
 ## Rule

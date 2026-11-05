@@ -1,3 +1,8 @@
+---
+trigger: always_on
+description: "Use ripgrep (rg) for searching text and patterns across files"
+---
+
 # Ripgrep (`rg`) Pattern Searching
 
 ## Rule

@@ -1,3 +1,8 @@
+---
+trigger: always_on
+description: "CodeGraph code index check and explore guidelines"
+---
+
 # CodeGraph Knowledge Graph Integration
 
 ## Rule

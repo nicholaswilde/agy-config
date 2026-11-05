@@ -1,3 +1,8 @@
+---
+trigger: always_on
+description: "Context-mode bounded routing and in-sandbox data derivation"
+---
+
 # Enforce Context-Mode MCP Tools
 
 ## Rule

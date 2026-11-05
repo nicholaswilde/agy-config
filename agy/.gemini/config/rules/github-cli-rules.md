@@ -1,3 +1,8 @@
+---
+trigger: always_on
+description: "Non-interactive execution for GitHub CLI (gh) commands"
+---
+
 # GitHub CLI (`gh`) Non-Interactive Execution
 
 ## Rule

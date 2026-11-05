@@ -1,3 +1,8 @@
+---
+trigger: always_on
+description: "Enforce Google DESIGN.md guidelines for frontend and GUI projects"
+---
+
 # Google DESIGN.md Specification for GUI Design
 
 ## Rule

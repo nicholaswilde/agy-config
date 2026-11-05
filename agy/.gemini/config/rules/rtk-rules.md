@@ -1,3 +1,8 @@
+---
+trigger: always_on
+description: "Prefix CLI commands with rtk to filter and compress output"
+---
+
 # RTK (`rtk`) Command Proxy
 
 ## Rule

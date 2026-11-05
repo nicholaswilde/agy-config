@@ -1,3 +1,8 @@
+---
+trigger: always_on
+description: "Prevent committing or leaking credentials, secrets, and sensitive tokens"
+---
+
 # Secret Management & Commit Prevention
 
 Strict guidelines preventing leakage of credentials, tokens, keys, and sensitive configs.

@@ -1,3 +1,8 @@
+---
+trigger: always_on
+description: "Ponytail lazy senior dev principles and minimal code discipline"
+---
+
 # Ponytail (Lazy Senior Dev Mode)
 
 ## Rule

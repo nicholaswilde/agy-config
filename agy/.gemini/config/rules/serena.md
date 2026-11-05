@@ -1,3 +1,8 @@
+---
+trigger: always_on
+description: "Serena semantic navigation and LSP integration"
+---
+
 # Serena Semantic Navigation & LSP Integration
 
 Serena MCP provides LSP semantic coding tools, AST symbol search, reference-aware refactoring, and persistent project memories.

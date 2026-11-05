@@ -1,3 +1,8 @@
+---
+trigger: always_on
+description: "Use fd instead of find for file discovery across repositories"
+---
+
 # File Discovery (`fd`)
 
 ## Rule

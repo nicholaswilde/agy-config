@@ -1,3 +1,8 @@
+---
+trigger: always_on
+description: "Terse communication style and minimal token consumption"
+---
+
 # Caveman Mode (Token Compression)
 
 ## Rule
