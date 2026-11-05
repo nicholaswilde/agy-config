@@ -11,7 +11,7 @@ Prefix raw shell commands with `rtk` whenever subcommand exists. `rtk` filters a
 | `git <cmd>` | `rtk git <cmd>` |
 | `gh <cmd>` | `rtk gh <cmd> \| cat` (see `github-cli-rules.md`) |
 | `rg` / `grep` | `rtk rg` / `rtk grep` (see `ripgrep-rules.md`) |
-| `ls` / `tree` / `find` | `rtk ls` / `rtk tree` / `rtk find` |
+| `ls` / `tree` / `find` / `fd` | `rtk ls` / `rtk tree` / `rtk find` / `rtk fd` (see `fd-rules.md`) |
 | `cat <file>` (to inspect) | `rtk read <file>` |
 | `diff` | `rtk diff` |
 | `wc` | `rtk wc` |
