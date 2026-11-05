@@ -43,6 +43,7 @@ Ensure `.agents/rules/` directory exists and aligns with global standards:
 2. **Symlink Relevant Global Rules**:
    Create symbolic links pointing to `/home/nicholas/git/nicholaswilde/agy-config/agy/.gemini/config/rules/<rule>.md`:
    - `rtk-rules.md` (universal)
+   - `fd-rules.md` (universal)
    - `serena.md` (codebases using AST/LSP)
    - `github-cli-rules.md` (universal)
    - `ripgrep-rules.md` (universal)
