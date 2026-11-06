@@ -1,13 +1,13 @@
 ---
 name: modernize-agentic-repo
 description: >-
-  Verify and modernize repo for agentic tools (serena, rtk, ponytail, codegraph, context-mode, caveman, headroom) and .agents/ layout.
+  Verify and modernize repo for agentic tools (serena, rtk, ponytail, codegraph, context-mode, caveman, headroom), rules (uv-rules, etc.), and .agents/ layout.
   Trigger: /modernize-agentic-repo, /modernize-agents, "modernize agent tooling", "modernize repo", "modernize workspace", "ensure agent tools", "modernize agents".
 ---
 
 # Modernize Agentic Repository Skill
 
-Use this skill to modernize a repository's workspace and tool configuration for Antigravity's agentic stack (Serena, RTK, Ponytail, CodeGraph, Context-Mode, Caveman, Headroom) and standardize directory layouts under `.agents/`.
+Use this skill to modernize a repository's workspace and tool configuration for Antigravity's agentic stack (Serena, RTK, Ponytail, CodeGraph, Context-Mode, Caveman, Headroom), configure agentic rules (including `uv-rules.md`), and standardize directory layouts under `.agents/`.
 
 ## Protocol
 
@@ -57,11 +57,21 @@ Inspect repository `.gitignore` and ensure local agent artifacts, caches, and in
 - Add `.codegraph/` (AST index and SQLite database).
 - Add `.serena/` (local project cache, local configs, memories).
 - Add `.rtk/*` with `!.rtk/filters.toml` whitelist.
+- If Python files, scripts, or package definitions are present, ensure Python caches and environments are ignored (`.venv/`, `__pycache__/`, `*.pyc`).
+- Whitelist `.agents/` assets:
+
+  ```gitignore
+  .agents/*
+  !.agents/skills/
+  !.agents/rules/
+  !.agents/skills_catalog.md
+  ```
+
 - Make surgical edits without disturbing existing project rules.
 
-### 3. Folder Consolidation (`.agents/`)
+### 3. Folder Consolidation & Rules Setup (`.agents/`)
 
-Consolidate legacy directories into the unified `.agents/` folder:
+Consolidate legacy directories and set up agentic rules under `.agents/`:
 
 1. **Merge `.gemini/` into `.agents/`**:
    - Check if `.gemini/` exists in workspace root.
@@ -74,13 +84,31 @@ Consolidate legacy directories into the unified `.agents/` folder:
      - If tracked in git: migrate with `git mv conductor .agents/conductor`.
      - If untracked: move with `mv conductor .agents/conductor`.
      - Ensure root `conductor/` is removed.
+3. **Setup Rules (`.agents/rules/`)**:
+   - Ensure `.agents/rules/` directory exists (`mkdir -p .agents/rules`).
+   - Symlink universal rules pointing to `/home/nicholas/git/nicholaswilde/agy-config/agy/.gemini/config/rules/<rule>.md`:
+     - `caveman-rules.md`
+     - `fd-rules.md`
+     - `github-cli-rules.md`
+     - `no-secrets.md`
+     - `ripgrep-rules.md`
+     - `rtk-rules.md`
+     - `serena.md`
+     - `taplo-rules.md` (when TOML files exist)
+   - **Setup `uv-rules.md`**:
+     - Check if repo uses Python (`pyproject.toml`, `requirements*.txt`, `setup.py`, `scripts/*.py`, `.python-version`, or Python code).
+     - If Python is present:
+       - Create symlink: `ln -sf /home/nicholas/git/nicholaswilde/agy-config/agy/.gemini/config/rules/uv-rules.md .agents/rules/uv-rules.md`.
+       - Verify symlink resolution (`test -e .agents/rules/uv-rules.md`).
+       - Ensure `AGENTS.md` contains `<!-- uv-rules-begin -->` section enforcing prefixing Python scripts/commands with `uv` and keeping `uv.lock` and `pyproject.toml` synchronized.
 
 ### 4. Documentation & Reference Updates
 
-Scan and update documentation references pointing to legacy paths:
+Scan and update documentation references pointing to legacy paths and core rules:
 
 - Search `AGENTS.md`, `README.md`, and workflow documentation for references to `conductor/` or `.gemini/`.
 - Update paths to point to `.agents/conductor/` and `.agents/`.
+- If Python is present, ensure `AGENTS.md` documents `uv` command prefixing and lockfile synchronization (`uv.lock` and `pyproject.toml`).
 
 ### 5. Final Verification & Status Report
 
