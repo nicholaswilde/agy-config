@@ -1,7 +1,7 @@
 {
   "allowNonWorkspaceAccess": true,
   "colorScheme": "dark",
-  "model": "Gemini 3.8 Flash (Medium)",
+  "model": "Gemini 3.8 Flash (Low)",
   "permissions": {
     "allow": [
       "command(grep)",
@@ -31,10 +31,15 @@
       "mcp(unifi/unifi_execute)",
       "command(rtk )",
       "mcp(codegraph/*)",
-      "mcp(context-mode/*)"
+      "mcp(context-mode/*)",
+      "mcp(context-mode_context-mode/*)"
     ]
   },
   "showFeedbackSurvey": false,
+  "title": {
+    "type": "command",
+    "command": "entire hooks antigravity title-tee"
+  },
   "trustedWorkspaces": [
     "/home/nicholas/git/nicholaswilde/homelab",
     "/home/nicholas/git/nicholaswilde/dotfiles",
@@ -48,6 +53,15 @@
     "/home/nicholas/git/nicholaswilde/inventory-agent",
     "/home/nicholas/git/nicholaswilde/esp32-sandbox",
     "/home/nicholas/git/nicholaswilde/the-amazing-race",
-    "/home/nicholas/git/nicholaswilde/agy-config"
+    "/home/nicholas/git/nicholaswilde/agy-config",
+    "/home/nicholas/git/nicholaswilde/lpass-to-pass-snapshot",
+    "/home/nicholas/git/nicholaswilde/cyd-weather-station",
+    "/home/nicholas/git/nicholaswilde/esp32-web-flasher",
+    "/home/nicholas/git/nicholaswilde/proxmox-mcp-rs",
+    "/home/nicholas/git/nicholaswilde/cyd-bluetooth-tracker",
+    "/home/nicholas/git/nicholaswilde/tfa",
+    "/home/nicholas/gist/nicholaswilde/0a6fe1de26cb8a2c131797e503dcf39f",
+    "/home/nicholas/git/nicholaswilde/enstow",
+    "/home/nicholas/git/nicholaswilde/scoop-bucket"
   ]
 }

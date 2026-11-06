@@ -2,7 +2,7 @@
 
 ## Rule
 
-Always use [`uv`](https://github.com/astral-sh/uv) to manage Python dependencies, run workflows, execute scripts, and invoke CLI tools. Always prefix `uv` commands with `rtk` (e.g. `rtk uv run ...`). Never run bare `pip`, `python`, `python3`, `pipx`, `virtualenv`, `poetry`, or bare `uv`.
+Always use [`uv`](https://github.com/astral-sh/uv) to manage Python dependencies, run workflows, execute scripts, and invoke CLI tools. When running Python scripts or commands, always prefix with `uv` (or `rtk uv run ...`). Never run bare `pip`, `python`, `python3`, `pipx`, `virtualenv`, `poetry`, or bare `uv`. Always ensure `uv.lock` and `pyproject.toml` remain up-to-date and in sync whenever project dependencies or configurations change.
 
 ## Guidelines
 
@@ -16,7 +16,7 @@ Always use [`uv`](https://github.com/astral-sh/uv) to manage Python dependencies
    - Remove: `rtk uv remove <package>`.
    - Lock: `rtk uv lock` (or `rtk uv lock --upgrade`).
    - Sync: `rtk uv sync`.
-   - Keep metadata in `pyproject.toml` and commit `uv.lock`.
+   - Keep metadata in `pyproject.toml` and always commit the updated `uv.lock`. Whenever dependencies or project definitions are touched, run `uv lock` (or `uv sync`) to ensure lockfile synchronization.
 
 3. **Taskfile & CI Automation**:
    - Prefix Python commands in `Taskfile.yaml` and CI with `uv run`.
