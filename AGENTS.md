@@ -70,6 +70,7 @@ This project uses [Task](https://taskfile.dev/) to orchestrate [GNU Stow](https:
 - **Link Checking**: Run `rtk lychee --no-progress [optional: --offline] <target>`; always pass `--no-progress` to suppress terminal escape sequences, and `--offline` when validating local file links.
 - **TOML Operations**: Prefix `taplo` commands with `rtk` (e.g., `rtk taplo fmt`, `rtk taplo lint`, `rtk taplo check`).
 - **Markdown Operations**: Prefix `rumdl` commands with `rtk` (e.g., `rtk rumdl check .`, `rtk rumdl fmt .`).
+- **Ripwire Operations**: Prefix `ripwire` commands with `rtk` (e.g., `rtk ripwire <dir> --for="<task>"`). Always invoke via CLI, never register or use MCP.
 - **Build & Test Outputs**: Use `rtk err` or `rtk test` when running build/test commands to filter output to errors/failures only (e.g., `rtk test task test`).
 - **Exceptions**: Inside `ctx_execute` / `ctx_batch_execute` sandbox code, skip `rtk` (only printed output enters context). Drop `rtk` when exact raw bytes or patch required (`git diff` patch).
 <!-- rtk-end -->
@@ -161,6 +162,21 @@ Use Headroom (`headroom`) MCP tools to manage context window consumption on larg
 - `headroom_retrieve`: Retrieve original content by hash if specific details needed.
 - `headroom_stats`: Monitor headroom cache usage.
 <!-- headroom-end -->
+
+<!-- ripwire-begin -->
+## Ripwire CLI Guidelines
+
+Use `ripwire` CLI (prefixed with `rtk ripwire`) for AST codebase mapping, call graphs, blast radius, and structural queries:
+
+- **CLI First**: Always invoke `rtk ripwire <dir> [flags]` via CLI; do NOT use MCP server.
+- **Task Orientation**: `rtk ripwire <dir> --for="<task>"` for ranked signatures and bodies.
+- **Task Bundle**: `rtk ripwire <dir> --pack-task="<task>" --legend=compact`.
+- **Stack Trace / Error**: `rtk ripwire <dir> --from-trace=FILE --legend=compact` (`-` for stdin).
+- **Call Graph**: `rtk ripwire <dir> --callers=SYM`, `--callees=SYM`, `--uses=SYM`.
+- **Blast Radius**: `rtk ripwire <dir> --impact=SYM --legend=compact` before changing shared code.
+- **Quality Delta & Gate**: `rtk ripwire <dir> --quality-delta --legend=compact` and `--test-gate --legend=compact`.
+- **Atomic Edits**: `rtk ripwire <dir> --replace-symbol-body=SYM --edit-payload=FILE` without whole-file re-reading.
+<!-- ripwire-end -->
 
 <!-- ripgrep-guidelines-begin -->
 ## Ripgrep Guidelines

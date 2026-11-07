@@ -30,6 +30,8 @@
       "mcp(unifi/unifi_tool_index)",
       "mcp(unifi/unifi_execute)",
       "command(rtk )",
+      "command(ripwire)",
+      "command(rtk ripwire)",
       "mcp(codegraph/*)",
       "mcp(context-mode/*)",
       "mcp(context-mode_context-mode/*)"
