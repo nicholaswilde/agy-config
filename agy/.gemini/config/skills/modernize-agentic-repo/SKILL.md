@@ -1,19 +1,19 @@
 ---
 name: modernize-agentic-repo
 description: >-
-  Verify and modernize repo for agentic tools (serena, rtk, ponytail, codegraph, context-mode, caveman, headroom), rules (uv-rules, etc.), and .agents/ layout.
+  Verify and modernize repo for agentic tools (serena, rtk, ponytail, codegraph, context-mode, caveman, headroom, ripwire), rules, and .agents/ layout.
   Trigger: /modernize-agentic-repo, /modernize-agents, "modernize agent tooling", "modernize repo", "modernize workspace", "ensure agent tools", "modernize agents".
 ---
 
 # Modernize Agentic Repository Skill
 
-Use this skill to modernize a repository's workspace and tool configuration for Antigravity's agentic stack (Serena, RTK, Ponytail, CodeGraph, Context-Mode, Caveman, Headroom), configure agentic rules (including `uv-rules.md`), and standardize directory layouts under `.agents/`.
+Use this skill to modernize a repository's workspace and tool configuration for Antigravity's agentic stack (Serena, RTK, Ponytail, CodeGraph, Context-Mode, Caveman, Headroom, Ripwire), configure agentic rules (including `uv-rules.md`, `ripwire-rules.md`), and standardize directory layouts under `.agents/`.
 
 ## Protocol
 
 ### 1. Stack Health & Tooling Verification
 
-Verify and ensure all 7 agentic tools and MCP servers are functional in the workspace:
+Verify and ensure all 8 agentic tools are functional in the workspace:
 
 1. **Serena MCP (Semantic Coding & LSP)**
    - Automatically execute the `/setup-serena` workflow:
@@ -49,6 +49,14 @@ Verify and ensure all 7 agentic tools and MCP servers are functional in the work
 7. **Headroom MCP (Context Window Compression)**
    - Run `headroom_stats` via `call_mcp_tool(ServerName: "headroom", ToolName: "headroom_stats")` to verify MCP server readiness.
    - Confirm `headroom_compress` and `headroom_retrieve` tools are available for shrinking large tool outputs and retrieving by hash.
+
+8. **Ripwire CLI (Codebase Map, AST Navigation, Blast Radius)**
+   - Automatically execute the `/setup-ripwire` workflow:
+     - Verify binary availability via `which ripwire`.
+     - Run health check via `rtk ripwire . --doctor`.
+     - Ensure global rule is symlinked: `.agents/rules/ripwire-rules.md`.
+     - Ensure `AGENTS.md` contains `<!-- ripwire-begin -->` and `rtk ripwire` in `<!-- rtk-begin -->`.
+     - Test and warm cache via `rtk ripwire . --top-k=5` and `rtk ripwire . --report`.
 
 ### 2. Repository Hygiene (`.gitignore`)
 
@@ -93,6 +101,7 @@ Consolidate legacy directories and set up agentic rules under `.agents/`:
      - `no-secrets.md`
      - `ripgrep-rules.md`
      - `rtk-rules.md`
+     - `ripwire-rules.md`
      - `serena.md`
      - `taplo-rules.md` (when TOML files exist)
    - **Setup `uv-rules.md`**:
