@@ -31,6 +31,7 @@ crashes/
 bin/
 
 # 4. Dependencies and Build Artifacts
+.venv/
 **/node_modules/
 **/dist/
 **/__pycache__/

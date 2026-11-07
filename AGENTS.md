@@ -71,6 +71,8 @@ This project uses [Task](https://taskfile.dev/) to orchestrate [GNU Stow](https:
 - **TOML Operations**: Prefix `taplo` commands with `rtk` (e.g., `rtk taplo fmt`, `rtk taplo lint`, `rtk taplo check`).
 - **Markdown Operations**: Prefix `rumdl` commands with `rtk` (e.g., `rtk rumdl check .`, `rtk rumdl fmt .`).
 - **Ripwire Operations**: Prefix `ripwire` commands with `rtk` (e.g., `rtk ripwire <dir> --for="<task>"`). Always invoke via CLI, never register or use MCP.
+- **Python Execution**: Prefix Python commands and scripts with `rtk uv` (e.g., `rtk uv run <script>`, `rtk uv add`, `rtk uv sync`).
+- **File Discovery**: Prefer `rtk fd` over `find` (see `fd-rules.md`).
 - **Build & Test Outputs**: Use `rtk err` or `rtk test` when running build/test commands to filter output to errors/failures only (e.g., `rtk test task test`).
 - **Exceptions**: Inside `ctx_execute` / `ctx_batch_execute` sandbox code, skip `rtk` (only printed output enters context). Drop `rtk` when exact raw bytes or patch required (`git diff` patch).
 <!-- rtk-end -->
@@ -192,6 +194,21 @@ Use `ripwire` CLI (prefixed with `rtk ripwire`) for AST codebase mapping, call g
 - **Format**: Run `rtk taplo fmt` to format TOML files in-place (`.rumdl.toml`).
 - **Validation**: Run `rtk taplo lint` to validate TOML syntax and schema.
 <!-- taplo-rules-end -->
+
+<!-- uv-rules-begin -->
+## Python Tooling & Execution with `uv`
+
+- **Execution**: Run tools via `rtk uv run <cmd>` and scripts via `rtk uv run <script>`. Never run bare `python`, `pip`, or `uv`.
+- **Dependencies**: Manage via `rtk uv add` / `rtk uv remove`. Always keep `pyproject.toml` and `uv.lock` synchronized and committed.
+- **Lock & Sync**: Run `rtk uv lock` or `rtk uv sync`. Use `uv sync --frozen` in CI.
+<!-- uv-rules-end -->
+
+<!-- fd-rules-begin -->
+## File Discovery (`fd`)
+
+- **Discovery**: Prefer `rtk fd` over `find`. Respects `.gitignore`, skips build dirs, parallel execution.
+- **Common commands**: `rtk fd <pattern>`, `rtk fd -e <ext>`, `rtk fd -t d <dir>`, `rtk fd -t f --max-depth 2`.
+<!-- fd-rules-end -->
 
 <!-- sensitive-information-protection-begin -->
 ## Sensitive Information & Secrets Protection
