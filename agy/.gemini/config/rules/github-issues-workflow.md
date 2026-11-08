@@ -1,6 +1,6 @@
 ---
 trigger: always_on
-description: "GitHub issue creation, labels, and issue closing rules"
+description: "GitHub issue creation, labels, PR cross-commenting, and issue closing rules"
 ---
 
 # GitHub Issues Workflow for Tasks
@@ -21,3 +21,8 @@ For features, enhancements, and bugs:
    - Close: Include `Fixes #<number>` in commit messages or use `rtk gh issue close <number>`.
 3. **Commit Linking**:
    - GitHub issues only close automatically when commits containing `Fixes #<issue>` are pushed to the remote repository.
+4. **Pull Request Creation & Cross-Commenting**:
+   When creating PR to fix GitHub issue:
+   - Add comment to PR mentioning issue (`rtk gh pr comment <pr> --body "... #<issue> ..." | cat`).
+   - Add comment to issue referencing PR (`rtk gh issue comment <issue> --body "... #<pr> ..." | cat`).
+   - Query issue author (`rtk gh issue view <issue> --json author --jq .author.login | cat`) and add comment to PR `@`-mentioning author asking them to test PR and confirm fix works.
