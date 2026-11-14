@@ -91,9 +91,9 @@ The markdown body must follow this canonical section ordering:
 
 When building or styling any GUI:
 
-1. **Check for `DESIGN.md`**: Look for `DESIGN.md` in repository root.
-2. **If missing**: If scaffolding a new GUI or design system, create `DESIGN.md` establishing tokens and rationale before writing UI code.
+1. **Check for `.agents/design.md`**: Look for `.agents/design.md` (or legacy root `DESIGN.md`) in the repository.
+2. **If missing**: If scaffolding a new GUI or design system (or invoking `/design-md`), create `.agents/design.md` establishing tokens and rationale before writing UI code, and reference `.agents/design.md` in `AGENTS.md`.
 3. **Reference Tokens**: Use CSS custom properties or framework theme bindings derived from tokens (e.g. Tailwind `theme.extend`, CSS `:root`).
 4. **Enforce WCAG AA**: Ensure component `backgroundColor` and `textColor` meet minimum 4.5:1 contrast ratio.
-5. **No Magic Values**: Avoid arbitrary inline hex codes or pixel dimensions that bypass `DESIGN.md`.
+5. **No Magic Values**: Avoid arbitrary inline hex codes or pixel dimensions that bypass `.agents/design.md`.
 6. **Theme Preference**: Default to **Catppuccin Mocha** palette tokens (`#1e1e2e` base, `#89b4fa` blue, `#cdd6f4` text) unless an alternate palette is specified.

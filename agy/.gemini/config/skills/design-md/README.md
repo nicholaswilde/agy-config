@@ -6,8 +6,8 @@ Enforces and documents Google's [DESIGN.md](https://github.com/google-labs-code/
 
 Agents building web, mobile, desktop, or dashboard user interfaces should follow this skill:
 
-- Consult root `DESIGN.md` before writing CSS or UI components.
-- Scaffold `DESIGN.md` with tokens and rationale when initializing a UI project.
+- Consult `.agents/design.md` before writing CSS or UI components.
+- Scaffold `.agents/design.md` with tokens and rationale when initializing a UI project, and reference it in `AGENTS.md`.
 - Use `{path.to.token}` reference syntax for token relationships.
 - Respect WCAG AA contrast minimums (4.5:1).
 
