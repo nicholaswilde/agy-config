@@ -104,8 +104,11 @@ Verify `.gitignore` rules:
 ### 6. Verification & Commit
 
 1. Run test suite to verify no regressions (`task test` or `uv run pytest`).
+
 2. Check `rtk git status`.
+
 3. Explicitly stage modified files.
+
 4. Commit using Conventional Commits:
 
    ```bash

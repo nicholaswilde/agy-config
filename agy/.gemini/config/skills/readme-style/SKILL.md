@@ -17,7 +17,9 @@ This skill enforces a consistent, visually polished README structure and design 
 
 1. **Badge Styling:**
    - Badges must be placed immediately beneath the main H1 header.
+
    - Use the [shields.io](https://shields.io) service with the `style=for-the-badge` query parameter for all badges.
+
    - Example Badge Snippets:
 
      ```markdown
@@ -53,6 +55,7 @@ This skill enforces a consistent, visually polished README structure and design 
      - Contributing: `## :handshake: Contributing`
      - License: `## :balance_scale: License`
      - Author: `## :writing_hand: Author`
+
    - **Standard Ordering & Wording (License & Author):** The final sections must follow the exact ordering of: Contributing, License, and Author.
      - License and Author sections must use the format:
 
@@ -101,6 +104,7 @@ This skill enforces a consistent, visually polished README structure and design 
      ```
 
    - **Inline Code:** File names, command flags, and configuration keys must be enclosed in backticks (e.g. `` `config.toml` ``, `` `--config` ``).
+
    - **Zero-Width Spaces:** Ensure zero-width spaces (`\u200b`) are preserved before major paragraphs in the bottom sections (License, Author).
 
 ## Examples

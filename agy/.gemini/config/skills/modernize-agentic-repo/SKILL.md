@@ -67,9 +67,13 @@ Verify and ensure all 9 agentic tools are functional in the workspace:
 Inspect repository `.gitignore` and ensure local agent artifacts, caches, and indexes are ignored:
 
 - Add `.codegraph/` (AST index and SQLite database).
+
 - Add `.serena/` (local project cache, local configs, memories).
+
 - Add `.rtk/*` with `!.rtk/filters.toml` whitelist.
+
 - If Python files, scripts, or package definitions are present, ensure Python caches and environments are ignored (`.venv/`, `__pycache__/`, `*.pyc`).
+
 - Whitelist `.agents/` assets:
 
   ```gitignore

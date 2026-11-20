@@ -244,7 +244,9 @@ Run repository-appropriate verification suites:
 If validation fails:
 
 - Diagnose failure diagnostics.
+
 - Apply surgical patch to fix regression.
+
 - Stage explicitly and commit fix:
 
   ```bash

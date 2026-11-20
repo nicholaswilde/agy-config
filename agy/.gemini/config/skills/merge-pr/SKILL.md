@@ -96,10 +96,12 @@ Outcomes:
 2. Inspect conflict regions (`<<<<<<< HEAD`, `=======`, `>>>>>>>`):
    - `HEAD`: Base branch code.
    - `origin/<head_branch>`: Incoming PR changes.
+
 3. Synthesize resolution:
    - Preserve all PR features and fixes while adapting to base branch state.
    - Remove conflict markers completely.
    - Stage resolved files: `git add <resolved_file>`.
+
 4. Finalize merge commit:
 
    ```bash
@@ -119,9 +121,13 @@ Merge may complete without conflict while breaking builds, types, or tests.
    - **Go**: `go test ./...`, `golangci-lint run`
 2. If failures occur:
    - Diagnose root cause from error diagnostics or test failure assertions.
+
    - Apply surgical fixes directly to affected files.
+
    - Re-run verification suite until all quality gates pass.
+
    - Stage fixed files explicitly (enforce `no-secrets.md`).
+
    - Commit fixes:
 
      ```bash

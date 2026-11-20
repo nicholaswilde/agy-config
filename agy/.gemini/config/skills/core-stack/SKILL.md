@@ -32,16 +32,20 @@ default to these tools and conventions.
 ## 3. Python Tooling & Workflows — `uv`
 
 * Use [`uv`](https://github.com/astral-sh/uv) for all Python package management, environment isolation, script execution, and pipeline workflows.
+
 * **NEVER** use `pip`, `poetry`, `pipenv`, or raw `virtualenv` at the project level.
+
 * **Command Execution**:
   * Run project commands, linters, and tests through `uv run`: `uv run pytest`, `uv run ruff check`.
   * Run scripts: `uv run python script.py` or standalone `uv run --with <pkg> script.py`.
+
 * **Dependency Management**:
   * Add dependencies: `uv add <package>` (or `uv add --dev <package>` for dev tools).
   * Remove dependencies: `uv remove <package>`.
   * Synchronize environment: `uv sync` (or `uv sync --frozen` in CI).
   * Project metadata lives in `pyproject.toml` with `requires-python` pinned.
   * Always commit `uv.lock` to git.
+
 * **Pipeline Workflows & Script Metadata**:
   * For self-contained automation scripts, declare dependencies using PEP 723 inline script metadata:
 
@@ -56,6 +60,7 @@ default to these tools and conventions.
     ```
 
   * Run directly with `uv run script.py` — `uv` transparently isolates dependencies in an ephemeral environment.
+
 * **Taskfile Integration**:
 
   ```yaml
@@ -74,8 +79,11 @@ default to these tools and conventions.
 ## 4. YAML Linting — `yamllint-rs`
 
 * When verifying, formatting, or creating YAML files (CI/CD, Docker, Taskfiles), assume `yamllint-rs` is the global linter.
+
 * Config file: `.yamllint` at repo root.
+
 * Run via task: `task yamllint` → `yamllint-rs .`
+
 * Canonical config:
 
   ```yaml
@@ -94,11 +102,17 @@ default to these tools and conventions.
 ## 5. Markdown Linting — `rumdl`
 
 * Use [`rumdl`](https://github.com/nicholaswilde/rumdl) for markdown linting (not `markdownlint-cli`).
+
 * Config file: `.markdownlint.yaml` or `.rumdl.toml` at repo root.
+
 * Interactive check: `rtk rumdl check .`
+
 * Interactive auto-fix / format: `rtk rumdl fmt .` (or `rtk rumdl check --fix .`)
+
 * Run via task: `task markdownlint` → `rumdl check .`
+
 * Auto-fix via task: `task markdownlint-fix` → `rumdl check --fix .`
+
 * Canonical config:
 
   ```yaml
@@ -128,14 +142,20 @@ default to these tools and conventions.
 ## 7. Link Checking — `lychee`
 
 * Use [`lychee`](https://github.com/lycheeverse/lychee) for dead link detection.
+
 * **Standard execution format**: `rtk lychee --no-progress [optional: --offline] <target>`
   1. **Always wrap with `rtk`**: Deduplicates repetitive errors (e.g. repeated broken footer links across multiple files).
   2. **Disable progress bars (`--no-progress`)**: Always include `--no-progress` to suppress ANSI escape sequences that pollute output and waste tokens.
   3. **Use offline mode for internal routing (`--offline`)**: Append `--offline` when verifying local file paths and internal routing to prevent external network timeouts.
+
 * Config file: `lychee.toml` at repo root.
+
 * Run via task: `task linkcheck` (online), `task linkcheck-offline`, or `task linkcheck-file FILE=path`.
+
 * Accept 403/429/520 status codes as valid (anti-scraper/rate-limit false positives).
+
 * CI uses [`lycheeverse/lychee-action@v2`](https://github.com/lycheeverse/lychee-action) on a daily cron schedule.
+
 * Canonical config keys:
 
   ```toml
@@ -149,10 +169,15 @@ default to these tools and conventions.
 ## 8. Secrets Encryption — `sops`
 
 * Use [`sops`](https://github.com/mozilla/sops) to encrypt sensitive files (MCP config, `.env`, etc.).
+
 * Config file: `.sops.yaml` at repo root — specifies PGP + age keys.
+
 * **NEVER commit** `.env`, `mcp_config.json`, `settings.json`, or any file with secrets/passwords unencrypted.
+
 * Encrypt: `task encrypt` / Decrypt: `task decrypt`.
+
 * Encrypted files use `.enc` suffix (e.g. `mcp_config.json.enc`).
+
 * Canonical `.sops.yaml`:
 
   ```yaml
@@ -172,7 +197,9 @@ default to these tools and conventions.
 ## 10. GitHub CLI — `gh`
 
 * **Always** use `gh` when interacting with the remote repository (e.g., cloning, managing issues/PRs, monitoring workflows).
+
 * **Always** pipe all `gh` commands to `cat` to bypass interactive paging, prompts, and other user interactions: `gh <command> | cat`
+
 * Key commands:
 
   ```bash
@@ -197,6 +224,7 @@ default to these tools and conventions.
   ```
 
 * Types: `feat`, `fix`, `docs`, `chore`, `refactor`, `ci`, `style`.
+
 * Use `git filter-branch` or interactive `git rebase -i` to rewrite generic messages (e.g. "update") to descriptive ones.
 
 ## 12. GitHub Actions Patterns
@@ -252,8 +280,11 @@ default to these tools and conventions.
 ## 18. Comment-Preserving YAML — `ruamel.yaml`
 
 * When Python scripts must **read and write** YAML while preserving comments and formatting, use `ruamel.yaml` (listed in `pyproject.toml`).
+
 * For simple YAML reads or writes without comment preservation, `yq` (§9) is preferred.
+
 * Install: `uv pip install ruamel-yaml`.
+
 * Usage pattern:
 
   ```python
@@ -331,7 +362,9 @@ default to these tools and conventions.
 ## 26. Debian Packaging — `cargo-deb`
 
 * Generates Debian `.deb` packages directly from Cargo metadata, automating system user creation, directory permissions, and systemd service generation.
+
 * Configuration is declared directly in `Cargo.toml` under `[package.metadata.deb]`.
+
 * Canonical config snippet:
 
   ```toml
@@ -353,7 +386,9 @@ default to these tools and conventions.
 ## 27. RPM Packaging — `cargo-generate-rpm`
 
 * Generates RedHat `.rpm` packages directly from Cargo metadata, utilizing custom post-install and pre-uninstall hooks.
+
 * Configuration is declared in `Cargo.toml` under `[package.metadata.generate-rpm]`.
+
 * Canonical config snippet:
 
   ```toml
@@ -396,6 +431,7 @@ default to these tools and conventions.
 * Uploads generated coverage reports (e.g. `lcov.info`) to Coveralls.io to track and monitor test coverage trends over time.
 * Command examples:
   * CLI upload: `coveralls report lcov.info -n -r $COVERALLS_REPO_TOKEN`
+
   * GitHub Action integration:
 
     ```yaml
@@ -409,7 +445,9 @@ default to these tools and conventions.
 ## 31. Integration Test Containers — `testcontainers`
 
 * Programmatic orchestration of transient Docker containers inside Rust unit or integration tests.
+
 * Prefer when integration testing has dependencies on third-party services (like MQTT brokers, databases) and you want automated setup/cleanup per test.
+
 * Canonical config snippet (in `Cargo.toml`):
 
   ```toml
@@ -423,8 +461,11 @@ default to these tools and conventions.
 ## 32. GitHub Profile Metrics — `lowlighter/metrics`
 
 * Use [`lowlighter/metrics`](https://github.com/lowlighter/metrics) to automatically generate high-resolution SVG infographics showcasing contribution history, coding habits, WakaTime metrics, and achievements.
+
 * Prefer using this action in a dedicated GitHub Actions workflow file (e.g. `.github/workflows/metrics.yml`) running on a regular cron schedule to keep profile assets up-to-date.
+
 * Always store sensitive keys, such as `METRICS_SECRET` (GitHub Personal Access Token) and `WAKATIME_API_KEY`, as GitHub Repository Secrets.
+
 * Canonical GitHub Actions job snippet:
 
   ```yaml
@@ -480,20 +521,26 @@ default to these tools and conventions.
 ## 36. AI Agent Ingestion — `llms.txt` + `llms-full.txt`
 
 * Follow the [llms.txt spec](https://llmstxt.org/) so AI agents can ingest a repo/site without crawling HTML.
+
 * **Relevant repos:** anything with a docs site (`zensical`), libraries, CLIs, MCP servers, or apps others integrate with. Skip pure dotfile/config or private scratch repos.
+
 * **Two files:**
   * `llms.txt` — hand-curated index. Small; links only.
   * `llms-full.txt` — generated; `llms.txt` + full content of every linked Markdown file concatenated. Never hand-edit.
+
 * **Location:**
   * Docs-site repos: `docs/llms.txt` + `docs/llms-full.txt` → served at site root (`<site_url>/llms.txt`).
   * Non-docs repos: repo root (`./llms.txt`, `./llms-full.txt`) → agents fetch via raw GitHub URL.
+
 * **`llms.txt` format** (sections in this order):
   1. H1 project name (only required section).
   2. Blockquote one-line summary.
   3. Optional paragraphs/lists (no headings) with key context.
   4. H2 sections of file lists: `- [Name](url): optional notes`.
   5. `## Optional` H2 last — secondary links agents may skip for short context.
+
 * Link to raw Markdown (`.md`) URLs, not rendered HTML, so agents get clean text.
+
 * Canonical `llms.txt`:
 
   ```markdown
@@ -537,18 +584,27 @@ default to these tools and conventions.
   ```
 
 * Run `task llms` before `task build`; regenerate in CI docs-deploy workflow so `llms-full.txt` never goes stale.
+
 * Exclude `llms-full.txt` from `lychee.toml` (`exclude_path`) and `_typos.toml` — content duplicates already-checked sources.
+
 * Link both files from `README.md` (e.g. `:robot: [llms.txt](llms.txt)`) and `AGENTS.md` for discoverability.
 
 ## 37. Content Search — `ripgrep` (`rg`)
 
 * Use [`ripgrep`](https://github.com/BurntSushi/ripgrep) (`rg`) for all file-content, string, and regex searches. Never `grep -r`.
+
 * Respects `.gitignore` by default; skips hidden/binary files. Use `--hidden` / `-uu` only when needed.
+
 * Prefix with `rtk` in agent shells to compress output: `rtk rg <pattern>`.
+
 * Scope with `-t <type>` and target dirs; keep context small (`-C 1`/`-C 2`); use `-l` for file lists.
+
 * Prefer `rg` over `grep` in Taskfiles and scripts too (e.g. `rg -l 'TODO' docs/`).
+
 * Install: `cargo binstall -y ripgrep` or `apt install ripgrep`.
+
 * Full rule: `~/.gemini/config/rules/ripgrep-rules.md`.
+
 * Command examples:
 
   ```bash
@@ -563,12 +619,19 @@ default to these tools and conventions.
 ## 38. TOML Linting & Formatting — `taplo`
 
 * Use [`taplo`](https://github.com/tamasfe/taplo) (`taplo-cli`) as the standard TOML toolkit for linting, formatting, schema validation, and syntax checking across all repositories.
+
 * Applies to all TOML files: `Cargo.toml`, `pyproject.toml`, `Taskfile.toml`, `_typos.toml`, `lychee.toml`, and application configuration files.
+
 * Config file: `taplo.toml` or `.taplo.toml` at repo root.
+
 * Format files in-place: `rtk taplo fmt` (interactive shell) or `taplo fmt` (Taskfile / CI).
+
 * Dry-run / CI format check: `rtk taplo fmt --check` (or `taplo fmt --check`).
+
 * Lint syntax and validate schemas: `rtk taplo lint` (or `rtk taplo check`).
+
 * Install: `cargo binstall -y taplo-cli`, `brew install taplo`, or download from GitHub releases (`tamasfe/taplo`).
+
 * Canonical `taplo.toml`:
 
   ```toml
