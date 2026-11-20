@@ -32,6 +32,7 @@
       "command(rtk )",
       "command(ripwire)",
       "command(rtk ripwire)",
+      "command(ctx7)",
       "mcp(codegraph/*)",
       "mcp(context-mode/*)",
       "mcp(context-mode_context-mode/*)"

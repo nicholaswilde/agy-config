@@ -43,6 +43,7 @@ tasks:
       - agy plugin install https://github.com/DietrichGebert/ponytail
       - agy plugin install https://github.com/JuliusBrussee/caveman
       - npm install -g context-mode
+      - npm install -g ctx7
       - agy plugin install https://github.com/mksglu/context-mode/tree/main/configs/antigravity-cli
 
   lint:md:

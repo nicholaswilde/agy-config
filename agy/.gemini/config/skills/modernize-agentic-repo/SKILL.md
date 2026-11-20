@@ -1,19 +1,19 @@
 ---
 name: modernize-agentic-repo
 description: >-
-  Verify and modernize repo for agentic tools (serena, rtk, ponytail, codegraph, context-mode, caveman, headroom, ripwire), rules, and .agents/ layout.
+  Verify and modernize repo for agentic tools (serena, rtk, ponytail, codegraph, context-mode, caveman, headroom, ripwire, ctx7), rules, and .agents/ layout.
   Trigger: /modernize-agentic-repo, /modernize-agents, "modernize agent tooling", "modernize repo", "modernize workspace", "ensure agent tools", "modernize agents".
 ---
 
 # Modernize Agentic Repository Skill
 
-Use this skill to modernize a repository's workspace and tool configuration for Antigravity's agentic stack (Serena, RTK, Ponytail, CodeGraph, Context-Mode, Caveman, Headroom, Ripwire), configure agentic rules (including `uv-rules.md`, `ripwire-rules.md`), and standardize directory layouts under `.agents/`.
+Use this skill to modernize a repository's workspace and tool configuration for Antigravity's agentic stack (Serena, RTK, Ponytail, CodeGraph, Context-Mode, Caveman, Headroom, Ripwire, Context7), configure agentic rules (including `uv-rules.md`, `ripwire-rules.md`), and standardize directory layouts under `.agents/`.
 
 ## Protocol
 
 ### 1. Stack Health & Tooling Verification
 
-Verify and ensure all 8 agentic tools are functional in the workspace:
+Verify and ensure all 9 agentic tools are functional in the workspace:
 
 1. **Serena MCP (Semantic Coding & LSP)**
    - Automatically execute the `/setup-serena` workflow:
@@ -57,6 +57,10 @@ Verify and ensure all 8 agentic tools are functional in the workspace:
      - Ensure global rule is symlinked: `.agents/rules/ripwire-rules.md`.
      - Ensure `AGENTS.md` contains `<!-- ripwire-begin -->` and `rtk ripwire` in `<!-- rtk-begin -->`.
      - Test and warm cache via `rtk ripwire . --top-k=5` and `rtk ripwire . --report`.
+
+9. **Context7 CLI (Live Library Docs)**
+   - Verify binary availability: `which ctx7` and `ctx7 --version` (or fallback `npx -y ctx7@latest`).
+   - Confirm global skill symlink exists at `~/.gemini/config/skills/context7/SKILL.md`.
 
 ### 2. Repository Hygiene (`.gitignore`)
 
