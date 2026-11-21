@@ -1,0 +1,11 @@
+# enstow configuration for agy-config
+# Used via `enstow -C .enstow.toml <command>` (or `ENSTOW_CONFIG=.enstow.toml`)
+
+source = "."
+prune = true
+
+recipients = ["age1x2at6wwq2gks47fsep9a25emdeqd93e3k0gfsswtmhruqrteu5jqjvy7kd"]
+
+packages = ["agy"]
+
+ignore = ["*.swp", "*.log"]

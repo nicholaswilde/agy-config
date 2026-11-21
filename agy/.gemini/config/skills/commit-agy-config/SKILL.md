@@ -20,7 +20,7 @@ Audit git status for modified or newly added agy assets:
   - **Skills**: `skills/<name>/` (e.g. `SKILL.md`, `README.md`, scripts, references)
   - **Rules**: `rules/<name>.md`, `AGENTS.md`, `GEMINI.md`
   - **Configs**: `settings.json`, `config.json`, `mcp_config.json`, plugin/hook manifests
-  - **Supporting files**: `Taskfile.yml`, `README.md`, `.gitignore`, `systemd/` when modified as part of the customization
+  - **Supporting files**: `Taskfile.yml`, `.enstow.toml`, `README.md`, `.gitignore`, `systemd/` when modified as part of the customization
 - If no target files are dirty or untracked, stop and report: `working tree clean; nothing to commit`.
 
 ### 2. Mandatory Secret & Sensitive Data Audit
@@ -82,11 +82,11 @@ Push committed changes to the tracking branch:
 - If upstream branch is not set: `git push -u origin <branch>`
 - Verify push exit code and confirmation.
 
-### 7. Sync & Stow Verification (for agy-config)
+### 7. Sync & enstow Verification (for agy-config)
 
 When operating inside the `agy-config` dotfiles repository:
 
-- Ensure new skills and rules are mirrored/symlinked into `~/.gemini/` (e.g., `ln -sf` or `task restow`).
+- Ensure new skills and rules are symlinked into `~/.gemini/` via `task restow` and verify with `task status` / `task doctor`.
 - Verify uncommitted change alerts reset via `task notify:check`.
 
 ### 8. Terse Caveman Status Report

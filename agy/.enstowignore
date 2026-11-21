@@ -1,0 +1,18 @@
+# Ignore Antigravity runtime and cache directories
+.gemini/antigravity-cli/annotations/
+.gemini/antigravity-cli/bin/
+.gemini/antigravity-cli/brain/
+.gemini/antigravity-cli/builtin/
+.gemini/antigravity-cli/cache/
+.gemini/antigravity-cli/conversations/
+.gemini/antigravity-cli/crashes/
+.gemini/antigravity-cli/history/
+.gemini/antigravity-cli/implicit/
+.gemini/antigravity-cli/log/
+.gemini/antigravity-cli/scratch/
+.gemini/antigravity-cli/updater/
+.gemini/config/plugins/
+.gemini/config/projects/
+.gemini/config/import_manifest.json
+.gemini/config/.migrated
+.gitkeep

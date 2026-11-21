@@ -6,7 +6,7 @@ Entry point and operational guidelines for AI agents working in this repository.
 
 ## Project Overview
 
-`agy-config` is a GNU Stow dotfiles repository managing Google Antigravity CLI (`agy`) configuration, Model Context Protocol (MCP) servers, plugins, global rules, and custom skills symlinked directly into `~/.gemini/`.
+`agy-config` is an [enstow](https://github.com/nicholaswilde/enstow) dotfiles repository managing Google Antigravity CLI (`agy`) configuration, Model Context Protocol (MCP) servers, plugins, global rules, and custom skills symlinked directly into `~/.gemini/`.
 
 ### Key Structure & File Locations
 
@@ -21,9 +21,10 @@ Entry point and operational guidelines for AI agents working in this repository.
 │   │       ├── mcp_config.json     # MCP server registrations (codegraph, serena, etc.)
 │   │       ├── rules/              # Behavioral and security rules
 │   │       └── skills/             # Custom skills library
-│   └── .stow-local-ignore          # Ignores runtime and cache files from Stow
+│   └── .enstowignore               # Git-style ignore patterns for enstow
+├── .enstow.toml                    # enstow package registry and recipients config
 ├── .gitignore                      # Git ignore rules
-├── Taskfile.yml                    # Stow automation workflows
+├── Taskfile.yml                    # enstow and repo automation workflows
 └── README.md                       # Project documentation
 ```
 
@@ -31,16 +32,19 @@ Entry point and operational guidelines for AI agents working in this repository.
 
 ## Tooling & Common Workflows
 
-This project uses [Task](https://taskfile.dev/) to orchestrate [GNU Stow](https://www.gnu.org/software/stow/) operations.
+This project uses [Task](https://taskfile.dev/) to orchestrate [enstow](https://github.com/nicholaswilde/enstow) operations via `enstow -C .enstow.toml`.
 
 ### Task Commands
 
-- **Dry-run stow**: `task test` (tests `stow -n -S -v -t ~/ agy`)
-- **Apply stow**: `task stow`
+- **Install/verify enstow**: `task deps`
+- **Dry-run apply**: `task test` (`enstow -C .enstow.toml apply --dry-run`)
+- **Apply symlinks**: `task apply` (aliases: `task stow`, `task install`)
 - **Dry-run restow**: `task restow:test`
 - **Re-apply symlinks**: `task restow`
-- **Dry-run unstow**: `task del:test`
-- **Unstow / Delete symlinks**: `task del`
+- **Dry-run unstow**: `task unstow:test` (alias: `task del:test`)
+- **Unstow / Delete symlinks**: `task unstow` (aliases: `task del`, `task delete`)
+- **Scrub symlinks/secrets**: `task scrub`
+- **Inspect status / diff / health**: `task status`, `task diff`, `task doctor`
 - **Install plugins**: `task plugins`
 - **Check dirty repo**: `task notify:check`
 - **Install dirty notify timer**: `task notify:install`
@@ -191,7 +195,7 @@ Use `ripwire` CLI (prefixed with `rtk ripwire`) for AST codebase mapping, call g
 ## Taplo TOML Rules
 
 - **Prefix with RTK**: Always prefix `taplo` commands with `rtk` in interactive shells (e.g., `rtk taplo fmt`, `rtk taplo lint`).
-- **Format**: Run `rtk taplo fmt` to format TOML files in-place (`.rumdl.toml`).
+- **Format**: Run `rtk taplo fmt` to format TOML files in-place (`.enstow.toml`, `.rumdl.toml`).
 - **Validation**: Run `rtk taplo lint` to validate TOML syntax and schema.
 <!-- taplo-rules-end -->
 
@@ -217,7 +221,7 @@ NEVER commit or stage sensitive personal, financial, or security data to reposit
 
 1. **Secrets & Credentials**: Strictly forbid staging or committing passwords, API tokens, auth credentials, private keys (`*.pem`, `*.key`, `id_rsa`, `id_ed25519`), `.env` files, or unencrypted secrets.
 2. **Sanitized Configurations**: Ensure configuration files (`settings.json`, `mcp_config.json`) contain no plaintext secrets or personal access tokens.
-3. **SOPS Encryption**: Use `sops` (`task encrypt` / `task decrypt`) for encrypted secret storage.
+3. **Age Encryption (`enstow`)**: Encrypt sensitive files with `enstow -C .enstow.toml encrypt` (`.age` suffix); run `task doctor` to audit permissions and leaks.
 4. **Explicit Staging**: Never use `git add .` when untracked secret files exist; stage explicitly by name.
 5. **Review Before Committing**: Always inspect `git status` and staged diffs before committing.
 <!-- sensitive-information-protection-end -->

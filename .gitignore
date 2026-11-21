@@ -42,7 +42,7 @@ bin/
 **/config/import_manifest.json
 **/config/.migrated
 
-# 5. Secrets (Ensure SOPS handles these)
+# 5. Secrets (Encrypt with enstow / age; never commit plaintext)
 secrets.yaml
 secrets.yml
 .env

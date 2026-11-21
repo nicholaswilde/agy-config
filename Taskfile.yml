@@ -4,38 +4,69 @@
 version: '3'
 
 vars:
-  STOW_ARGS: '-v -t ~/ agy'
+  ENSTOW_CONFIG: '{{ .TASKFILE_DIR }}/.enstow.toml'
+  ENSTOW: 'enstow -C {{ .ENSTOW_CONFIG }}'
 
 tasks:
-  restow:
-    desc: Restow
+  deps:
+    desc: Install or verify enstow
     cmds:
-      - stow -R {{ .STOW_ARGS }}
+      - 'command -v enstow >/dev/null 2>&1 && enstow --version ||
+        (command -v brew >/dev/null 2>&1 && brew install nicholaswilde/homebrew-tap/enstow) ||
+        { echo "Install enstow from https://github.com/nicholaswilde/enstow" >&2; false; }'
 
-  restow:test:
-    desc: Restow test
+  apply:
+    aliases: [stow, install]
+    desc: Apply agy package with enstow
     cmds:
-      - stow -n -R {{ .STOW_ARGS }}
-
-  stow:
-    desc: Stow
-    cmds:
-      - stow -S {{ .STOW_ARGS }}
+      - '{{ .ENSTOW }} apply {{ .CLI_ARGS }}'
 
   test:
-    desc: Test
+    desc: Preview enstow apply (dry-run)
     cmds:
-      - stow -n -S {{ .STOW_ARGS }}
+      - '{{ .ENSTOW }} apply --dry-run {{ .CLI_ARGS }}'
 
-  del:
-    desc: Delete
+  restow:
+    desc: Restow agy package with enstow
     cmds:
-      - stow -D {{ .STOW_ARGS }}
+      - '{{ .ENSTOW }} restow {{ .CLI_ARGS }}'
 
-  del:test:
-    desc: Delete test
+  restow:test:
+    desc: Preview enstow restow (dry-run)
     cmds:
-      - stow -n -D {{ .STOW_ARGS }}
+      - '{{ .ENSTOW }} restow --dry-run {{ .CLI_ARGS }}'
+
+  unstow:
+    aliases: [del, delete]
+    desc: Remove managed symlinks with enstow
+    cmds:
+      - '{{ .ENSTOW }} unstow {{ .CLI_ARGS }}'
+
+  unstow:test:
+    aliases: [del:test]
+    desc: Preview enstow unstow (dry-run)
+    cmds:
+      - '{{ .ENSTOW }} unstow --dry-run {{ .CLI_ARGS }}'
+
+  scrub:
+    desc: Securely shred decrypted secrets and remove managed symlinks
+    cmds:
+      - '{{ .ENSTOW }} scrub {{ .CLI_ARGS }}'
+
+  status:
+    desc: Show sync status of managed dotfiles
+    cmds:
+      - '{{ .ENSTOW }} status {{ .CLI_ARGS }}'
+
+  diff:
+    desc: Show diff between dotfiles and targets (secrets masked)
+    cmds:
+      - '{{ .ENSTOW }} diff --mask-secrets {{ .CLI_ARGS }}'
+
+  doctor:
+    desc: Audit symlink health, secret permissions, and leaks
+    cmds:
+      - '{{ .ENSTOW }} doctor {{ .CLI_ARGS }}'
 
   plugins:
     desc: Install plugins

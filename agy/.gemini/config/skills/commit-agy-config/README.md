@@ -10,7 +10,7 @@ Create git commits and pushes for new or updated Antigravity skills, rules, and 
 - Stages files explicitly by name (never `git add .`).
 - Generates terse Conventional Commit messages (≤50 chars).
 - Commits and pushes to remote upstream.
-- Verifies symlinks and Stow status for `~/.gemini/`.
+- Verifies symlinks and `enstow` status for `~/.gemini/`.
 
 ## How to invoke
 

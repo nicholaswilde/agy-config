@@ -12,6 +12,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  ENSTOW_VERSION: 0.1.15
+
 jobs:
   test:
     name: Lint & Test
@@ -24,11 +27,19 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y stow jq yamllint
+          sudo apt-get install -y jq yamllint
 
       - name: Install go-task
         run: |
           sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
+
+      - name: Install enstow
+        run: |
+          ARCH="$(uname -m)"
+          curl -fsSL "https://github.com/nicholaswilde/enstow/releases/download/v${ENSTOW_VERSION}/enstow-${ENSTOW_VERSION}-${ARCH}-unknown-linux-musl.tar.gz" \
+            | sudo tar -xz --strip-components=1 -C /usr/local/bin "enstow-${ENSTOW_VERSION}-${ARCH}-unknown-linux-musl/enstow"
+          sudo chmod +x /usr/local/bin/enstow
+          enstow --version
 
       - name: Install rumdl
         env:
@@ -50,9 +61,15 @@ jobs:
       - name: Lint Markdown
         run: task lint:md
 
-
-      - name: Test GNU Stow
+      - name: Dry-run enstow
         run: task test
+
+      - name: Apply and verify enstow
+        run: |
+          task apply
+          task status
+          task doctor
+          task unstow
 
       - name: Verify Secrets Invariant
         run: |

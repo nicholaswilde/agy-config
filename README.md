@@ -4,17 +4,17 @@
 [![ci](https://img.shields.io/github/actions/workflow/status/nicholaswilde/agy-config/ci.yml?label=ci&style=for-the-badge&branch=main&logo=github-actions)](https://github.com/nicholaswilde/agy-config/actions/workflows/ci.yml)
 [![license](https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=for-the-badge)](LICENSE)
 
-GNU Stow dotfiles package for managing Google Antigravity CLI (`agy`) configuration, MCP servers, plugins, global rules, and custom skills.
+[enstow](https://github.com/nicholaswilde/enstow) dotfiles package for managing Google Antigravity CLI (`agy`) configuration, MCP servers, plugins, global rules, and custom skills.
 
 ---
 
 ## :sparkles: Features
 
-- **Dotfiles Management via GNU Stow**: Clean symlinking directly into `~/.gemini/`.
+- **Dotfiles Management via enstow**: Per-file symlinking directly into `~/.gemini/` with built-in `age` secret support, drift status, and health diagnostics.
 - **MCP Server Configurations**: Preconfigured integration for `codegraph`, `docker-hub`, `context-mode`, and `serena`.
 - **Curated Skills Library**: Bundled custom skills including `caveman`, `cavecrew`, `core-stack`, `design-md`, `setup-serena`, and network diagnostics.
 - **Rule Enforcement**: Built-in rules for secret management, credential leak prevention, Google `DESIGN.md` GUI standards, and semantic coding.
-- **Automated Workflows & CI**: Streamlined `Taskfile` commands for safe dry-runs, stowing, restowing, and linting (`rumdl`, `yamllint`) backed by GitHub Actions CI.
+- **Automated Workflows & CI**: Streamlined `Taskfile` commands for safe dry-runs, applying, restowing, diagnostics (`status`, `diff`, `doctor`), and linting (`rumdl`, `yamllint`) backed by GitHub Actions CI.
 - **Design & Theming Standards**: Native Catppuccin Mocha theme defaults and 2-space indentation standards across all tools.
 - **Dirty Repo Notifications**: systemd user timer alerts via [Mailrise](https://github.com/YoRyan/mailrise) when config changes are uncommitted or unpushed.
 
@@ -24,49 +24,53 @@ GNU Stow dotfiles package for managing Google Antigravity CLI (`agy`) configurat
 
 ### Prerequisites
 
-- [GNU Stow](https://www.gnu.org/software/stow/)
+- [enstow](https://github.com/nicholaswilde/enstow)
 - [Task](https://taskfile.dev/)
 
 ### Setup
 
-Clone the repository:
+Clone the repository and verify `enstow`:
 
 ```bash
 git clone git@github.com:nicholaswilde/agy-config.git ~/git/nicholaswilde/agy-config
 cd ~/git/nicholaswilde/agy-config
+task deps
 ```
 
 ---
 
 ## :rocket: Usage
 
-Run operations using [Task](https://taskfile.dev/):
+> [!NOTE]
+> Migrating a host previously stowed with GNU Stow? Remove legacy folded directory symlinks under `~/.gemini/config/skills/` first, then run `task apply -- --backup` (or `task restow -- --backup`) to apply per-file `enstow` symlinks safely.
+
+Run operations using [Task](https://taskfile.dev/) (configured via [`.enstow.toml`](./.enstow.toml)):
 
 ### Dry Run (Test)
 
-Test stowing without making actual filesystem changes:
+Preview applying `agy` without making filesystem changes:
 
 ```bash
 task test
 ```
 
-### Stow Configuration
+### Apply Configuration
 
-Symlink the `agy` package into `~/`:
+Symlink the `agy` package into `~/` (aliases: `task stow`, `task install`):
 
 ```bash
-task stow
+task apply
 ```
 
 ### Restow Configuration
 
-Re-link and refresh existing symlinks:
+Prune stale symlinks and re-apply the `agy` package:
 
 ```bash
 task restow
 ```
 
-To test restowing first:
+To preview restowing first:
 
 ```bash
 task restow:test
@@ -74,16 +78,26 @@ task restow:test
 
 ### Remove Symlinks
 
-Unstow and remove created symlinks:
+Unstow and remove managed symlinks (aliases: `task del`, `task delete`):
 
 ```bash
-task del
+task unstow
 ```
 
-To test removal first:
+To preview removal first (alias: `task del:test`):
 
 ```bash
-task del:test
+task unstow:test
+```
+
+### Status, Diff & Doctor
+
+Inspect symlink state, view masked diffs, and audit symlink/secret hygiene:
+
+```bash
+task status
+task diff
+task doctor
 ```
 
 ### Install Plugins
@@ -205,16 +219,16 @@ Precedence: caller environment > `.env` > script default.
 │   │       ├── mcp_config.json # Model Context Protocol (MCP) server definitions
 │   │       ├── rules/          # Behavioral and security rules
 │   │       └── skills/         # Custom skills library
-│   └── .stow-local-ignore      # Ignores runtime and cache directories from Stow
+│   └── .enstowignore           # Git-style ignore patterns for enstow
 ├── scripts/
 │   └── notify-dirty.sh         # Dirty check & Mailrise notification script
 ├── systemd/
 │   ├── agy-dirty-notify.service # systemd user service definition
 │   └── agy-dirty-notify.timer   # systemd user timer definition (15m interval)
+├── .enstow.toml                # enstow package registry and recipients config
 ├── .env.example                # Notification and Mailrise environment template
 ├── .gitignore                  # Git ignore patterns
 ├── .rumdl.toml                 # Markdown linter and formatter configuration
-├── .sops.yaml                  # SOPS encryption configuration (PGP + age)
 ├── .yamllint                   # YAML linter configuration
 ├── AGENTS.md                   # Operational guidelines for AI coding agents
 ├── LICENSE                     # Apache 2.0 License
