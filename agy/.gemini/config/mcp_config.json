@@ -19,9 +19,6 @@
         "--transport=stdio",
         "--username=nicholaswilde"
       ],
-      "env": {
-        "HUB_PAT_TOKEN": ""
-      },
       "trust": true
     },
     "serena": {
@@ -30,6 +27,14 @@
         "start-mcp-server",
         "--context=antigravity",
         "--project-from-cwd"
+      ],
+      "trust": true
+    },
+    "headroom": {
+      "command": "/home/nicholas/.local/bin/headroom",
+      "args": [
+        "mcp",
+        "serve"
       ],
       "trust": true
     }

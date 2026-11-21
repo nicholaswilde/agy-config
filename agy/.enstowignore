@@ -16,3 +16,7 @@
 .gemini/config/import_manifest.json
 .gemini/config/.migrated
 .gitkeep
+
+# Ignore app-owned config files rewritten atomically by agy
+.gemini/antigravity-cli/settings.json
+.gemini/config/config.json
