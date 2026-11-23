@@ -32,19 +32,20 @@ Entry point and operational guidelines for AI agents working in this repository.
 
 ## Tooling & Common Workflows
 
-This project uses [Task](https://taskfile.dev/) to orchestrate [enstow](https://github.com/nicholaswilde/enstow) operations via `enstow -C .enstow.toml`.
+This project uses [Task](https://taskfile.dev/) to orchestrate [enstow](https://github.com/nicholaswilde/enstow) operations. `enstow` auto-discovers `.enstow.toml` from repository root (`prune = true`, `mask_secrets = true`).
 
 ### Task Commands
 
 - **Install/verify enstow**: `task deps`
-- **Dry-run apply**: `task test` (`enstow -C .enstow.toml apply --dry-run`)
+- **Dry-run apply**: `task test` (`enstow apply --dry-run`)
 - **Apply symlinks**: `task apply` (aliases: `task stow`, `task install`)
 - **Dry-run restow**: `task restow:test`
 - **Re-apply symlinks**: `task restow`
 - **Dry-run unstow**: `task unstow:test` (alias: `task del:test`)
 - **Unstow / Delete symlinks**: `task unstow` (aliases: `task del`, `task delete`)
 - **Scrub symlinks/secrets**: `task scrub`
-- **Inspect status / diff / health**: `task status`, `task diff`, `task doctor`
+- **Inspect status / diff / health**: `task status` (`-- --check` for non-zero exit on drift), `task diff`, `task doctor`
+- **Audit staged secrets / install pre-commit hook**: `task check-secrets` (`enstow doctor --staged -s .`), `task install-hooks`
 - **Install plugins**: `task plugins`
 - **Check dirty repo**: `task notify:check`
 - **Install dirty notify timer**: `task notify:install`
@@ -221,7 +222,7 @@ NEVER commit or stage sensitive personal, financial, or security data to reposit
 
 1. **Secrets & Credentials**: Strictly forbid staging or committing passwords, API tokens, auth credentials, private keys (`*.pem`, `*.key`, `id_rsa`, `id_ed25519`), `.env` files, or unencrypted secrets.
 2. **Sanitized Configurations**: Ensure configuration files (`settings.json`, `mcp_config.json`) contain no plaintext secrets or personal access tokens.
-3. **Age Encryption (`enstow`)**: Encrypt sensitive files with `enstow -C .enstow.toml encrypt` (`.age` suffix); run `task doctor` to audit permissions and leaks.
+3. **Age Encryption (`enstow`)**: Encrypt sensitive files with `enstow encrypt` (`.age` suffix; generate keys via `enstow keygen`, edit + deploy via `enstow edit --apply`); run `task check-secrets` (`enstow doctor --staged -s .`) and `task doctor` to audit permissions, `.gitignore` coverage, and leaks.
 4. **Explicit Staging**: Never use `git add .` when untracked secret files exist; stage explicitly by name.
 5. **Review Before Committing**: Always inspect `git status` and staged diffs before committing.
 <!-- sensitive-information-protection-end -->

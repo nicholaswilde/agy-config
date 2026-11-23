@@ -18,12 +18,12 @@ This skill establishes a strict execution hierarchy for system operations, repos
    - Determine the requested operation (e.g., building, testing, linting, deploying, or stowing).
 
 2. **Audit Local Automation Pathways:**
-   - **Step:** Inspect `Taskfile.yaml` at the root of the repository to check for existing tasks matching or related to the user intent.
+   - **Step:** Inspect `Taskfile.yml` / `Taskfile.yaml` at the root of the repository to check for existing tasks matching or related to the user intent.
    - **Step:** Scan the `scripts/` directory for executable shell scripts that handle the target workflow.
 
 3. **Execution Hierarchy Selection:**
-   - **Priority 1 (Taskfile):** If a relevant task exists in `Taskfile.yaml` (e.g., `task check-secrets`), execute that task directly using `go-task`.
-   - **Priority 2 (Dedicated Scripts):** If no matching task exists but a dedicated script is present in `scripts/` (e.g., `scripts/check-secrets.sh`), invoke the script rather than duplicating its logic into a raw command.
+   - **Priority 1 (Taskfile):** If a relevant task exists in `Taskfile.yml` / `Taskfile.yaml` (e.g., `task check-secrets`), execute that task directly using `go-task`.
+   - **Priority 2 (Dedicated Scripts):** If no matching task exists but a dedicated script is present in `scripts/` (e.g., `scripts/notify-dirty.sh`), invoke the script rather than duplicating its logic into a raw command.
    - **Priority 3 (Raw Commands):** Only utilize raw shell commands if no pre-existing task or script covers the required functionality.
 
 4. **Automation Alignment Protocol:**

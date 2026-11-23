@@ -3,10 +3,6 @@
 
 version: '3'
 
-vars:
-  ENSTOW_CONFIG: '{{ .TASKFILE_DIR }}/.enstow.toml'
-  ENSTOW: 'enstow -C {{ .ENSTOW_CONFIG }}'
-
 tasks:
   deps:
     desc: Install or verify enstow
@@ -19,54 +15,71 @@ tasks:
     aliases: [stow, install]
     desc: Apply agy package with enstow
     cmds:
-      - '{{ .ENSTOW }} apply {{ .CLI_ARGS }}'
+      - 'enstow apply {{ .CLI_ARGS }}'
 
   test:
     desc: Preview enstow apply (dry-run)
     cmds:
-      - '{{ .ENSTOW }} apply --dry-run {{ .CLI_ARGS }}'
+      - 'enstow apply --dry-run {{ .CLI_ARGS }}'
 
   restow:
     desc: Restow agy package with enstow
     cmds:
-      - '{{ .ENSTOW }} restow {{ .CLI_ARGS }}'
+      - 'enstow restow {{ .CLI_ARGS }}'
 
   restow:test:
     desc: Preview enstow restow (dry-run)
     cmds:
-      - '{{ .ENSTOW }} restow --dry-run {{ .CLI_ARGS }}'
+      - 'enstow restow --dry-run {{ .CLI_ARGS }}'
 
   unstow:
     aliases: [del, delete]
     desc: Remove managed symlinks with enstow
     cmds:
-      - '{{ .ENSTOW }} unstow {{ .CLI_ARGS }}'
+      - 'enstow unstow {{ .CLI_ARGS }}'
 
   unstow:test:
     aliases: [del:test]
     desc: Preview enstow unstow (dry-run)
     cmds:
-      - '{{ .ENSTOW }} unstow --dry-run {{ .CLI_ARGS }}'
+      - 'enstow unstow --dry-run {{ .CLI_ARGS }}'
 
   scrub:
     desc: Securely shred decrypted secrets and remove managed symlinks
     cmds:
-      - '{{ .ENSTOW }} scrub {{ .CLI_ARGS }}'
+      - 'enstow scrub {{ .CLI_ARGS }}'
 
   status:
     desc: Show sync status of managed dotfiles
     cmds:
-      - '{{ .ENSTOW }} status {{ .CLI_ARGS }}'
+      - 'enstow status {{ .CLI_ARGS }}'
 
   diff:
     desc: Show diff between dotfiles and targets (secrets masked)
     cmds:
-      - '{{ .ENSTOW }} diff --mask-secrets {{ .CLI_ARGS }}'
+      - 'enstow diff {{ .CLI_ARGS }}'
 
   doctor:
     desc: Audit symlink health, secret permissions, and leaks
     cmds:
-      - '{{ .ENSTOW }} doctor {{ .CLI_ARGS }}'
+      - 'enstow doctor {{ .CLI_ARGS }}'
+
+  check-secrets:
+    desc: Verify staged files for plaintext secrets and credential leaks
+    cmds:
+      - 'enstow doctor --staged -s .'
+
+  install-hooks:
+    desc: Install git pre-commit hook using enstow doctor --staged
+    cmds:
+      - mkdir -p .git/hooks
+      - |
+        rm -f .git/hooks/pre-commit
+        cat <<'EOF' > .git/hooks/pre-commit
+        #!/usr/bin/env sh
+        exec enstow doctor --staged -s .
+        EOF
+        chmod +x .git/hooks/pre-commit
 
   plugins:
     desc: Install plugins

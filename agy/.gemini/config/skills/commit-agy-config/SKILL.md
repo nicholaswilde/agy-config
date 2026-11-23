@@ -30,6 +30,7 @@ Strictly enforce secret management guidelines before staging any file:
 - **Scan candidate files**: Verify no API tokens, auth credentials, passwords, private keys (`*.pem`, `*.key`, `id_rsa`, `id_ed25519`), or `.env` files are included.
 - **Sanitize configs**: Check that configuration files (`settings.json`, `mcp_config.json`, `config.json`) contain no plaintext secrets or personal access tokens.
 - **No blanket staging**: NEVER run `git add .` or `git add -A`. All targets must be staged explicitly by path.
+- **Automated staged secret guard**: After staging (Step 4), run `task check-secrets` (or `enstow doctor --staged -s .`) to catch staged `.env` files, plaintext counterparts of encrypted files, and credential leaks.
 
 ### 3. Formatting, Linting & Token Compression Validation
 
@@ -47,6 +48,7 @@ Ensure modified assets pass repository linting and token-budget standards:
 Stage target files explicitly:
 
 - Stage candidate paths: `git add <file1> <file2> ...`
+- Run staged secret guard: `task check-secrets` (or `enstow doctor --staged -s .`)
 - Inspect staged files: `git diff --staged --name-status`
 - Review staged diff: `git diff --staged` to confirm only intended changes are included and no secrets or unintended edits exist.
 
@@ -86,7 +88,7 @@ Push committed changes to the tracking branch:
 
 When operating inside the `agy-config` dotfiles repository:
 
-- Ensure new skills and rules are symlinked into `~/.gemini/` via `task restow` and verify with `task status` / `task doctor`.
+- Sync added/removed skills and rules into `~/.gemini/` via `task apply` (`prune = true` in `.enstow.toml` auto-prunes stale symlinks at any depth) and verify with `task status -- --check` and `task doctor`.
 - Verify uncommitted change alerts reset via `task notify:check`.
 
 ### 8. Terse Caveman Status Report

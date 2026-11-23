@@ -1,8 +1,8 @@
-# enstow configuration for agy-config
-# Used via `enstow -C .enstow.toml <command>` (or `ENSTOW_CONFIG=.enstow.toml`)
+# enstow configuration for agy-config (auto-discovered from repository root)
 
 source = "."
 prune = true
+mask_secrets = true
 
 recipients = ["age1x2at6wwq2gks47fsep9a25emdeqd93e3k0gfsswtmhruqrteu5jqjvy7kd"]
 

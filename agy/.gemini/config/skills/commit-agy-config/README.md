@@ -5,12 +5,11 @@ Create git commits and pushes for new or updated Antigravity skills, rules, and 
 ## What it does
 
 - Audits repository status for modified or untracked skills, rules, and configs.
-- Enforces secret prevention rules (no API keys, tokens, `.env` files).
-- Lints Markdown (`rumdl`) and YAML (`yamllint`).
-- Stages files explicitly by name (never `git add .`).
+- Enforces secret prevention rules via `enstow doctor --staged` (`task check-secrets`) and explicit staging (never `git add .`).
+- Lints Markdown (`rumdl`), YAML (`yamllint`), and token budgets (`lint-tokens.py`).
 - Generates terse Conventional Commit messages (≤50 chars).
 - Commits and pushes to remote upstream.
-- Verifies symlinks and `enstow` status for `~/.gemini/`.
+- Syncs symlinks (`task apply`) and verifies `task status -- --check` and `task doctor` for `~/.gemini/`.
 
 ## How to invoke
 

@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  ENSTOW_VERSION: 0.1.15
+  ENSTOW_VERSION: 0.1.16
 
 jobs:
   test:
@@ -67,7 +67,7 @@ jobs:
       - name: Apply and verify enstow
         run: |
           task apply
-          task status
+          task status -- --check
           task doctor
           task unstow
 

@@ -42,9 +42,9 @@ task deps
 ## :rocket: Usage
 
 > [!NOTE]
-> Migrating a host previously stowed with GNU Stow? Remove legacy folded directory symlinks under `~/.gemini/config/skills/` first, then run `task apply -- --backup` (or `task restow -- --backup`) to apply per-file `enstow` symlinks safely.
+> Migrating a host previously stowed with GNU Stow? `enstow apply --backup` (via `task apply -- --backup`) automatically unfolds legacy folded directory symlinks, prunes stale links, and backs up conflicting targets to `~/.enstow-backup/<timestamp>`.
 
-Run operations using [Task](https://taskfile.dev/) (configured via [`.enstow.toml`](./.enstow.toml)):
+Run operations using [Task](https://taskfile.dev/) (or invoke `enstow` directly from repository root, where [`.enstow.toml`](./.enstow.toml) is auto-discovered with `prune = true` and `mask_secrets = true`):
 
 ### Dry Run (Test)
 
@@ -92,12 +92,15 @@ task unstow:test
 
 ### Status, Diff & Doctor
 
-Inspect symlink state, view masked diffs, and audit symlink/secret hygiene:
+Inspect symlink state (`-- --check` exits non-zero on drift), view masked diffs, audit symlink/secret hygiene, and guard staged commits:
 
 ```bash
 task status
+task status -- --check
 task diff
 task doctor
+task check-secrets
+task install-hooks
 ```
 
 ### Install Plugins
