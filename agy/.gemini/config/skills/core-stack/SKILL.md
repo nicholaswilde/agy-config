@@ -231,7 +231,8 @@ default to these tools and conventions.
 
 * Workflows live in `.github/workflows/`.
 * Always pin action versions (e.g. `actions/checkout@v6`).
-* Use `concurrency` groups with `cancel-in-progress: true` on PR/push workflows.
+* Use `concurrency` groups with `cancel-in-progress: true` on PR/push workflows (`cancel-in-progress: false` for `pages` deploy workflows).
+* GitHub Pages workflows **must** separate `build` (`upload-pages-artifact`) and `deploy` (`needs: build`, `deploy-pages`) into distinct jobs to avoid artifact-sync races and duplicate-artifact failures on job retries.
 * Use `workflow_dispatch` to allow manual re-runs.
 * Use path-filtered triggers (`paths:`) to avoid unnecessary runs.
 * Scheduled maintenance workflows (e.g. weekly image optimization via Jules) use cron expressions.
@@ -260,7 +261,7 @@ default to these tools and conventions.
 * Serve locally: `uvx zensical serve --dev-addr 0.0.0.0:8000` or `task serve` / `task up`.
 * Install/update via `uv`: `uv pip install zensical` / `uv pip install --upgrade zensical`.
 * Nav is declared as `[[project.nav]]` TOML array-of-tables in `zensical.toml`; auto-generate with `task generate-docs-nav`.
-* CI deploys via `actions/deploy-pages@v4` on push to `main`/`master`.
+* CI deploys on push to `main`/`master` via separate `build` (`actions/configure-pages@v6`, `actions/upload-pages-artifact@v5`) and `deploy` (`needs: build`, `actions/deploy-pages@v5`) jobs.
 * Canonical config keys: `[project]` (site_name, site_url, repo_url, extra_css), `[project.theme]` (name, features, palette), `[project.plugins]` (search, tags, minify), `[project.markdown_extensions]`.
 
 ## 16. Container Runtime — Docker Compose
