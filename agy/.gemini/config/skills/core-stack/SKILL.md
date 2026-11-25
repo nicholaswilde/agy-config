@@ -1,7 +1,7 @@
 ---
 name: core-stack
 description: >-
-  Reference standards for core tooling stack (go-task, rumdl, yamllint-rs, taplo, uv, shuck, zensical).
+  Reference standards for core tooling stack (go-task, rumdl, yamllint-rs, taplo, mdfm, uv, shuck, zensical).
   Trigger: /core-stack, "core stack", "stack standards", "tooling standards".
 ---
 
@@ -189,8 +189,8 @@ default to these tools and conventions.
 
 ## 9. YAML Processing — `yq`
 
-* Use [`yq`](https://github.com/mikefarah/yq) for reading/writing YAML (including front matter in markdown).
-* For front-matter in markdown: `yq --front-matter="process" '.key = "value"' file.md`
+* Use [`yq`](https://github.com/mikefarah/yq) for reading/writing YAML files.
+* For Markdown frontmatter (YAML or TOML), prefer `mdfm` (§39) over `yq --front-matter`.
 * For in-place edits: `yq -i` flag.
 * For sorted keys: `yq -i 'sort_keys(.)'`.
 
@@ -665,4 +665,43 @@ default to these tools and conventions.
     cmds:
       - taplo lint
       - taplo fmt --check
+  ```
+
+## 39. Markdown Frontmatter — `mdfm`
+
+* Use [`mdfm`](https://github.com/nicholaswilde/mdfm) (`jq` for Markdown frontmatter) to query, mutate, delete, and validate YAML and TOML frontmatter across Markdown files. Prefer over `yq --front-matter` or ad-hoc regex/Python scripts.
+
+* Respects `.gitignore` when walking directories and skips no-op writes when output is byte-identical.
+
+* Config file: `.mdfm.toml` at repo root (or `~/.config/mdfm/config.toml`). Precedence: CLI flags > `MDFM_*` env vars > `.mdfm.toml` > global config > defaults.
+
+* Install: `brew install nicholaswilde/tap/mdfm` (already installed locally).
+
+* Command examples:
+
+  ```bash
+  mdfm get title docs/                                              # query key (supports dot paths like author.name)
+  mdfm --output json --where 'draft == true' get title posts/       # filter + JSON output
+  mdfm set draft=false author.name="Nick" posts/post.md             # insert/update keys (creates frontmatter if absent)
+  mdfm --where 'tags contains "rust"' set --dry-run status=ready .  # preview bulk mutation
+  mdfm del draft temp_key posts/                                    # delete keys (supports --dry-run)
+  mdfm check --schema .mdfm-schema.json docs/                       # validate frontmatter against JSON Schema
+  ```
+
+* Canonical `.mdfm.toml`:
+
+  ```toml
+  default_format = "yaml"
+  output = "table"
+  schema = ".mdfm-schema.json"
+  ignore = ["drafts/**", "CHANGELOG.md"]
+  ```
+
+* Standard Taskfile task:
+
+  ```yaml
+  lint:frontmatter:
+    desc: Validate Markdown frontmatter against JSON Schema
+    cmds:
+      - mdfm check --schema .mdfm-schema.json docs/
   ```
