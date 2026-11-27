@@ -144,6 +144,35 @@ tasks:
       - 'rm -f ~/.config/systemd/user/agy-dirty-notify.service ~/.config/systemd/user/agy-dirty-notify.timer'
       - 'systemctl --user daemon-reload'
 
+  batch:list:
+    desc: List catalog actions or matching repos
+    cmds:
+      - 'uv run scripts/batch.py list {{ .CLI_ARGS }}'
+
+  batch:sync:
+    desc: Scan ~/git/nicholaswilde and diff/update repos.toml
+    cmds:
+      - 'uv run scripts/batch.py sync {{ .CLI_ARGS }}'
+
+  batch:zensical:
+    desc: Update zensical across cataloged repos
+    cmds:
+      - 'uv run scripts/batch.py zensical-update {{ .CLI_ARGS }}'
+
+  batch:sync-agents:
+    desc: Sync AGENTS.md, .agents/rules, skills catalog, and .gitignore across repos
+    cmds:
+      - 'uv run scripts/batch.py sync-agents {{ .CLI_ARGS }}'
+
+  batch:run-skill:
+    desc: Run an Antigravity skill via agy -p across cataloged repos
+    cmds:
+      - 'uv run scripts/batch.py run-skill {{ .CLI_ARGS }}'
+
+  batch:test:
+    desc: Run batch runner unit tests
+    cmds:
+      - 'uv run python3 -m unittest -v scripts/test_batch.py'
 
   default:
     cmds:

@@ -1,0 +1,287 @@
+[settings]
+root = "~/git/nicholaswilde"
+ignore = ["0a6fe1de26cb8a2c131797e503dcf39f", "pass", "test"]
+
+[actions.zensical-update]
+description = "Bump zensical version in pyproject.toml and refresh uv.lock"
+tags = ["zensical"]
+# include = []
+# exclude = []
+
+[actions.sync-agents]
+description = "Sync AGENTS.md tooling blocks, .agents/rules symlinks, skills catalog, and .gitignore"
+tags = ["agents"]
+# include = []
+# exclude = []
+
+# --- repos ---
+
+[repos.Proxmox]
+tags = ["gh-actions"]
+
+[repos.adguardhome-mcp-rs]
+tags = ["gh-actions", "rust", "taskfile"]
+
+[repos.agy-config]
+tags = ["agents", "gh-actions", "rumdl", "taskfile", "yamllint"]
+
+[repos.apt]
+tags = [
+  "agents",
+  "gh-actions",
+  "llms-txt",
+  "python",
+  "rumdl",
+  "taskfile",
+  "yamllint",
+]
+
+[repos.aria2-mcp-rs]
+tags = ["gh-actions", "rust", "taskfile"]
+
+[repos.catppuccin-rgb565]
+tags = ["agents", "gh-actions", "llms-txt", "taskfile"]
+
+[repos.changedetection-mcp-rs]
+tags = ["agents", "gh-actions", "rust", "taskfile"]
+
+[repos.cheatsheets]
+tags = ["agents", "gh-actions", "lychee", "python", "taskfile", "zensical"]
+
+[repos.cook-docs]
+tags = [
+  "agents",
+  "gh-actions",
+  "llms-txt",
+  "python",
+  "rumdl",
+  "rust",
+  "taskfile",
+  "yamllint",
+  "zensical",
+]
+
+[repos.curriculum-vitae]
+tags = ["gh-actions", "taskfile", "typos", "yamllint"]
+
+[repos.cyd-bluetooth-tracker]
+tags = ["agents", "gh-actions", "taskfile"]
+
+[repos.cyd-digital-clock]
+tags = ["agents", "gh-actions", "python", "taskfile"]
+
+[repos.cyd-flight-radar]
+tags = ["agents", "gh-actions", "taskfile"]
+
+[repos.cyd-photo-frame]
+tags = ["agents", "gh-actions", "python", "taskfile"]
+
+[repos.cyd-weather-station]
+tags = ["agents", "gh-actions", "python", "taskfile"]
+
+[repos.cyd-wifi-analyzer]
+tags = ["agents", "gh-actions", "taskfile"]
+
+[repos.dotfiles]
+tags = ["agents", "gh-actions", "taskfile"]
+
+[repos.enstow]
+tags = [
+  "agents",
+  "gh-actions",
+  "llms-txt",
+  "python",
+  "rumdl",
+  "rust",
+  "taskfile",
+  "zensical",
+]
+
+[repos.esp32-sandbox]
+tags = ["agents", "gh-actions", "taskfile"]
+
+[repos.esp32-web-flasher]
+tags = ["agents", "gh-actions", "python", "rumdl", "taskfile"]
+
+[repos.frame-fi]
+tags = ["agents", "gh-actions", "taskfile"]
+
+[repos.gardening]
+tags = [
+  "agents",
+  "gh-actions",
+  "lychee",
+  "python",
+  "rumdl",
+  "taskfile",
+  "typos",
+  "yamllint",
+  "zensical",
+]
+
+[repos.gatus-mcp-rs]
+tags = ["gh-actions", "rust", "taskfile"]
+
+[repos.hbctl]
+tags = [
+  "agents",
+  "gh-actions",
+  "llms-txt",
+  "python",
+  "rumdl",
+  "rust",
+  "taskfile",
+  "zensical",
+]
+
+[repos.home-assistant]
+tags = ["agents", "gh-actions", "taskfile"]
+
+[repos.home-assistant-adapter]
+tags = ["gh-actions", "rumdl", "taskfile", "yamllint"]
+
+[repos.homebrew-tap]
+tags = ["agents", "gh-actions", "llms-txt", "python", "taskfile"]
+
+[repos.homelab]
+tags = [
+  "agents",
+  "gh-actions",
+  "lychee",
+  "python",
+  "rumdl",
+  "taskfile",
+  "typos",
+  "yamllint",
+  "zensical",
+]
+
+[repos.homelab-playbooks]
+tags = ["agents", "gh-actions", "taskfile"]
+
+[repos.homelab-pull]
+tags = ["agents", "gh-actions", "taskfile"]
+
+[repos.homelab-terraform]
+tags = ["agents", "gh-actions"]
+
+[repos.inventory-agent]
+tags = ["agents", "gh-actions", "python", "taskfile"]
+
+[repos.localsend-go]
+tags = ["gh-actions"]
+
+[repos.lpass-to-pass-snapshot]
+tags = ["agents", "taskfile"]
+
+[repos.mdfm]
+tags = [
+  "agents",
+  "gh-actions",
+  "llms-txt",
+  "python",
+  "rumdl",
+  "rust",
+  "taplo",
+  "taskfile",
+  "zensical",
+]
+
+[repos.mkdocs-material]
+tags = ["gh-actions", "taskfile"]
+
+[repos.nicholaswilde]
+tags = [
+  "agents",
+  "gh-actions",
+  "python",
+  "rumdl",
+  "taskfile",
+  "typos",
+  "yamllint",
+]
+
+[repos."nicholaswilde.github.io"]
+tags = ["agents", "gh-actions", "python", "taskfile", "yamllint"]
+
+[repos."nicholaswilde.r-universe.dev"]
+tags = ["gh-actions"]
+
+[repos.notes]
+tags = ["agents", "gh-actions", "python", "rumdl", "taskfile", "zensical"]
+
+[repos.prog-metal-structures]
+tags = ["agents", "gh-actions", "python", "taskfile", "typos"]
+
+[repos.proxmox-mcp-rs]
+tags = ["agents", "gh-actions", "rust", "taskfile"]
+
+[repos.qbittorrent-mcp-rs]
+tags = ["agents", "gh-actions", "rust", "taskfile"]
+
+[repos.recipes]
+tags = [
+  "agents",
+  "gh-actions",
+  "lychee",
+  "python",
+  "rumdl",
+  "taskfile",
+  "typos",
+  "yamllint",
+  "zensical",
+]
+
+[repos.recipes-mcp-rs]
+tags = ["gh-actions", "rust", "taskfile"]
+
+[repos.rescue-groups-mcp]
+tags = ["gh-actions", "rust", "taskfile"]
+
+[repos.scoop-bucket]
+tags = ["agents", "gh-actions", "llms-txt", "python", "taskfile"]
+
+[repos.side-eye]
+tags = ["gh-actions", "taskfile"]
+
+[repos.syncthing-mcp-rs]
+tags = ["agents", "gh-actions", "rust", "taskfile"]
+
+[repos.sys-fetch]
+tags = ["gh-actions", "taskfile"]
+
+[repos.sysmqttd]
+tags = [
+  "agents",
+  "gh-actions",
+  "lychee",
+  "rumdl",
+  "rust",
+  "taskfile",
+  "typos",
+  "yamllint",
+]
+
+[repos.tfa]
+tags = [
+  "agents",
+  "gh-actions",
+  "llms-txt",
+  "python",
+  "rumdl",
+  "rust",
+  "taskfile",
+  "zensical",
+]
+
+[repos.the-amazing-race]
+tags = ["agents", "gh-actions", "llms-txt", "python", "taskfile", "typos"]
+
+[repos.the-great-british-bake-off]
+tags = ["agents", "gh-actions", "llms-txt", "python", "taskfile", "typos"]
+
+[repos.trmnl-google-sheet-quote]
+tags = ["agents", "gh-actions", "taskfile"]
+
+[repos.vaultwarden-backup]
+tags = ["gh-actions", "taskfile"]
