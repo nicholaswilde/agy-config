@@ -7,7 +7,7 @@ description: >-
 
 # Modernize Agentic Repository Skill
 
-Use this skill to modernize a repository's workspace and tool configuration for Antigravity's agentic stack (Serena, RTK, Ponytail, CodeGraph, Context-Mode, Caveman, Headroom, Ripwire, Context7), configure agentic rules (including `uv-rules.md`, `ripwire-rules.md`), and standardize directory layouts under `.agents/`.
+Use this skill to modernize a repository's workspace and tool configuration for Antigravity's agentic stack (Serena, RTK, Ponytail, CodeGraph, Context-Mode, Caveman, Headroom, Ripwire, Context7), configure agentic rules (including `uv-rules.md`, `ripwire-rules.md`, `context7-rules.md`), and standardize directory layouts under `.agents/`.
 
 ## Protocol
 
@@ -61,6 +61,8 @@ Verify and ensure all 9 agentic tools are functional in the workspace:
 9. **Context7 CLI (Live Library Docs)**
    - Verify binary availability: `which ctx7` and `ctx7 --version` (or fallback `npx -y ctx7@latest`).
    - Confirm global skill symlink exists at `~/.gemini/config/skills/context7/SKILL.md`.
+   - Ensure global rule is symlinked: `.agents/rules/context7-rules.md`.
+   - Ensure `AGENTS.md` contains `<!-- context7-begin -->`.
 
 ### 2. Repository Hygiene (`.gitignore`)
 
@@ -104,6 +106,7 @@ Consolidate legacy directories and set up agentic rules under `.agents/`:
    - Ensure `.agents/rules/` directory exists (`mkdir -p .agents/rules`).
    - Symlink universal rules pointing to `/home/nicholas/git/nicholaswilde/agy-config/agy/.gemini/config/rules/<rule>.md`:
      - `caveman-rules.md`
+     - `context7-rules.md`
      - `fd-rules.md`
      - `github-cli-rules.md`
      - `no-secrets.md`

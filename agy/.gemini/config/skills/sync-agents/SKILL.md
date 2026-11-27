@@ -25,6 +25,7 @@ Inspect repository root `AGENTS.md`:
    - `<!-- serena-begin -->` — Serena MCP symbol navigation (`get_symbols_overview`, `find_symbol`, `get_diagnostics_for_file`).
    - `<!-- headroom-begin -->` — Headroom MCP context compression (`headroom_compress`).
    - `<!-- ripwire-begin -->` — Ripwire CLI codebase navigation (`rtk ripwire <dir> [flags]`; CLI-first, no MCP).
+   - `<!-- context7-begin -->` — Context7 CLI live docs (`ctx7` inside `ctx_execute` before `search_web`; CLI-only, no MCP).
    - `<!-- ripgrep-guidelines-begin -->` — Pattern search via `rtk rg`.
    - `<!-- taplo-rules-begin -->` — TOML formatting & linting (`rtk taplo fmt`, `rtk taplo lint` for TOML projects).
    - `<!-- sensitive-information-protection-begin -->` — Secret commit prevention, SOPS encryption (`task encrypt`), no blanket staging.
@@ -49,6 +50,7 @@ Ensure `.agents/rules/` directory exists and aligns with global standards:
    - `github-cli-rules.md` (universal)
    - `ripgrep-rules.md` (universal)
    - `ripwire-rules.md` (universal)
+   - `context7-rules.md` (universal)
    - `no-secrets.md` (universal)
    - `caveman-rules.md` (universal)
    - `uv-rules.md` (Python projects)
